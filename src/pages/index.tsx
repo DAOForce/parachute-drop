@@ -1,27 +1,17 @@
-import styled from '@emotion/styled';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 
-const Feed: NextPage = () => {
+const Home: NextPage = () => {
   return (
-    <Styled.Page>
+    <main>
       <Head>
-        <title>SOPTstagram</title>
-        <meta name="description" content="SOPTstagram" />
+        <title>Shooting Star</title>
+        <meta name="description" content="Shooting Star" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      메인입니다
-    </Styled.Page>
+      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+    </main>
   );
 };
 
-export default Feed;
-
-const Styled = {
-  Page: styled.div`
-    width: 100vw;
-    & > * {
-      width: 100%;
-    }
-  `,
-};
+export default Home;
