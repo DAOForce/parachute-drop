@@ -18,67 +18,50 @@ function spacedetail() {
   const [isAbled, setIsAbled] = useState<boolean>();
   const handleNextClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    if (!router?.query?.tokenName && !tokenNameRef?.current.value) {
+    console.log(tokenNameRef?.current.value);
+    console.log(tokenSymbolRef?.current.value);
+    console.log(tokenSupplyRef?.current.value);
+    console.log(ownerAddressRef?.current.value);
+    if (!tokenNameRef?.current.value) {
       alert('Please enter the token name');
       return;
-    } else if (!router?.query?.tokenSymbol && !tokenSymbolRef?.current.value) {
+    } else if (!tokenSymbolRef?.current.value) {
       alert('Please enter the token symbol');
       return;
-    } else if (!router?.query?.tokenSupply && !tokenSupplyRef?.current.value) {
+    } else if (!tokenSupplyRef?.current.value) {
       alert('Please enter the token supply');
       return;
-    } else if (!router?.query?.ownerAdrres && !ownerAddressRef?.current.value) {
+    } else if (!ownerAddressRef?.current.value) {
       alert('Please upload the owner address');
       return;
     }
     router.push({
-      pathname: '/newairdrop/enterairdrop',
+      pathname: '/createspace/createtoken',
       query: {
         ...router.query,
-        tokenName: tokenNameRef?.current?.value
-          ? tokenNameRef?.current?.value
-          : router?.query?.ownerAdrres,
-        tokenSymbol: tokenSymbolRef?.current?.value
-          ? tokenSymbolRef?.current?.value
-          : router?.query?.tokenSymbol,
-        tokenSupply: tokenSupplyRef?.current?.value
-          ? tokenSupplyRef?.current?.value
-          : router?.query?.tokenSupply,
-        ownerAdrres: ownerAddressRef?.current?.value
-          ? ownerAddressRef?.current?.value
-          : router?.query?.ownerAdrres,
+        tokenName: tokenNameRef?.current.value,
+        tokenSymbol: tokenSymbolRef?.current.value,
+        tokenSupply: tokenSupplyRef?.current.value,
+        ownerAdrres: ownerAddressRef?.current.value,
       },
     });
   };
 
   const handleBackClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    // router.push('/createspace/spacedetail');
     router.push({
-      pathname: '/createspace/spacedetail',
+      pathname: '/createspace/createtoken',
       query: {
         ...router.query,
-        tokenName: tokenNameRef?.current?.value
-          ? tokenNameRef?.current?.value
-          : router?.query?.ownerAdrres,
-        tokenSymbol: tokenSymbolRef?.current?.value
-          ? tokenSymbolRef?.current?.value
-          : router?.query?.tokenSymbol,
-        tokenSupply: tokenSupplyRef?.current?.value
-          ? tokenSupplyRef?.current?.value
-          : router?.query?.tokenSupply,
-        ownerAdrres: ownerAddressRef?.current?.value
-          ? ownerAddressRef?.current?.value
-          : router?.query?.ownerAdrres,
       },
     });
   };
 
   return (
     <StyledRoot>
-      <CreateSpaceNav routingAddress="/">{HEADER_NAME.CREATE_SPACE}</CreateSpaceNav>
-      <Title>{TITLE.CREATE_TOKEN}</Title>
-      <Subscription>{SUBSCRIPTION.CREATE_TOKEN}</Subscription>
+      <CreateSpaceNav routingAddress="/">{HEADER_NAME.START_NEW_AIRDROP}</CreateSpaceNav>
+      <Title>{TITLE.ENTER_DETAIL_AIRDROP}</Title>
+      <Subscription>{SUBSCRIPTION.ENTER_DETAIL_AIRDROP}</Subscription>
       <StyledForm>
         <div className="form-control w-full">
           <label className="label w-full">
@@ -87,7 +70,7 @@ function spacedetail() {
           <input
             ref={tokenNameRef}
             type="text"
-            placeholder={router?.query?.tokenName ? router.query.tokenName.toString() : 'Type here'}
+            placeholder="Type here"
             className="input input-bordered w-full"
           />
           <label className="label w-full">
@@ -95,8 +78,8 @@ function spacedetail() {
           </label>
           <input
             ref={tokenSymbolRef}
-            type="number"
-            placeholder={router?.query?.tokenSymbol ? router.query.tokenSymbol.toString() : '0.00'}
+            type="text"
+            placeholder="0.00"
             className="input input-bordered w-full"
           />
           <label className="label w-full">
@@ -105,9 +88,7 @@ function spacedetail() {
           <input
             ref={tokenSupplyRef}
             type="text"
-            placeholder={
-              router?.query?.tokenSupply ? router.query.tokenSupply.toString() : 'Type here'
-            }
+            placeholder="Type here"
             className="input input-bordered w-full"
           />
           <label className="label w-full">
@@ -116,9 +97,7 @@ function spacedetail() {
           <input
             ref={ownerAddressRef}
             type="text"
-            placeholder={
-              router?.query?.ownerAdrres ? router.query.ownerAdrres.toString() : 'Type here'
-            }
+            placeholder="Type here"
             className="input input-bordered w-full"
           />
         </div>

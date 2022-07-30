@@ -18,30 +18,33 @@ function spacedetail() {
   const [isAbled, setIsAbled] = useState<boolean>();
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    console.log(nameRef?.current.value);
-    console.log(introRef?.current.value);
-    console.log(homepageRef?.current.value);
+    console.log(nameRef?.current?.value);
+    console.log(introRef?.current?.value);
+    console.log(homepageRef?.current?.value);
     console.log(imageData);
-    if (!nameRef?.current.value) {
+    if (!router?.query?.name && !nameRef?.current?.value) {
       alert('Please enter the name');
       return;
-    } else if (!introRef?.current.value) {
+    } else if (!router?.query?.intro && !introRef?.current?.value) {
       alert('Please enter the intro');
       return;
-    } else if (!homepageRef?.current.value) {
+    } else if (!router?.query?.homepage && !homepageRef?.current?.value) {
       alert('Please enter the homepage');
       return;
-    } else if (!imageData) {
+    } else if (!router?.query?.imageData && !imageData) {
       alert('Please upload the image');
       return;
     }
     router.push({
       pathname: '/createspace/createtoken',
       query: {
-        name: nameRef?.current.value,
-        intro: introRef?.current.value,
-        homepage: homepageRef?.current.value,
-        imageData: imageData,
+        ...router.query,
+        name: nameRef?.current?.value ? nameRef?.current?.value : router?.query?.name,
+        intro: introRef?.current?.value ? introRef?.current?.value : router?.query?.intro,
+        homepage: homepageRef?.current?.value
+          ? homepageRef?.current?.value
+          : router?.query?.homepage,
+        imageData: imageData ? imageData : router?.query?.imageData,
       },
     });
   };
@@ -60,7 +63,7 @@ function spacedetail() {
           <input
             ref={nameRef}
             type="text"
-            placeholder="Type here"
+            placeholder={router?.query?.name ? router?.query?.name : 'Type here'}
             className="input input-bordered w-full"
           />
           <label className="label w-full">
@@ -69,7 +72,7 @@ function spacedetail() {
           <input
             ref={introRef}
             type="text"
-            placeholder="Type here"
+            placeholder={router?.query?.intro ? router?.query?.intro : 'Type here'}
             className="input input-bordered w-full"
           />
           <label className="label w-full">
@@ -78,7 +81,7 @@ function spacedetail() {
           <input
             ref={homepageRef}
             type="text"
-            placeholder="Type here"
+            placeholder={router?.query?.homepage ? router?.query?.homepage : 'Type here'}
             className="input input-bordered w-full"
           />
         </div>

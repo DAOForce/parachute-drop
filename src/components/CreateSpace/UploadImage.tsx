@@ -4,12 +4,14 @@ import PlusIcon from '@src/assets/Icon/PlusIcon.svg';
 import { create as ipfsHttpClient } from 'ipfs-http-client';
 import { flushSync } from 'react-dom';
 import ClipLoader from 'react-spinners/ClipLoader';
+import { useRouter } from 'next/router';
 
 interface UploadImageProps {
   setImageData: Dispatch<SetStateAction<string | null>>;
 }
 
 function UploadImage({ setImageData }: UploadImageProps) {
+  const router = useRouter();
   const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0');
   const inputRef = useRef(null);
   const [isLoadig, setIsLoading] = useState(false);
@@ -49,8 +51,11 @@ function UploadImage({ setImageData }: UploadImageProps) {
 
   return (
     <StyledRoot className="upload__image">
-      {previewImage ? (
-        <img src={previewImage} alt="dao image" />
+      {router?.query?.imageData || previewImage ? (
+        <img
+          src={router?.query?.imageData ? router?.query?.imageData : previewImage}
+          alt="dao image"
+        />
       ) : isLoadig ? (
         <ClipLoader color="#FFE55C" loading={isLoadig} size={50} />
       ) : (
