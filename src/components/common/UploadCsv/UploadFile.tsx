@@ -8,6 +8,7 @@ interface UploadFileProps {
 }
 
 function UploadFile({ setFileData }: UploadFileProps) {
+  const allowedExtensions = ['csv'];
   const getFileData = () => {
     try {
       const input = document.createElement('input');
@@ -16,11 +17,17 @@ function UploadFile({ setFileData }: UploadFileProps) {
 
       input.type = 'file';
       input.accept = 'csv';
+      // @TODO 에러처리
       input.onchange = (_) => {
-        // you can use this method to get file and perform respective operations
         const files = Array.from(input?.files as ArrayLike<File>);
 
         inputFile = files[0];
+
+        const fileExtension = inputFile?.type.split('/')[1];
+        if (!allowedExtensions.includes(fileExtension)) {
+          alert('Please input a csv file');
+          return;
+        }
 
         const reader = new FileReader();
         reader.onload = async ({ target }) => {
