@@ -18,7 +18,7 @@ function spacedetail() {
       <CreateSpaceNav routingAddress="/">{HEADER_NAME.CREATE_SPACE}</CreateSpaceNav>
       <Title>{TITLE.SPACE_DETAIL}</Title>
       <Subscription>{SUBSCRIPTION.SPACE_DETAIL}</Subscription>
-      <UploadImage imageData={imageData} setImageData={setImageData} />
+      <UploadImage setImageData={setImageData} />
       <button className="btn btn-active btn-primary rounded-full" onClick={handleClick}>
         Next
       </button>

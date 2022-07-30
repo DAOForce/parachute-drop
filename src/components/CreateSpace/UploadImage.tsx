@@ -6,14 +6,14 @@ import { flushSync } from 'react-dom';
 import ClipLoader from 'react-spinners/ClipLoader';
 
 interface UploadImageProps {
-  imageData: string | null;
   setImageData: Dispatch<SetStateAction<string | null>>;
 }
 
-function UploadImage({ imageData, setImageData }: UploadImageProps) {
+function UploadImage({ setImageData }: UploadImageProps) {
   const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0');
   const inputRef = useRef(null);
   const [isLoadig, setIsLoading] = useState(false);
+  const [previewImage, setPreviewImage] = useState('');
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     flushSync(() => {
@@ -30,19 +30,27 @@ function UploadImage({ imageData, setImageData }: UploadImageProps) {
     } catch (error) {
       console.log('Error uploading file: ', error);
     }
-    flushSync(() => {
-      setIsLoading(false);
+    const reader = new FileReader();
+
+    reader.readAsDataURL(file);
+
+    return new Promise((resolve) => {
+      reader.onload = () => {
+        setPreviewImage(reader.result);
+        console.log('>>reader.result', reader.result);
+
+        resolve();
+        flushSync(() => {
+          setIsLoading(false);
+        });
+      };
     });
-  };
-  const handleImageClick = () => {
-    setImageData(null);
-    console.log(inputRef);
   };
 
   return (
     <StyledRoot className="upload__image">
-      {imageData ? (
-        <img src={imageData} alt="dao image" onClick={handleImageClick} />
+      {previewImage ? (
+        <img src={previewImage} alt="dao image" />
       ) : isLoadig ? (
         <ClipLoader color="#FFE55C" loading={isLoadig} size={50} />
       ) : (
@@ -76,7 +84,8 @@ const StyledRoot = styled.div`
   }
   & img {
     object-fit: cover;
-    height: 271px;
+    min-height: 271px;
+    min-width: 271px;
   }
   #input-file {
     display: none;
