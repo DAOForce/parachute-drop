@@ -1,8 +1,5 @@
 import type { NextPage } from 'next';
-import Head from 'next/head';
-import CardSpace from '@src/components/main/CardSpace';
 import Navbar from '@src/components/common/Navbar';
-import { totalmem } from 'os';
 
 const total = 300.0;
 const amounts = [
