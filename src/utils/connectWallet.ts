@@ -13,6 +13,8 @@ export const getMetamaskAddress = async () => {
 
     console.log('Connected', accounts[0]);
 
+    localStorage.setItem('ownerAddress', accounts[0]);
+
     return accounts[0];
   } catch (error) {
     console.log(error);

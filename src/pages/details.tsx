@@ -1,7 +1,6 @@
 import type { NextPage } from 'next';
 import Navbar from '@src/components/common/Navbar';
-
-const total = 300.0;
+import { useEffect, useState } from 'react';
 
 const daoDetails = {
   name: 'ENS',
@@ -10,6 +9,8 @@ const daoDetails = {
   link: 'https://ens.dominon.network',
 };
 
+const total = 300.0;
+
 const amounts = [
   { label: 'Claimable', amount: 100.0, color: '#FFE55C' },
   { label: 'Unvested', amount: 200.0, color: '#474747' },
@@ -17,10 +18,22 @@ const amounts = [
 ];
 
 const Details: NextPage = () => {
+  const [isLogin, setIsLogin] = useState<boolean | undefined | null>();
+
+  useEffect(() => {
+    localStorage.getItem('ownerAddress') ? setIsLogin(true) : setIsLogin(false);
+  }, []);
+
+  const [ownerAddress, setOwnerAddress] = useState<string | undefined | null>('');
+
+  useEffect(() => {
+    setOwnerAddress(localStorage.getItem('ownerAddress'));
+  }, [ownerAddress]);
+
   return (
     <>
       <Navbar />
-      <div className="container mx-auto mt-8 mb-2">
+      <div className="container mx-auto mt-12 mb-2">
         {/* 프로필 영역 */}
         <div className="flex items-center">
           <div className="avatar mr-5">
@@ -37,7 +50,9 @@ const Details: NextPage = () => {
             </div>
             <p className="mb-2">{daoDetails.about}</p>
             <div>
-              <a className="text-sm underline">{daoDetails.link}</a>
+              <a className="text-sm link link-hover " href={daoDetails.link}>
+                {daoDetails.link.split('//')[1]}
+              </a>
             </div>
           </div>
         </div>
@@ -59,45 +74,54 @@ const Details: NextPage = () => {
             </div>
           </div> */}
           </div>
-          <div className="bg-[#191919] p-8 mb-3 rounded-lg">
-            <p className="mb-6">1/3 Round</p>
-            {amounts.map((amount, index) => {
-              return (
-                <>
-                  <div className="text-sm mt-2 mb-2">
-                    <span className="opacity-50 mr-1">{amount.label}</span>
-                    <span>{amount.amount}</span>
-                  </div>
-                  <div
-                    className="rounded-full"
-                    style={{
-                      backgroundColor: amount.color,
-                      height: '16px',
-                      width: `${(amount.amount / total) * 100}%`,
-                    }}
-                  />
-                </>
-              );
-            })}
-          </div>
+
+          {ownerAddress ? (
+            <div className="bg-[#191919] p-8 mb-3 rounded-lg">
+              <p className="mb-6 font-bold ">My airdrop</p>
+              {amounts.map((amount, index) => {
+                return (
+                  <>
+                    <div className="text-sm mt-2 mb-2">
+                      <span className="opacity-50 mr-1">{amount.label}</span>
+                      <span>{amount.amount}</span>
+                    </div>
+                    <div
+                      className="rounded-full"
+                      style={{
+                        backgroundColor: amount.color,
+                        height: '16px',
+                        width: `${(amount.amount / total) * 100}%`,
+                      }}
+                    />
+                  </>
+                );
+              })}
+            </div>
+          ) : null}
+
           <div className="bg-[#191919] p-8 rounded-lg">
+            <p className="mb-6 font-bold ">1/3 Round</p>
             <h5 className="text-base mb-4">Uncoming Vest Events</h5>
             <div className="overflow-x-auto">
               <table className="table w-full">
                 <thead>
                   <tr>
                     <th>Date</th>
+                    <th>Round</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>Jun 1, 2024</td>
+                    <td>1 Round</td>
                   </tr>
                   <tr>
                     <td>Jun 1, 2024</td>
+                    <td>2 Round</td>
                   </tr>
                   <tr>
                     <td>Jun 1, 2024</td>
+                    <td>3 Round</td>
                   </tr>
                 </tbody>
               </table>

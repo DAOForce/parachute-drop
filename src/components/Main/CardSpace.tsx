@@ -1,23 +1,27 @@
 import { useRouter } from 'next/router';
 
 interface CardSpaceProps {
-  key: number;
+  index: number;
   profile: string;
   name: string;
   number: number;
+  id: string;
 }
 
 function CardSpace(props: CardSpaceProps) {
-  const { key, profile, name, number } = props;
+  const { index, profile, name, number, id } = props;
 
   const router = useRouter();
 
-  const handleClick = () => {
-    router.push('/details');
+  const handleClick = (value: string) => {
+    router.push({
+      pathname: '/details',
+      query: value,
+    });
   };
 
   return (
-    <div key={key} className="card shadow-xl bg-[#191919]">
+    <div key={index} className="card shadow-xl bg-[#191919]">
       <div className="card-body items-center text-center mb-2">
         <img src={profile} className="w-24 rounded-full" />
 
@@ -26,7 +30,7 @@ function CardSpace(props: CardSpaceProps) {
           <span>{number}</span> members
         </p>
         <div className="card-actions justify-center mt-2">
-          <button className="btn btn-warning" onClick={() => handleClick()}>
+          <button className="btn btn-warning" onClick={() => handleClick(id)}>
             Join
           </button>
         </div>

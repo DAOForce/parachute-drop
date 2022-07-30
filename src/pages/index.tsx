@@ -47,6 +47,10 @@ const CardContents = [
 const Home: NextPage = () => {
   const router = useRouter();
 
+  const handleClick = () => {
+    router.push('/createspace/spacedetail');
+  };
+
   return (
     <>
       <Head>
@@ -56,34 +60,32 @@ const Home: NextPage = () => {
       </Head>
       <Navbar />
       <div className="container mx-auto">
-        <div className="flex mt-8 mb-4">
+        <div className="flex mt-16 mb-4">
           <div className="grow">
             <p className="text-2xl font-bold ">Spaces</p>
           </div>
           <div className="flex-none">
-            <button className="btn gap-2 btn-outline btn-primary">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                />
-              </svg>
-              Create a Space
+            <button className="link link-hover " onClick={() => handleClick()}>
+              <div className="flex items-center">
+                <div>
+                  <Add />
+                </div>
+                <div className="text-sm">Create Space</div>
+              </div>
             </button>
           </div>
         </div>
 
         <div className="grid grid-cols-3 gap-4 pb-8">
           {CardContents.map((card, index) => (
-            <CardSpace key={index} profile={card.profile} name={card.name} number={card.number} />
+            <CardSpace
+              key={card.id}
+              index={index}
+              id={card.id}
+              profile={card.profile}
+              name={card.name}
+              number={card.number}
+            />
           ))}
         </div>
       </div>
