@@ -15,6 +15,9 @@ function TestEvmos(props: TestEvmosProps) {
   const { generateEndpointBalances, generateEndpointAccount } = provider;
   useEffect(() => {
     const evmosAddress = ethToEvmos(ownerAddress);
+    console.log(addressConverter);
+    console.log(provider);
+    console.log('transactions', transactions);
     console.log('evmosAddress', ethToEvmos(ownerAddress));
   }, [ownerAddress]);
 
