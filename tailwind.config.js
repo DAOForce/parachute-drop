@@ -20,6 +20,7 @@ module.exports = {
           ...require('daisyui/src/colors/themes')['[data-theme=dark]'],
           primary: '#FFE55C',
           main: '#FFE55C',
+          backgrount: 'black',
         },
       },
     ],

@@ -25,6 +25,6 @@ const StyleMain = styled.main`
   justify-content: center;
   flex-direction: column;
   & > header {
-    margin-bottom: 181px;
+    margin-bottom: 120px;
   }
 `;
