@@ -1,9 +1,9 @@
+import Add from '@src/assets/Icon/add.svg';
+import Navbar from '@src/components/common/Navbar';
+import CardSpace from '@src/components/main/CardSpace';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import CardSpace from '@src/components/main/CardSpace';
-import Navbar from '@src/components/common/Navbar';
 import { useRouter } from 'next/router';
-import Add from '@src/assets/Icon/add.svg';
 
 const CardContents = [
   {
@@ -61,9 +61,22 @@ const Home: NextPage = () => {
             <p className="text-2xl font-bold ">Spaces</p>
           </div>
           <div className="flex-none">
-            <button className="btn btn-outline btn-sm gap-2 ">
-              <Add />
-              Create
+            <button className="btn gap-2 btn-outline btn-primary">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                />
+              </svg>
+              Create a Space
             </button>
           </div>
         </div>
