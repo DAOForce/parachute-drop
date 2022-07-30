@@ -18,6 +18,7 @@
     "@emotion/styled": "^11.8.1",
     "@metamask/providers": "^9.0.0",
     "daisyui": "^2.20.0",
+    "dayjs": "^1.11.4",
     "emotion-reset": "^3.0.1",
     "evmosjs": "^0.2.8",
     "next": "12.1.6",
