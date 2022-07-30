@@ -1,54 +1,53 @@
-import TestEvmos from '@src/components/Main/TestEvmos';
-import { getKeplrAddress, getMetamaskAddress } from '@src/utils/connectWallet';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import React, { useEffect, useState } from 'react';
+import CardSpace from '@src/components/main/CardSpace';
+import Navbar from '@src/components/common/Navbar';
 
 const Home: NextPage = () => {
-  const [ownerAddress, setOwnerAddress] = useState<string | undefined>('');
-  const handleWalletClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    switch (e.currentTarget.id) {
-      case 'metamask':
-        const metamaskAccounts = await getMetamaskAddress();
-        setOwnerAddress(metamaskAccounts);
-        // setOwnerAddress(await getMetamaskAddress());
-        break;
-      case 'keplr':
-        const keplrAccounts = await getKeplrAddress();
-        setOwnerAddress(keplrAccounts?.address);
-        // console.log(await getKeplrAddress());
-        break;
-      default:
-        break;
-    }
-  };
-
   return (
-    <main>
+    <>
       <Head>
-        <title>Shooting Star</title>
+        <title>Parachute</title>
         <meta name="description" content="Shooting Star" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Navbar />
+      <div className="container mx-auto">
+        <div className="flex">
+          <div className="grow">
+            <h1>Spaces</h1>
+          </div>
+          <div className="flex-none">
+            <button className="btn gap-2 btn-outline btn-primary">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                />
+              </svg>
+              Create a Space
+            </button>
+          </div>
+        </div>
 
-      <button
-        className="btn btn-outline btn-success"
-        onClick={handleWalletClick}
-        type="button"
-        id="metamask"
-      >
-        Connect Metamask Wallet
-      </button>
-      <button
-        className="btn btn-outline btn-primary"
-        onClick={handleWalletClick}
-        type="button"
-        id="keplr"
-      >
-        Connect Keplr Wallet
-      </button>
-      <TestEvmos ownerAddress={ownerAddress} />
-    </main>
+        <div className="columns-3">
+          <CardSpace />
+          <CardSpace />
+          <CardSpace />
+          <CardSpace />
+          <CardSpace />
+          <CardSpace />
+        </div>
+      </div>
+    </>
   );
 };
 
