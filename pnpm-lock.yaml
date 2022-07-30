@@ -8,6 +8,7 @@ specifiers:
   '@keplr-wallet/types': ^0.10.13
   '@metamask/providers': ^9.0.0
   '@stylelint/postcss-css-in-js': ^0.38.0
+  '@tanstack/react-query': ^4.0.10
   '@types/node': 17.0.38
   '@types/papaparse': ^5.3.3
   '@types/react': 18.0.10
@@ -50,6 +51,7 @@ dependencies:
   '@emotion/react': 11.9.3_pyvpkphh3iojkm7duxxfd5cb3a
   '@emotion/styled': 11.9.3_jkt623t24ad26wpdnmua3hku6y
   '@metamask/providers': 9.0.0
+  '@tanstack/react-query': 4.0.10_ef5jwxihqo6n7gxfmzogljlgcm
   daisyui: 2.20.0_6qxuh3ctkxhae7jnbdaexscv2m
   emotion-reset: 3.0.1_@emotion+react@11.9.3
   evmosjs: 0.2.8
@@ -797,6 +799,29 @@ packages:
       - supports-color
     dev: true
 
+  /@tanstack/query-core/4.0.10:
+    resolution: {integrity: sha512-9LsABpZXkWZHi4P1ozRETEDXQocLAxVzQaIhganxbNuz/uA3PsCAJxJTiQrknG5htLMzOF5MqM9G10e6DCxV1A==}
+    dev: false
+
+  /@tanstack/react-query/4.0.10_ef5jwxihqo6n7gxfmzogljlgcm:
+    resolution: {integrity: sha512-Wn5QhZUE5wvr6rGClV7KeQIUsdTmYR9mgmMZen7DSRWauHW2UTynFg3Kkf6pw+XlxxOLsyLWwz/Q6q1lSpM3TQ==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      '@tanstack/query-core': 4.0.10
+      '@types/use-sync-external-store': 0.0.3
+      react: 18.1.0
+      react-dom: 18.1.0_react@18.1.0
+      use-sync-external-store: 1.2.0_react@18.1.0
+    dev: false
+
   /@tharsis/address-converter/0.1.8:
     resolution: {integrity: sha512-z7zdNczV8RIzBNxzIzRFhC5ujiQ3Lt04At9rooo2pL6QONDDMMLxsqH3o28ie80k5DXSXaMJ6gffATeehxwAkw==}
     requiresBuild: true
@@ -935,6 +960,10 @@ packages:
 
   /@types/scheduler/0.16.2:
     resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
+
+  /@types/use-sync-external-store/0.0.3:
+    resolution: {integrity: sha512-EwmlvuaxPNej9+T4v5AuBPJa2x2UOJVdjCtDHgcDqitUeOtjnJKJ+apYjVcAoBEMjKW1VVFGZLUb5+qqa09XFA==}
+    dev: false
 
   /@typescript-eslint/eslint-plugin/5.31.0_mp5sa5yz4gwf64fr27rrogi6ru:
     resolution: {integrity: sha512-VKW4JPHzG5yhYQrQ1AzXgVgX8ZAJEvCz0QI6mLRX4tf7rnFfh5D8SKm0Pq6w5PyNfAWJk6sv313+nEt3ohWMBQ==}
@@ -4684,6 +4713,14 @@ packages:
     dependencies:
       punycode: 2.1.1
     dev: true
+
+  /use-sync-external-store/1.2.0_react@18.1.0:
+    resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.1.0
+    dev: false
 
   /util-deprecate/1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}

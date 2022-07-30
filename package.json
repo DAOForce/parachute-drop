@@ -17,6 +17,7 @@
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "@metamask/providers": "^9.0.0",
+    "@tanstack/react-query": "^4.0.10",
     "daisyui": "^2.20.0",
     "emotion-reset": "^3.0.1",
     "evmosjs": "^0.2.8",
