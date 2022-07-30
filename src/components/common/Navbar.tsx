@@ -1,9 +1,17 @@
 import TestEvmos from '@src/components/main/TestEvmos';
 import { getKeplrAddress, getMetamaskAddress } from '@src/utils/connectWallet';
 import React, { useEffect, useState } from 'react';
+import Logo from '@src/assets/logo.svg';
+import { useRouter } from 'next/router';
 
 function Navbar() {
+  const router = useRouter();
   const [ownerAddress, setOwnerAddress] = useState<string | undefined>('');
+
+  const handleClick = () => {
+    router.push('/');
+  };
+
   const handleWalletClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     switch (e.currentTarget.id) {
       case 'metamask':
@@ -21,36 +29,46 @@ function Navbar() {
     }
   };
   return (
-    <div className="navbar dark:bg-slate-800">
+    <div className="navbar bg-[#000]">
       <div className="flex-1">
-        <a className="btn btn-ghost normal-case text-xl">Parachute</a>
+        <a className="btn btn-ghost normal-case text-xl" onClick={() => handleClick()}>
+          {' '}
+          <Logo />
+        </a>
       </div>
       <div className="flex-none">
-        <ul className="menu menu-horizontal p-0">
-          <li>
-            <a>Spaces</a>
-          </li>
-          <li>
-            <a>Portfolio</a>
-          </li>
-        </ul>
-        <button
-          className="btn btn-outline btn-success"
-          onClick={handleWalletClick}
-          type="button"
-          id="metamask"
-        >
-          Connect Metamask Wallet
-        </button>
-        <button
-          className="btn btn-outline btn-primary"
-          onClick={handleWalletClick}
-          type="button"
-          id="keplr"
-        >
-          Connect Keplr Wallet
-        </button>{' '}
-        <TestEvmos ownerAddress={ownerAddress} />
+        <label for="my-modal-4" class="btn modal-button">
+          Connect Wallet
+        </label>
+
+        <input type="checkbox" id="my-modal-4" className="modal-toggle" />
+        <label for="my-modal-4" class="modal cursor-pointer">
+          <label className="modal-box relative" for="">
+            <h3 className="font-bold text-lg text-center">Connect Wallet</h3>
+            <p className="py-4 text-center">Choose wallet to connect to the blockchain.</p>
+            <div className="grid gap-4">
+              <button
+                className="btn btn-block btn-warning"
+                onClick={handleWalletClick}
+                type="button"
+                id="metamask"
+              >
+                Metamask Wallet
+              </button>
+
+              <button
+                className="btn btn-block btn-warning"
+                onClick={handleWalletClick}
+                type="button"
+                id="keplr"
+              >
+                Keplr Wallet
+              </button>
+            </div>
+          </label>
+        </label>
+
+        {/* <TestEvmos ownerAddress={ownerAddress} /> */}
       </div>
     </div>
   );
