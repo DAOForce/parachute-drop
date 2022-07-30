@@ -41,6 +41,7 @@ specifiers:
   prettier: ^2.6.2
   react: 18.1.0
   react-dom: 18.1.0
+  react-spinners: ^0.13.4
   stylelint: ^14.8.5
   stylelint-config-prettier: ^9.0.3
   stylelint-config-standard: ^25.0.0
@@ -61,6 +62,7 @@ dependencies:
   papaparse: 5.3.2
   react: 18.1.0
   react-dom: 18.1.0_react@18.1.0
+  react-spinners: 0.13.4_ef5jwxihqo6n7gxfmzogljlgcm
 
 devDependencies:
   '@babel/core': 7.18.9
@@ -4343,6 +4345,16 @@ packages:
     resolution: {integrity: sha512-GOA8tc1EVYLnHvma/TU9VTgLOyralO7eATRuCDchQveXW9Fr9vXygyq9iwqmM7YRZ8qRJfEt9xOS7OYMdJvRFw==}
     dependencies:
       p-defer: 3.0.0
+    dev: false
+
+  /react-spinners/0.13.4_ef5jwxihqo6n7gxfmzogljlgcm:
+    resolution: {integrity: sha512-V6IURjYOwomhdngMfuVxBp4utCF6v21sjQ6r4K2JoKl8fwXZp1UeHMBLf+2SU+cts8hAVj9rHOJ8kdT5UqqaJw==}
+    peerDependencies:
+      react: ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.1.0
+      react-dom: 18.1.0_react@18.1.0
     dev: false
 
   /react/18.1.0:
