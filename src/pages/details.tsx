@@ -78,6 +78,29 @@ const Details: NextPage = () => {
             );
           })}
         </div>
+        <div className="bg-indigo-500">
+          <h5>Uncoming Vest Events</h5>
+          <div className="overflow-x-auto">
+            <table className="table w-full">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Jun 1, 2024</td>
+                </tr>
+                <tr>
+                  <td>Jun 1, 2024</td>
+                </tr>
+                <tr>
+                  <td>Jun 1, 2024</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </>
   );
