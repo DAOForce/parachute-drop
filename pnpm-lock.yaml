@@ -49,7 +49,6 @@ dependencies:
   '@emotion/react': 11.9.3_pyvpkphh3iojkm7duxxfd5cb3a
   '@emotion/styled': 11.9.3_jkt623t24ad26wpdnmua3hku6y
   '@metamask/providers': 9.0.0
-  '@types/papaparse': 5.3.3
   daisyui: 2.20.0_6qxuh3ctkxhae7jnbdaexscv2m
   emotion-reset: 3.0.1_@emotion+react@11.9.3
   evmosjs: 0.2.8
@@ -64,6 +63,7 @@ devDependencies:
   '@keplr-wallet/types': 0.10.13
   '@stylelint/postcss-css-in-js': 0.38.0_ryeeqdz73dmnun3unz5nxq65vi
   '@types/node': 17.0.38
+  '@types/papaparse': 5.3.3
   '@types/react': 18.0.10
   '@types/react-dom': 18.0.5
   '@typescript-eslint/eslint-plugin': 5.31.0_mp5sa5yz4gwf64fr27rrogi6ru
@@ -905,7 +905,7 @@ packages:
     resolution: {integrity: sha512-i7fV8u843vb7nIGpcwdCsG3WjfBONeytRHK1mQL9d5KQAvFeAK2rRisDHicreYpoQ0MXocUDEqunKHTeXdvibg==}
     dependencies:
       '@types/node': 17.0.38
-    dev: false
+    dev: true
 
   /@types/parse-json/4.0.0:
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==}
