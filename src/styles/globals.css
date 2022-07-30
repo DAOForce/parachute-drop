@@ -11,6 +11,7 @@ body {
     'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   background: black;
   height: 100%;
+  color: #fff;
 }
 
 a {
@@ -20,4 +21,9 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+/* index.scss */
+:root {
+  --color-primary: #ffe55c;
 }
