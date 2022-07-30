@@ -24,4 +24,7 @@ const StyleMain = styled.main`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  & > header {
+    margin-bottom: 181px;
+  }
 `;

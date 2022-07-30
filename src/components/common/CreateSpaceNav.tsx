@@ -30,6 +30,15 @@ const StyledHeader = styled.header`
   justify-content: space-between;
   height: 57.65px;
   padding: 30px 25px;
+  & div {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+
+    color: #ffffff;
+  }
   & svg {
     cursor: pointer;
   }
