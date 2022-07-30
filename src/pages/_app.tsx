@@ -1,4 +1,5 @@
 import '@src/styles/globals.css';
+import Navbar from '@src/components/common/Navbar';
 
 import { Global, ThemeProvider } from '@emotion/react';
 import { global } from '@src/styles/global';
