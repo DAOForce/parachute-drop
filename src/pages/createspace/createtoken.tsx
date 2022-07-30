@@ -95,8 +95,10 @@ function spacedetail() {
           </label>
           <input
             ref={tokenSymbolRef}
-            type="number"
-            placeholder={router?.query?.tokenSymbol ? router.query.tokenSymbol.toString() : '0.00'}
+            type="text"
+            placeholder={
+              router?.query?.tokenSymbol ? router.query.tokenSymbol.toString() : 'Type here'
+            }
             className="input input-bordered w-full"
           />
           <label className="label w-full">
@@ -104,10 +106,8 @@ function spacedetail() {
           </label>
           <input
             ref={tokenSupplyRef}
-            type="text"
-            placeholder={
-              router?.query?.tokenSupply ? router.query.tokenSupply.toString() : 'Type here'
-            }
+            type="number"
+            placeholder={router?.query?.tokenSupply ? router.query.tokenSupply.toString() : '0.00'}
             className="input input-bordered w-full"
           />
           <label className="label w-full">
