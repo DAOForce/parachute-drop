@@ -1,35 +1,34 @@
 import type { NextPage } from 'next';
 import Navbar from '@src/components/common/Navbar';
 import { useEffect, useState } from 'react';
+import dayjs from 'dayjs';
 
 const daoDetails = {
-  name: 'ENS',
-  symbol: 'ENS',
-  about: 'About ENS Here About ENS Here About ENS Here',
-  link: 'https://ens.dominon.network',
+  name: 'Telescope',
+  ticker: 'TELE',
+  DAOName: 'Telescope DAO',
+  intro: 'Telescope DAO is changing the world',
+  image: 'https://m.media-amazon.com/images/I/41ViEgmMrOL._SY355_.jpg',
+  link: 'https://telescope.dao',
 };
 
-const total = 300.0;
+const airdrop_timestamps = [1651354641, 1653946641, 1656625041];
+const airdrop_round_airdrop_amounts = 4000;
 
-const amounts = [
-  { label: 'Claimable', amount: 100.0, color: '#FFE55C' },
-  { label: 'Unvested', amount: 200.0, color: '#474747' },
-  { label: 'Total', amount: total, color: '#FF8F5C' },
+const date1 = dayjs(airdrop_timestamps[1]);
+const date2 = dayjs(airdrop_timestamps[0]);
+
+const airdropDetails = [
+  { label: 'Start Date', value: airdrop_timestamps[0] },
+  { label: 'Rounds', value: airdrop_timestamps.length },
+  { label: 'Interval', value: date1.diff(date2, 'day') + ' Days' },
 ];
 
+const total = airdrop_timestamps.length * airdrop_round_airdrop_amounts;
+
+const amounts = [{ label: 'Total Amounts', amount: total, color: '#FFE55C' }];
+
 const Details: NextPage = () => {
-  const [isLogin, setIsLogin] = useState<boolean | undefined | null>();
-
-  useEffect(() => {
-    localStorage.getItem('ownerAddress') ? setIsLogin(true) : setIsLogin(false);
-  }, []);
-
-  const [ownerAddress, setOwnerAddress] = useState<string | undefined | null>('');
-
-  useEffect(() => {
-    setOwnerAddress(localStorage.getItem('ownerAddress'));
-  }, [ownerAddress]);
-
   return (
     <>
       <Navbar />
@@ -42,13 +41,13 @@ const Details: NextPage = () => {
             </div>
           </div>
           <div>
-            <div className="flex items-center mb-1">
-              <p className="font-bold text-2xl mr-1">{daoDetails.name}</p>
+            <div className="flex items-center mb-2">
+              <p className="font-bold text-2xl mr-2">{daoDetails.DAOName}</p>
               <p className="text-sm opacity-50">
-                $<span>{daoDetails.symbol}</span>
+                $<span>{daoDetails.ticker}</span>
               </p>
             </div>
-            <p className="mb-2">{daoDetails.about}</p>
+            <p className="mb-2">{daoDetails.intro}</p>
             <div>
               <a className="text-sm link link-hover " href={daoDetails.link}>
                 {daoDetails.link.split('//')[1]}
@@ -75,33 +74,35 @@ const Details: NextPage = () => {
           </div> */}
           </div>
 
-          {ownerAddress ? (
-            <div className="bg-[#191919] p-8 mb-3 rounded-lg">
-              <p className="mb-6 font-bold ">My airdrop</p>
-              {amounts.map((amount, index) => {
-                return (
-                  <>
-                    <div className="text-sm mt-2 mb-2">
-                      <span className="opacity-50 mr-1">{amount.label}</span>
-                      <span>{amount.amount}</span>
-                    </div>
-                    <div
-                      className="rounded-full"
-                      style={{
-                        backgroundColor: amount.color,
-                        height: '16px',
-                        width: `${(amount.amount / total) * 100}%`,
-                      }}
-                    />
-                  </>
-                );
-              })}
-            </div>
-          ) : null}
+          <div className="bg-[#191919] p-8 mb-3 rounded-lg">
+            {amounts.map((amount, index) => {
+              return (
+                <>
+                  <div className="mb-4">
+                    <span className="opacity-50 w-40 inline-block">{amount.label}</span>
+                    <span>{amount.amount}</span>
+                  </div>
+                  <div
+                    className="rounded-full"
+                    style={{
+                      backgroundColor: amount.color,
+                      height: '16px',
+                      width: `${(amount.amount / total) * 100}%`,
+                    }}
+                  />
+                </>
+              );
+            })}
+          </div>
 
           <div className="bg-[#191919] p-8 rounded-lg">
-            <p className="mb-6 font-bold ">1/3 Round</p>
-            <h5 className="text-base mb-4">Uncoming Vest Events</h5>
+            {airdropDetails.map((airdrop, index) => (
+              <div className="mb-4">
+                <span className="opacity-50 w-40 inline-block">{airdrop.label}</span>
+                <span>{airdrop.value}</span>
+              </div>
+            ))}
+            <h5 className="text-base mb-4 mt-8 ">Vest Events</h5>
             <div className="overflow-x-auto">
               <table className="table w-full">
                 <thead>
@@ -111,18 +112,12 @@ const Details: NextPage = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Jun 1, 2024</td>
-                    <td>1 Round</td>
-                  </tr>
-                  <tr>
-                    <td>Jun 1, 2024</td>
-                    <td>2 Round</td>
-                  </tr>
-                  <tr>
-                    <td>Jun 1, 2024</td>
-                    <td>3 Round</td>
-                  </tr>
+                  {airdrop_timestamps.map((airdrop, index) => (
+                    <tr>
+                      <td>{dayjs(airdrop).format('DD/MM/YYYY')}</td>
+                      <td>{index + 1} Round</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>

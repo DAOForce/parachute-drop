@@ -7,40 +7,28 @@ import { useRouter } from 'next/router';
 
 const CardContents = [
   {
-    profile: 'https://i.pravatar.cc/300',
-    name: 'ENS',
-    number: 100,
-    id: '1',
+    image: 'https://i.pravatar.cc/300',
+    DAOName: 'Telescope DAO',
+    intro: 'Telescope DAO is changing the world',
+    ticker: 'TELE',
   },
   {
-    profile: 'https://i.pravatar.cc/300',
-    name: 'ENS',
-    number: 100,
-    id: '2',
+    image: 'https://i.pravatar.cc/300',
+    DAOName: 'Telescope DAO',
+    intro: 'Telescope DAO is changing the world',
+    ticker: 'TELE',
   },
   {
-    profile: 'https://i.pravatar.cc/300',
-    name: 'ENS',
-    number: 100,
-    id: '3',
+    image: 'https://i.pravatar.cc/300',
+    DAOName: 'Telescope DAO',
+    intro: 'Telescope DAO is changing the world',
+    ticker: 'TELE',
   },
   {
-    profile: 'https://i.pravatar.cc/300',
-    name: 'ENS',
-    number: 100,
-    id: '4',
-  },
-  {
-    profile: 'https://i.pravatar.cc/300',
-    name: 'ENS',
-    number: 100,
-    id: '5',
-  },
-  {
-    profile: 'https://i.pravatar.cc/300',
-    name: 'ENS',
-    number: 100,
-    id: '6',
+    image: 'https://i.pravatar.cc/300',
+    DAOName: 'Telescope DAO',
+    intro: 'Telescope DAO is changing the world',
+    ticker: 'TELE',
   },
 ];
 
@@ -81,10 +69,10 @@ const Home: NextPage = () => {
             <CardSpace
               key={card.id}
               index={index}
-              id={card.id}
-              profile={card.profile}
-              name={card.name}
-              number={card.number}
+              ticker={card.ticker}
+              intro={card.intro}
+              DAOName={card.DAOName}
+              image={card.image}
             />
           ))}
         </div>
