@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import UploadFile from './UploadFile';
 import { FreeObject } from '@src/types';
 import AddressList from './AddressList';
 
-function UploadCsv() {
-  const [fileData, setFileData] = useState<Array<FreeObject> | null>(null);
-  useEffect(() => {
-    console.log('>>fileData', fileData);
-  }, [fileData]);
+interface UploadCsvProps {
+  fileData: Array<FreeObject> | null;
+  setFileData: Dispatch<Array<FreeObject> | null>;
+}
+function UploadCsv({ fileData, setFileData }: UploadCsvProps) {
   return (
     <StyledRoot>
       <StyledAddressBox>
@@ -24,7 +24,7 @@ function UploadCsv() {
 export default UploadCsv;
 
 const StyledRoot = styled.section`
-  width: 1008px;
+  width: 868.5px;
 `;
 const StyledAddressBox = styled.div`
   width: 100%;

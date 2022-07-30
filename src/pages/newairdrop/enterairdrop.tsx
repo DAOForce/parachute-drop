@@ -40,7 +40,7 @@ function spacedetail() {
       return;
     }
     router.push({
-      pathname: '/createspace/add_whitelist_addres',
+      pathname: '/newairdrop/add_whitelist_address',
       query: {
         ...router.query,
         treasuryAddress: treasuryAddressRef?.current?.value

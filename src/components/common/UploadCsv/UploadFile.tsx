@@ -34,6 +34,7 @@ function UploadFile({ setFileData }: UploadFileProps) {
           const csv = Papa.parse(target?.result as string, { header: true });
           parsedData = csv?.data as Array<FreeObject>;
           setFileData(parsedData);
+          localStorage.setItem('whitelist', JSON.stringify(parsedData));
         };
 
         reader.readAsText(inputFile);
