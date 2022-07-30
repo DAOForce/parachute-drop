@@ -48,7 +48,7 @@ function review_airdrop() {
       </StyledRecipt>
       <StyledButtonGroup>
         <BackBtn onClick={handleBackClick} />
-        <NextBtn onClick={handleNextClick} />
+        <NextBtn onClick={handleNextClick}>Done</NextBtn>
       </StyledButtonGroup>
     </StyleMain>
   );
@@ -100,6 +100,9 @@ const StyledRecipt = styled.section`
 
     color: #ffffff;
     margin-bottom: 48px;
+    width: 452px;
+    text-align: center;
+    word-break: break-all;
     &:last-child {
       margin-bottom: 0px;
     }

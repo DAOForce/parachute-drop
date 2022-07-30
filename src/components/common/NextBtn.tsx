@@ -5,9 +5,10 @@ import React from 'react';
 interface NextBtnProps {
   isAbled?: boolean;
   onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  children?: string;
 }
 
-function NextBtn({ isAbled = true, onClick }: NextBtnProps) {
+function NextBtn({ isAbled = true, onClick, children = 'Next' }: NextBtnProps) {
   return (
     <>
       {isAbled ? (
@@ -16,7 +17,7 @@ function NextBtn({ isAbled = true, onClick }: NextBtnProps) {
           className="btn btn-active btn-primary rounded-full"
           onClick={onClick}
         >
-          Next
+          {children}
         </StyledButton>
       ) : (
         <StyledButton
@@ -24,7 +25,7 @@ function NextBtn({ isAbled = true, onClick }: NextBtnProps) {
           className="btn btn-disabled btn-primary rounded-full"
           onClick={onClick}
         >
-          Next
+          {children}
         </StyledButton>
       )}
     </>
