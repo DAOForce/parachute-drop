@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import Title from '@src/components/CreateSpace/Title';
 import Subscription from '@src/components/CreateSpace/Subscription';
@@ -32,6 +32,13 @@ function add_whitelist_address() {
       },
     });
   };
+
+  useEffect(() => {
+    const storageData = localStorage.getItem('whitelist');
+    if (storageData) {
+      setFileData(JSON.parse(storageData));
+    }
+  }, []);
   return (
     <StyleMain>
       <CreateSpaceNav routingAddress="/">{HEADER_NAME.START_NEW_AIRDROP}</CreateSpaceNav>
