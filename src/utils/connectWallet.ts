@@ -1,4 +1,6 @@
-export const connectMetamask = async () => {
+import { KeplrWallet } from '@src/types';
+
+export const getMetamaskAddress = async () => {
   try {
     const { ethereum } = window;
 
@@ -11,13 +13,13 @@ export const connectMetamask = async () => {
 
     console.log('Connected', accounts[0]);
 
-    return accounts;
+    return accounts[0];
   } catch (error) {
     console.log(error);
   }
 };
 
-export const connectKeplr = async () => {
+export const getKeplrAddress = async () => {
   try {
     const { keplr } = window;
 
@@ -30,9 +32,9 @@ export const connectKeplr = async () => {
 
     await keplr.enable(chainId);
     const offlineSigner = keplr.getOfflineSigner(chainId);
-    const accounts = await offlineSigner.getAccounts();
+    const accounts = (await offlineSigner.getAccounts()) as Array<KeplrWallet>;
 
-    return accounts;
+    return accounts[0];
   } catch (error) {
     console.log(error);
   }

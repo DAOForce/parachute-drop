@@ -1,16 +1,22 @@
-import { connectKeplr, connectMetamask } from '@src/utils/connectWallet';
+import TestEvmos from '@src/components/Main/TestEvmos';
+import { getKeplrAddress, getMetamaskAddress } from '@src/utils/connectWallet';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Home: NextPage = () => {
+  const [ownerAddress, setOwnerAddress] = useState<string | undefined>('');
   const handleWalletClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     switch (e.currentTarget.id) {
       case 'metamask':
-        console.log(await connectMetamask());
+        const metamaskAccounts = await getMetamaskAddress();
+        setOwnerAddress(metamaskAccounts);
+        // setOwnerAddress(await getMetamaskAddress());
         break;
       case 'keplr':
-        console.log(await connectKeplr());
+        const keplrAccounts = await getKeplrAddress();
+        setOwnerAddress(keplrAccounts?.address);
+        // console.log(await getKeplrAddress());
         break;
       default:
         break;
@@ -41,6 +47,7 @@ const Home: NextPage = () => {
       >
         Connect Keplr Wallet
       </button>
+      <TestEvmos ownerAddress={ownerAddress} />
     </main>
   );
 };

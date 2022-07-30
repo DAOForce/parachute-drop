@@ -60,13 +60,11 @@
   },
   "lint-staged": {
     "*.{ts,tsx}": [
-      "eslint --fix",
       "prettier --write",
       "stylelint --ignore-path .gitignore '**/*.(css|tsx)' --fix",
       "git add"
     ],
     "*.+{json|css|md}": [
-      "eslint --fix",
       "prettier --write",
       "stylelint --ignore-path .gitignore '**/*.(css|tsx)' --fix",
       "git add"
