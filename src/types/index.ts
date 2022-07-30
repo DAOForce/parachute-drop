@@ -12,3 +12,17 @@ export interface CSV {
   error: any;
   meta: any;
 }
+
+export interface postAirdropInfoInfoParams {
+  name: string;
+  ticker: string;
+  DAOName: string;
+  intro: string;
+  image: string;
+  link: string;
+  initial_supply: number;
+  owner: string;
+  airdrop_timestamps: Array<number>;
+  airdrop_target_addresses: Array<string>;
+  airdrop_round_airdrop_amounts: number;
+}
