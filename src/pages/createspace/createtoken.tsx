@@ -146,6 +146,7 @@ const StyledRoot = styled.main`
 const StyledForm = styled.form`
   width: 560px;
   & div {
+    margin-top: 125px;
     width: 100%;
   }
   & label {

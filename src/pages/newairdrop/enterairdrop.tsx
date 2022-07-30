@@ -11,38 +11,52 @@ import NextBtn from '@src/components/common/NextBtn';
 
 function spacedetail() {
   const router = useRouter();
-  const tokenNameRef = useRef(null);
-  const tokenSymbolRef = useRef(null);
-  const tokenSupplyRef = useRef(null);
-  const ownerAddressRef = useRef(null);
+  const treasuryAddressRef = useRef(null);
+  const amountsRef = useRef(null);
+  const startDateRef = useRef(null);
+  const roundsRef = useRef(null);
+  const intervaleRef = useRef(null);
+  const durationRef = useRef(null);
   const [isAbled, setIsAbled] = useState<boolean>();
   const handleNextClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    console.log(tokenNameRef?.current.value);
-    console.log(tokenSymbolRef?.current.value);
-    console.log(tokenSupplyRef?.current.value);
-    console.log(ownerAddressRef?.current.value);
-    if (!tokenNameRef?.current.value) {
+    if (!router?.query?.treasuryAddress && !treasuryAddressRef?.current.value) {
       alert('Please enter the token name');
       return;
-    } else if (!tokenSymbolRef?.current.value) {
+    } else if (!router?.query?.amounts && !amountsRef?.current.value) {
       alert('Please enter the token symbol');
       return;
-    } else if (!tokenSupplyRef?.current.value) {
+    } else if (!router?.query?.startDate && !startDateRef?.current.value) {
       alert('Please enter the token supply');
       return;
-    } else if (!ownerAddressRef?.current.value) {
+    } else if (!router?.query?.rounds && !roundsRef?.current.value) {
+      alert('Please upload the owner address');
+      return;
+    } else if (!router?.query?.interval && !intervaleRef?.current.value) {
+      alert('Please upload the owner address');
+      return;
+    } else if (!router?.query?.duration && !durationRef?.current.value) {
       alert('Please upload the owner address');
       return;
     }
     router.push({
-      pathname: '/createspace/createtoken',
+      pathname: '/createspace/add_whitelist_addres',
       query: {
         ...router.query,
-        tokenName: tokenNameRef?.current.value,
-        tokenSymbol: tokenSymbolRef?.current.value,
-        tokenSupply: tokenSupplyRef?.current.value,
-        ownerAdrres: ownerAddressRef?.current.value,
+        treasuryAddress: treasuryAddressRef?.current?.value
+          ? treasuryAddressRef?.current?.value
+          : router?.query?.treasuryAddress,
+        amounts: amountsRef?.current?.value ? amountsRef?.current?.value : router?.query?.amounts,
+        startDate: startDateRef?.current?.value
+          ? startDateRef?.current?.value
+          : router?.query?.startDate,
+        rounds: roundsRef?.current?.value ? roundsRef?.current?.value : router?.query?.rounds,
+        interval: intervaleRef?.current?.value
+          ? intervaleRef?.current?.value
+          : router?.query?.interval,
+        duration: durationRef?.current?.value
+          ? durationRef?.current?.value
+          : router?.query?.duration,
       },
     });
   };
@@ -53,6 +67,20 @@ function spacedetail() {
       pathname: '/createspace/createtoken',
       query: {
         ...router.query,
+        treasuryAddress: treasuryAddressRef?.current?.value
+          ? treasuryAddressRef?.current?.value
+          : router?.query?.treasuryAddress,
+        amounts: amountsRef?.current?.value ? amountsRef?.current?.value : router?.query?.amounts,
+        startDate: startDateRef?.current?.value
+          ? startDateRef?.current?.value
+          : router?.query?.startDate,
+        rounds: roundsRef?.current?.value ? roundsRef?.current?.value : router?.query?.rounds,
+        interval: intervaleRef?.current?.value
+          ? intervaleRef?.current?.value
+          : router?.query?.interval,
+        duration: durationRef?.current?.value
+          ? durationRef?.current?.value
+          : router?.query?.duration,
       },
     });
   };
@@ -65,39 +93,59 @@ function spacedetail() {
       <StyledForm>
         <div className="form-control w-full">
           <label className="label w-full">
-            <span className="label-text w-full">Token Name</span>
+            <span className="label-text w-full">Treasury address</span>
           </label>
           <input
-            ref={tokenNameRef}
+            ref={treasuryAddressRef}
             type="text"
-            placeholder="Type here"
+            placeholder={
+              router?.query?.treasuryAddress ? router.query.treasuryAddress.toString() : 'Type here'
+            }
             className="input input-bordered w-full"
           />
           <label className="label w-full">
-            <span className="label-text w-full">Token Symbol</span>
+            <span className="label-text w-full">Amounts</span>
           </label>
           <input
-            ref={tokenSymbolRef}
-            type="text"
-            placeholder="0.00"
+            ref={amountsRef}
+            type="number"
+            placeholder={router?.query?.amounts ? router.query.amounts.toString() : '0.00'}
             className="input input-bordered w-full"
           />
           <label className="label w-full">
-            <span className="label-text w-full">Token Supply</span>
+            <span className="label-text w-full">Start Date</span>
           </label>
           <input
-            ref={tokenSupplyRef}
+            ref={startDateRef}
             type="text"
-            placeholder="Type here"
+            placeholder={router?.query?.startDate ? router.query.startDate.toString() : 'dd/mm/yy'}
             className="input input-bordered w-full"
           />
           <label className="label w-full">
-            <span className="label-text w-full">Owner Address</span>
+            <span className="label-text w-full">Rounds</span>
           </label>
           <input
-            ref={ownerAddressRef}
-            type="text"
-            placeholder="Type here"
+            ref={roundsRef}
+            type="number"
+            placeholder={router?.query?.rounds ? router.query.rounds.toString() : '0'}
+            className="input input-bordered w-full"
+          />
+          <label className="label w-full">
+            <span className="label-text w-full">Interval</span>
+          </label>
+          <input
+            ref={intervaleRef}
+            type="number"
+            placeholder={router?.query?.interval ? router.query.interval.toString() : '0'}
+            className="input input-bordered w-full"
+          />
+          <label className="label w-full">
+            <span className="label-text w-full">Claimable Duration</span>
+          </label>
+          <input
+            ref={durationRef}
+            type="number"
+            placeholder={router?.query?.duration ? router.query.duration.toString() : '0'}
             className="input input-bordered w-full"
           />
         </div>
@@ -125,6 +173,7 @@ const StyledRoot = styled.main`
 const StyledForm = styled.form`
   width: 560px;
   & div {
+    margin-top: 125px;
     width: 100%;
   }
   & label {
