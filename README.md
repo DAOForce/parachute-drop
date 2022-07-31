@@ -21,3 +21,6 @@
 ## How to keep track of users' balance of token 
 Please follow this link
 https://docs.google.com/document/d/11R5V5q38uc41Iu0GLragcQbfb6uuSFj7wGrOTU9E6ZM/edit?usp=sharing
+
+## Demonstration Video
+https://drive.google.com/file/d/1bwGjGstn-IYZNQftPZEfoDuDP6-OtB9f/view?usp=sharing
