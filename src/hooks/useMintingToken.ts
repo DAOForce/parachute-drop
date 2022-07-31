@@ -1,8 +1,8 @@
 import { airdropAbi } from '@src/lib/abi';
 import { postAirdropInfo } from '@src/lib/api';
 import { postAirdropInfoInfoParams } from '@src/types';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-const ethers = require('ethers');
+import { useMutation } from '@tanstack/react-query';
+import { ethers } from 'ethers';
 
 const useMintingToken = ({
   name,
@@ -17,7 +17,6 @@ const useMintingToken = ({
   airdrop_target_addresses,
   airdrop_round_airdrop_amounts,
 }: postAirdropInfoInfoParams) => {
-  const queryClient = useQueryClient();
   // const queryKeys = [flag] as string[];
 
   return useMutation(
@@ -36,7 +35,6 @@ const useMintingToken = ({
         airdrop_round_airdrop_amounts,
       }),
     {
-      onMutate: async () => {},
       onSuccess: async ({ data }) => {
         localStorage.setItem('airdropInfo', JSON.stringify(data));
         try {
@@ -54,6 +52,8 @@ const useMintingToken = ({
           const receipt = await airdropContract.executeAirdropRound(
             data?.governanceToken.contractAddress,
           );
+
+          console.log('>>receipt', receipt);
           localStorage.setItem('excuteAfterInfo', JSON.stringify(receipt));
         } catch (err) {
           console.log(err);
