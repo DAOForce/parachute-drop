@@ -151,7 +151,7 @@ function spacedetail() {
             placeholder={router?.query?.interval ? router.query.interval.toString() : '0'}
             className="input input-bordered w-full"
           />
-          <label className="label w-full">
+          {/* <label className="label w-full">
             <span className="label-text w-full">Claimable Duration (Days)</span>
           </label>
           <input
@@ -159,7 +159,7 @@ function spacedetail() {
             type="number"
             placeholder={router?.query?.duration ? router.query.duration.toString() : '0'}
             className="input input-bordered w-full"
-          />
+          /> */}
         </div>
         <StyledButtonGroup>
           <BackBtn onClick={handleBackClick} />
