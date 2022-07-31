@@ -49,6 +49,13 @@ function spacedetail() {
     });
   };
 
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      localStorage.removeItem('whitelist');
+      localStorage.removeItem('timestampArray');
+    }
+  }, []);
+
   return (
     <StyledRoot>
       <CreateSpaceNav routingAddress="/">{HEADER_NAME.CREATE_SPACE}</CreateSpaceNav>

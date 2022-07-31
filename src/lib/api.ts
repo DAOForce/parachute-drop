@@ -5,7 +5,7 @@ const BASE_URL = 'http://3.38.106.130:8080';
 
 export const client = axios.create({
   baseURL: BASE_URL,
-  timeout: 10000,
+  timeout: 500000,
 });
 
 export const postAirdropInfo = async ({
