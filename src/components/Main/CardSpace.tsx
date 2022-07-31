@@ -14,6 +14,19 @@ function CardSpace(props: CardSpaceProps) {
   const router = useRouter();
 
   const handleClick = (value: string) => {
+    const tempData = {
+      governanceToken: {
+        hash: '0x114e425ee91a1e1f877f071fa3955c1e45b3c2ac0c5d8daf828d2922b589b382',
+        contractAddress: '0x44ac3fE79F7F6d8381BC1Ce6e1F25E69745eE233',
+      },
+      airdropContract: {
+        hash: '0x269935779637014f1bd9b3ab460e339ec62b799eadb8baec713f164022b3b5b8',
+        contractAddress: '0x47Dcc4000fE75F87C1A952BE0Cf4112f67E1a362',
+      },
+    };
+
+    // @TODO 실제 데이터로 채우기
+    localStorage.setItem('clickedCardInfo', JSON.stringify(tempData));
     router.push({
       pathname: '/details',
       query: value,

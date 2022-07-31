@@ -50,13 +50,13 @@ function Navbar() {
         </div>
       ) : (
         <div className="flex-none">
-          <label for="my-modal-4" className="btn modal-button">
+          <label htmlFor="my-modal-4" className="btn modal-button">
             Connect Wallet
           </label>
 
           <input type="checkbox" id="my-modal-4" className="modal-toggle" />
-          <label for="my-modal-4" class="modal cursor-pointer">
-            <label className="modal-box relative" for="">
+          <label htmlFor="my-modal-4" className="modal cursor-pointer">
+            <label className="modal-box relative" htmlFor="">
               <h3 className="font-bold text-lg text-center">Connect Wallet</h3>
               <p className="py-4 text-center">Choose wallet to connect to the blockchain.</p>
               <div className="grid gap-4">
