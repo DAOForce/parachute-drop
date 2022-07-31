@@ -976,6 +976,38 @@ const Details: NextPage = () => {
   const total = airdrop_timestamps.length * airdrop_round_airdrop_amounts;
 
   const amounts = [{ label: 'Total Amounts', amount: total, color: '#FFE55C' }];
+
+  // get tokens from localstorage
+
+  const getAirdropInfo = async () => {
+    const contractInfo = JSON.parse(localStorage.getItem('clickedCardInfo') as string);
+    const airdropContract = new ethers.Contract(
+      contractInfo?.airdropContract?.contractAddress,
+      abi,
+      signer,
+    );
+
+    const roundData = await airdropContract?.getNumOfTotalRounds();
+    const airdropBalance = await airdropContract?.getTotalAirdropVolumePerRound();
+    const airdropWhiteList = await airdropContract?.getAirdropTargetAddresses();
+    const AirdropTimestamps = await airdropContract?.getAirdropSnapshotTimestamps();
+    const initialBlockNumberByRound = await airdropContract?.getInitialBlockNumberByRound(1);
+
+    console.log('--------------------------------[');
+    console.log(roundData);
+    console.log(airdropBalance);
+    console.log(airdropWhiteList);
+    console.log(AirdropTimestamps);
+    console.log(initialBlockNumberByRound);
+    console.log('--------------------------------[');
+  };
+
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      getAirdropInfo();
+    }
+  }, []);
+
   return (
     <>
       <Navbar />
