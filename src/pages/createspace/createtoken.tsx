@@ -27,7 +27,7 @@ function spacedetail() {
     } else if (!router?.query?.tokenSupply && !tokenSupplyRef?.current.value) {
       alert('Please enter the token supply');
       return;
-    } else if (!router?.query?.ownerAdrres && !ownerAddressRef?.current.value) {
+    } else if (!router?.query?.ownerAddrress && !ownerAddressRef?.current.value) {
       alert('Please upload the owner address');
       return;
     }
@@ -37,16 +37,16 @@ function spacedetail() {
         ...router.query,
         tokenName: tokenNameRef?.current?.value
           ? tokenNameRef?.current?.value
-          : router?.query?.ownerAdrres,
+          : router?.query?.ownerAddrress,
         tokenSymbol: tokenSymbolRef?.current?.value
           ? tokenSymbolRef?.current?.value
           : router?.query?.tokenSymbol,
         tokenSupply: tokenSupplyRef?.current?.value
           ? tokenSupplyRef?.current?.value
           : router?.query?.tokenSupply,
-        ownerAdrres: ownerAddressRef?.current?.value
+        ownerAddrress: ownerAddressRef?.current?.value
           ? ownerAddressRef?.current?.value
-          : router?.query?.ownerAdrres,
+          : router?.query?.ownerAddrress,
       },
     });
   };
@@ -60,16 +60,16 @@ function spacedetail() {
         ...router.query,
         tokenName: tokenNameRef?.current?.value
           ? tokenNameRef?.current?.value
-          : router?.query?.ownerAdrres,
+          : router?.query?.ownerAddrress,
         tokenSymbol: tokenSymbolRef?.current?.value
           ? tokenSymbolRef?.current?.value
           : router?.query?.tokenSymbol,
         tokenSupply: tokenSupplyRef?.current?.value
           ? tokenSupplyRef?.current?.value
           : router?.query?.tokenSupply,
-        ownerAdrres: ownerAddressRef?.current?.value
+        ownerAddrress: ownerAddressRef?.current?.value
           ? ownerAddressRef?.current?.value
-          : router?.query?.ownerAdrres,
+          : router?.query?.ownerAddrress,
       },
     });
   };
@@ -117,7 +117,7 @@ function spacedetail() {
             ref={ownerAddressRef}
             type="text"
             placeholder={
-              router?.query?.ownerAdrres ? router.query.ownerAdrres.toString() : 'Type here'
+              router?.query?.ownerAddrress ? router.query.ownerAddrress.toString() : 'Type here'
             }
             className="input input-bordered w-full"
           />

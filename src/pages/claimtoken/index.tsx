@@ -10,24 +10,29 @@ import NextBtn from '@src/components/common/NextBtn';
 import { useRouter } from 'next/router';
 import useMintingToken from '@src/hooks/useMintingToken';
 import ClipLoader from 'react-spinners/ClipLoader';
+import CheckIcon from '@src/assets/Icon/CheckIcon.svg';
 
 function review_airdrop() {
   const router = useRouter();
-  const storageWhiteList = JSON.parse(localStorage.getItem('whitelist'));
-  const storageTimeList = JSON.parse(localStorage.getItem('timestampArray'));
-  const { mutate, isLoading, isError, error } = useMintingToken({
-    name: router?.query?.tokenName,
-    ticker: router?.query?.tokenSymbol,
-    DAOName: router?.query?.name,
-    intro: router?.query?.intro,
-    image: router?.query?.imageData,
-    link: router?.query?.homepage,
-    initial_supply: Number(router?.query?.tokenSupply),
-    owner: router?.query?.ownerAddrress,
-    airdrop_timestamps: storageTimeList,
-    airdrop_target_addresses: storageWhiteList.map((o: { address: string }) => o.address),
-    airdrop_round_airdrop_amounts: Number(router?.query?.amounts),
-  });
+  const storageWhiteList =
+    typeof window !== 'undefined' && JSON.parse(localStorage.getItem('whitelist'));
+  const storageTimeList =
+    typeof window !== 'undefined' && JSON.parse(localStorage.getItem('timestampArray'));
+  const { mutate, isLoading, isError, error, isSuccess } =
+    typeof window !== 'undefined' &&
+    useMintingToken({
+      name: router?.query?.tokenName,
+      ticker: router?.query?.tokenSymbol,
+      DAOName: router?.query?.name,
+      intro: router?.query?.intro,
+      image: router?.query?.imageData,
+      link: router?.query?.homepage,
+      initial_supply: Number(router?.query?.tokenSupply),
+      owner: router?.query?.ownerAddrress,
+      airdrop_timestamps: storageTimeList,
+      airdrop_target_addresses: storageWhiteList.map((o: { address: string }) => o.address),
+      airdrop_round_airdrop_amounts: Number(router?.query?.amounts),
+    });
   const handleAgainClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     mutate();
@@ -42,27 +47,41 @@ function review_airdrop() {
     });
   };
 
-  useEffect(() => {
-    console.log(router?.query);
-    window && mutate();
-  }, [window]);
+  const handleHomeClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    router.push({
+      pathname: '/',
+    });
+  };
 
   useEffect(() => {
-    console.log('>.status', status);
-  }, [status]);
+    if (typeof window !== 'undefined') {
+      mutate();
+    }
+  }, []);
 
   return (
     <StyleMain>
       <CreateSpaceNav routingAddress="/">{HEADER_NAME.CLAIM_TOKEN}</CreateSpaceNav>
-      <Title>{TITLE.CONFIRM_WALLET}</Title>
-      <StyledRecipt>
-        {isLoading && <ClipLoader color="#FFE55C" loading={isLoading} size={50} />}
-        {isError && <div>{error?.message}</div>}
-      </StyledRecipt>
-      <StyledButtonGroup>
-        <BackBtn onClick={handleBackClick} />
-        <BackBtn onClick={handleAgainClick}>Try Again</BackBtn>
-      </StyledButtonGroup>
+      {isSuccess ? (
+        <StyledResult>
+          <CheckIcon />
+          <Title>{TITLE.AIRDROP_START}</Title>
+          <NextBtn onClick={handleHomeClick}>Return To Home</NextBtn>
+        </StyledResult>
+      ) : (
+        <>
+          <Title>{TITLE.CONFIRM_WALLET}</Title>
+          <StyledRecipt>
+            {isLoading && <ClipLoader color="#FFE55C" loading={isLoading} size={50} />}
+            {isError && <div>{error?.message}</div>}
+          </StyledRecipt>
+          <StyledButtonGroup>
+            <BackBtn onClick={handleBackClick} />
+            <BackBtn onClick={handleAgainClick}>Try Again</BackBtn>
+          </StyledButtonGroup>
+        </>
+      )}
     </StyleMain>
   );
 }
@@ -126,4 +145,19 @@ const StyledButtonGroup = styled.div`
   margin-top: 50px;
   margin-bottom: 400px;
   width: 582px;
+`;
+
+const StyledResult = styled.div`
+  width: 512px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  & svg {
+    margin-top: 140px;
+    margin-bottom: 30px;
+  }
+  & h1 {
+    margin-bottom: 83px;
+  }
 `;
