@@ -2,16 +2,18 @@ import type { NextPage } from 'next';
 import Navbar from '@src/components/common/Navbar';
 import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
+import { airdropAbi, daoAbi } from '@src/lib/abi';
+import NextBtn from '@src/components/common/NextBtn';
+const ethers = require('ethers');
 
 const Details: NextPage = () => {
-  let ethers = require('ethers');
   const provider = new ethers.providers.JsonRpcProvider('https://eth.bd.evmos.dev:8545');
   const providerGetBlockNumber = async () => await provider.getBlockNumber();
   const providerGetNetwork = async () => await provider.getNetwork();
 
-  console.log(providerGetBlockNumber());
-  console.log(provider);
-  console.log(providerGetNetwork());
+  // console.log(providerGetBlockNumber());
+  // console.log(provider);
+  // console.log(providerGetNetwork());
 
   const balance = async () =>
     await provider.getBalance('0x49388dCC82D36B6338871C00F26bF49fF9369A1D');
@@ -20,909 +22,18 @@ const Details: NextPage = () => {
 
   const testContractAddr = 0xd750a1d50f2018abb27747a0316685294b5d16d0;
 
-  console.log(testContractAddr);
+  // console.log(testContractAddr);
   const contractAddr = '0xd750a1d50f2018abb27747a0316685294b5d16d0';
-  console.log(contractAddr);
-
-  const abi = [
-    {
-      inputs: [
-        {
-          internalType: 'string',
-          name: '_name',
-          type: 'string',
-        },
-        {
-          internalType: 'string',
-          name: '_ticker',
-          type: 'string',
-        },
-        {
-          internalType: 'string',
-          name: '_DAOName',
-          type: 'string',
-        },
-        {
-          internalType: 'string',
-          name: '_intro',
-          type: 'string',
-        },
-        {
-          internalType: 'string',
-          name: '_image',
-          type: 'string',
-        },
-        {
-          internalType: 'string',
-          name: '_link',
-          type: 'string',
-        },
-        {
-          internalType: 'uint256',
-          name: '_initial_supply',
-          type: 'uint256',
-        },
-        {
-          internalType: 'address',
-          name: '_owner',
-          type: 'address',
-        },
-      ],
-      stateMutability: 'nonpayable',
-      type: 'constructor',
-    },
-    {
-      anonymous: false,
-      inputs: [
-        {
-          indexed: true,
-          internalType: 'address',
-          name: 'owner',
-          type: 'address',
-        },
-        {
-          indexed: true,
-          internalType: 'address',
-          name: 'spender',
-          type: 'address',
-        },
-        {
-          indexed: false,
-          internalType: 'uint256',
-          name: 'value',
-          type: 'uint256',
-        },
-      ],
-      name: 'Approval',
-      type: 'event',
-    },
-    {
-      anonymous: false,
-      inputs: [
-        {
-          indexed: true,
-          internalType: 'address',
-          name: 'delegator',
-          type: 'address',
-        },
-        {
-          indexed: true,
-          internalType: 'address',
-          name: 'fromDelegate',
-          type: 'address',
-        },
-        {
-          indexed: true,
-          internalType: 'address',
-          name: 'toDelegate',
-          type: 'address',
-        },
-      ],
-      name: 'DelegateChanged',
-      type: 'event',
-    },
-    {
-      anonymous: false,
-      inputs: [
-        {
-          indexed: true,
-          internalType: 'address',
-          name: 'delegate',
-          type: 'address',
-        },
-        {
-          indexed: false,
-          internalType: 'uint256',
-          name: 'previousBalance',
-          type: 'uint256',
-        },
-        {
-          indexed: false,
-          internalType: 'uint256',
-          name: 'newBalance',
-          type: 'uint256',
-        },
-      ],
-      name: 'DelegateVotesChanged',
-      type: 'event',
-    },
-    {
-      anonymous: false,
-      inputs: [
-        {
-          indexed: true,
-          internalType: 'address',
-          name: 'from',
-          type: 'address',
-        },
-        {
-          indexed: true,
-          internalType: 'address',
-          name: 'to',
-          type: 'address',
-        },
-        {
-          indexed: false,
-          internalType: 'uint256',
-          name: 'value',
-          type: 'uint256',
-        },
-      ],
-      name: 'Transfer',
-      type: 'event',
-    },
-    {
-      inputs: [],
-      name: 'DOMAIN_SEPARATOR',
-      outputs: [
-        {
-          internalType: 'bytes32',
-          name: '',
-          type: 'bytes32',
-        },
-      ],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [
-        {
-          internalType: 'address',
-          name: '',
-          type: 'address',
-        },
-        {
-          internalType: 'address',
-          name: '',
-          type: 'address',
-        },
-      ],
-      name: '_allowances',
-      outputs: [
-        {
-          internalType: 'uint256',
-          name: '',
-          type: 'uint256',
-        },
-      ],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [],
-      name: '_totalSupply',
-      outputs: [
-        {
-          internalType: 'uint256',
-          name: '',
-          type: 'uint256',
-        },
-      ],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [
-        {
-          internalType: 'uint16',
-          name: '_roundNumber',
-          type: 'uint16',
-        },
-        {
-          internalType: 'address',
-          name: '_userAddress',
-          type: 'address',
-        },
-        {
-          components: [
-            {
-              internalType: 'uint32',
-              name: 'blockNumber',
-              type: 'uint32',
-            },
-            {
-              internalType: 'uint256',
-              name: 'balanceAfterCommit',
-              type: 'uint256',
-            },
-          ],
-          internalType: 'struct CommonStructs.BalanceCommit',
-          name: 'newCommit',
-          type: 'tuple',
-        },
-      ],
-      name: 'addBalanceCommitHistoryByAddress',
-      outputs: [],
-      stateMutability: 'nonpayable',
-      type: 'function',
-    },
-    {
-      inputs: [
-        {
-          internalType: 'address',
-          name: 'to',
-          type: 'address',
-        },
-        {
-          internalType: 'uint256',
-          name: 'amount',
-          type: 'uint256',
-        },
-      ],
-      name: 'airdropFromContractAccount',
-      outputs: [
-        {
-          internalType: 'bool',
-          name: '',
-          type: 'bool',
-        },
-      ],
-      stateMutability: 'nonpayable',
-      type: 'function',
-    },
-    {
-      inputs: [
-        {
-          internalType: 'address',
-          name: 'owner',
-          type: 'address',
-        },
-        {
-          internalType: 'address',
-          name: 'spender',
-          type: 'address',
-        },
-      ],
-      name: 'allowance',
-      outputs: [
-        {
-          internalType: 'uint256',
-          name: '',
-          type: 'uint256',
-        },
-      ],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [
-        {
-          internalType: 'address',
-          name: 'spender',
-          type: 'address',
-        },
-        {
-          internalType: 'uint256',
-          name: 'amount',
-          type: 'uint256',
-        },
-      ],
-      name: 'approve',
-      outputs: [
-        {
-          internalType: 'bool',
-          name: '',
-          type: 'bool',
-        },
-      ],
-      stateMutability: 'nonpayable',
-      type: 'function',
-    },
-    {
-      inputs: [
-        {
-          internalType: 'address',
-          name: 'account',
-          type: 'address',
-        },
-      ],
-      name: 'balanceOf',
-      outputs: [
-        {
-          internalType: 'uint256',
-          name: '',
-          type: 'uint256',
-        },
-      ],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [
-        {
-          internalType: 'address',
-          name: 'account',
-          type: 'address',
-        },
-        {
-          internalType: 'uint32',
-          name: 'pos',
-          type: 'uint32',
-        },
-      ],
-      name: 'checkpoints',
-      outputs: [
-        {
-          components: [
-            {
-              internalType: 'uint32',
-              name: 'fromBlock',
-              type: 'uint32',
-            },
-            {
-              internalType: 'uint224',
-              name: 'votes',
-              type: 'uint224',
-            },
-          ],
-          internalType: 'struct ERC20Votes.Checkpoint',
-          name: '',
-          type: 'tuple',
-        },
-      ],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [],
-      name: 'decimals',
-      outputs: [
-        {
-          internalType: 'uint8',
-          name: '',
-          type: 'uint8',
-        },
-      ],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [
-        {
-          internalType: 'address',
-          name: 'spender',
-          type: 'address',
-        },
-        {
-          internalType: 'uint256',
-          name: 'subtractedValue',
-          type: 'uint256',
-        },
-      ],
-      name: 'decreaseAllowance',
-      outputs: [
-        {
-          internalType: 'bool',
-          name: '',
-          type: 'bool',
-        },
-      ],
-      stateMutability: 'nonpayable',
-      type: 'function',
-    },
-    {
-      inputs: [
-        {
-          internalType: 'address',
-          name: 'delegatee',
-          type: 'address',
-        },
-      ],
-      name: 'delegate',
-      outputs: [],
-      stateMutability: 'nonpayable',
-      type: 'function',
-    },
-    {
-      inputs: [
-        {
-          internalType: 'address',
-          name: 'delegatee',
-          type: 'address',
-        },
-        {
-          internalType: 'uint256',
-          name: 'nonce',
-          type: 'uint256',
-        },
-        {
-          internalType: 'uint256',
-          name: 'expiry',
-          type: 'uint256',
-        },
-        {
-          internalType: 'uint8',
-          name: 'v',
-          type: 'uint8',
-        },
-        {
-          internalType: 'bytes32',
-          name: 'r',
-          type: 'bytes32',
-        },
-        {
-          internalType: 'bytes32',
-          name: 's',
-          type: 'bytes32',
-        },
-      ],
-      name: 'delegateBySig',
-      outputs: [],
-      stateMutability: 'nonpayable',
-      type: 'function',
-    },
-    {
-      inputs: [
-        {
-          internalType: 'address',
-          name: 'account',
-          type: 'address',
-        },
-      ],
-      name: 'delegates',
-      outputs: [
-        {
-          internalType: 'address',
-          name: '',
-          type: 'address',
-        },
-      ],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [
-        {
-          internalType: 'uint16',
-          name: '_roundNumber',
-          type: 'uint16',
-        },
-        {
-          internalType: 'address',
-          name: '_userAddress',
-          type: 'address',
-        },
-      ],
-      name: 'getBalanceCommitHistoryByAddress',
-      outputs: [
-        {
-          components: [
-            {
-              internalType: 'uint32',
-              name: 'blockNumber',
-              type: 'uint32',
-            },
-            {
-              internalType: 'uint256',
-              name: 'balanceAfterCommit',
-              type: 'uint256',
-            },
-          ],
-          internalType: 'struct CommonStructs.BalanceCommit[]',
-          name: '',
-          type: 'tuple[]',
-        },
-      ],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [
-        {
-          internalType: 'address',
-          name: 'account',
-          type: 'address',
-        },
-      ],
-      name: 'getCurrentVotes',
-      outputs: [
-        {
-          internalType: 'uint96',
-          name: '',
-          type: 'uint96',
-        },
-      ],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [],
-      name: 'getDAOName',
-      outputs: [
-        {
-          internalType: 'string',
-          name: '',
-          type: 'string',
-        },
-      ],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [],
-      name: 'getImage',
-      outputs: [
-        {
-          internalType: 'string',
-          name: '',
-          type: 'string',
-        },
-      ],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [],
-      name: 'getIntro',
-      outputs: [
-        {
-          internalType: 'string',
-          name: '',
-          type: 'string',
-        },
-      ],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [],
-      name: 'getLink',
-      outputs: [
-        {
-          internalType: 'string',
-          name: '',
-          type: 'string',
-        },
-      ],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [],
-      name: 'getOwner',
-      outputs: [
-        {
-          internalType: 'address',
-          name: '',
-          type: 'address',
-        },
-      ],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [
-        {
-          internalType: 'uint256',
-          name: 'blockNumber',
-          type: 'uint256',
-        },
-      ],
-      name: 'getPastTotalSupply',
-      outputs: [
-        {
-          internalType: 'uint256',
-          name: '',
-          type: 'uint256',
-        },
-      ],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [
-        {
-          internalType: 'address',
-          name: 'account',
-          type: 'address',
-        },
-        {
-          internalType: 'uint256',
-          name: 'blockNumber',
-          type: 'uint256',
-        },
-      ],
-      name: 'getPastVotes',
-      outputs: [
-        {
-          internalType: 'uint256',
-          name: '',
-          type: 'uint256',
-        },
-      ],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [
-        {
-          internalType: 'address',
-          name: 'account',
-          type: 'address',
-        },
-        {
-          internalType: 'uint256',
-          name: 'blockNumber',
-          type: 'uint256',
-        },
-      ],
-      name: 'getPriorVotes',
-      outputs: [
-        {
-          internalType: 'uint96',
-          name: '',
-          type: 'uint96',
-        },
-      ],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [],
-      name: 'getRoundNumber',
-      outputs: [
-        {
-          internalType: 'uint16',
-          name: '',
-          type: 'uint16',
-        },
-      ],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [
-        {
-          internalType: 'address',
-          name: 'account',
-          type: 'address',
-        },
-      ],
-      name: 'getVotes',
-      outputs: [
-        {
-          internalType: 'uint256',
-          name: '',
-          type: 'uint256',
-        },
-      ],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [
-        {
-          internalType: 'address',
-          name: 'spender',
-          type: 'address',
-        },
-        {
-          internalType: 'uint256',
-          name: 'addedValue',
-          type: 'uint256',
-        },
-      ],
-      name: 'increaseAllowance',
-      outputs: [
-        {
-          internalType: 'bool',
-          name: '',
-          type: 'bool',
-        },
-      ],
-      stateMutability: 'nonpayable',
-      type: 'function',
-    },
-    {
-      inputs: [],
-      name: 'incrementRoundNumber',
-      outputs: [],
-      stateMutability: 'nonpayable',
-      type: 'function',
-    },
-    {
-      inputs: [],
-      name: 'name',
-      outputs: [
-        {
-          internalType: 'string',
-          name: '',
-          type: 'string',
-        },
-      ],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [
-        {
-          internalType: 'address',
-          name: 'owner',
-          type: 'address',
-        },
-      ],
-      name: 'nonces',
-      outputs: [
-        {
-          internalType: 'uint256',
-          name: '',
-          type: 'uint256',
-        },
-      ],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [
-        {
-          internalType: 'address',
-          name: 'account',
-          type: 'address',
-        },
-      ],
-      name: 'numCheckpoints',
-      outputs: [
-        {
-          internalType: 'uint32',
-          name: '',
-          type: 'uint32',
-        },
-      ],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [
-        {
-          internalType: 'address',
-          name: 'owner',
-          type: 'address',
-        },
-        {
-          internalType: 'address',
-          name: 'spender',
-          type: 'address',
-        },
-        {
-          internalType: 'uint256',
-          name: 'value',
-          type: 'uint256',
-        },
-        {
-          internalType: 'uint256',
-          name: 'deadline',
-          type: 'uint256',
-        },
-        {
-          internalType: 'uint8',
-          name: 'v',
-          type: 'uint8',
-        },
-        {
-          internalType: 'bytes32',
-          name: 'r',
-          type: 'bytes32',
-        },
-        {
-          internalType: 'bytes32',
-          name: 's',
-          type: 'bytes32',
-        },
-      ],
-      name: 'permit',
-      outputs: [],
-      stateMutability: 'nonpayable',
-      type: 'function',
-    },
-    {
-      inputs: [],
-      name: 'symbol',
-      outputs: [
-        {
-          internalType: 'string',
-          name: '',
-          type: 'string',
-        },
-      ],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [],
-      name: 'totalSupply',
-      outputs: [
-        {
-          internalType: 'uint256',
-          name: '',
-          type: 'uint256',
-        },
-      ],
-      stateMutability: 'view',
-      type: 'function',
-    },
-    {
-      inputs: [
-        {
-          internalType: 'address',
-          name: 'to',
-          type: 'address',
-        },
-        {
-          internalType: 'uint256',
-          name: 'amount',
-          type: 'uint256',
-        },
-      ],
-      name: 'transfer',
-      outputs: [
-        {
-          internalType: 'bool',
-          name: '',
-          type: 'bool',
-        },
-      ],
-      stateMutability: 'nonpayable',
-      type: 'function',
-    },
-    {
-      inputs: [
-        {
-          internalType: 'address',
-          name: 'from',
-          type: 'address',
-        },
-        {
-          internalType: 'address',
-          name: 'to',
-          type: 'address',
-        },
-        {
-          internalType: 'uint256',
-          name: 'amount',
-          type: 'uint256',
-        },
-      ],
-      name: 'transferFrom',
-      outputs: [
-        {
-          internalType: 'bool',
-          name: '',
-          type: 'bool',
-        },
-      ],
-      stateMutability: 'nonpayable',
-      type: 'function',
-    },
-  ];
+  // console.log(contractAddr);
 
   const signer = new ethers.Wallet(
     'd8f5d2f82fcceb4f7564364d25b23fc9fca1ad48d2570aceb376f738cf4b970c',
     provider,
   );
-  const testTokenContract = new ethers.Contract(contractAddr, abi, signer);
+  const testTokenContract = new ethers.Contract(contractAddr, daoAbi, signer);
   const testTokenContract4 = new ethers.Contract(
     '0x65751ae0dD90FD2008D179c0F83b528959bdBE50',
-    abi,
+    daoAbi,
     signer,
   );
 
@@ -949,7 +60,7 @@ const Details: NextPage = () => {
 
   const testTokenContract5 = new ethers.Contract(
     '0x577D6Ca4073baC31A41e74F5d90137611fd3Ba60',
-    abi,
+    daoAbi,
     signer,
   );
 
@@ -979,13 +90,25 @@ const Details: NextPage = () => {
 
   // get tokens from localstorage
 
+  const [airRoundData, setAirRoundData] = useState<number>(0);
+  const [airBalance, setAirBalance] = useState<number>(0);
+  const [airWhiteList, setAirWhiteList] = useState<Array<string> | undefined>();
+  const [airTimestamps, setAirTimestamps] = useState<Array<number> | undefined>();
+  const [initialBlockNumber, setInitialBlockNumber] = useState<number>(0);
+  const [ownerAddress, setOwnerAddress] = useState<string>('');
+
   const getAirdropInfo = async () => {
+    console.log('==============================');
     const contractInfo = JSON.parse(localStorage.getItem('clickedCardInfo') as string);
+    const ownerAddressTemp = '0x49388dCC82D36B6338871C00F26bF49fF9369A1D';
+    setOwnerAddress(ownerAddressTemp);
     const airdropContract = new ethers.Contract(
-      contractInfo?.airdropContract?.contractAddress,
-      abi,
+      contractInfo.airdropContract.contractAddress,
+      airdropAbi,
       signer,
     );
+
+    // console.log('>>airdropContractairdropContract', airdropContract);
 
     const roundData = await airdropContract?.getNumOfTotalRounds();
     const airdropBalance = await airdropContract?.getTotalAirdropVolumePerRound();
@@ -995,11 +118,16 @@ const Details: NextPage = () => {
 
     console.log('--------------------------------[');
     console.log(roundData);
-    console.log(airdropBalance);
+    console.log(airdropBalance.toNumber());
     console.log(airdropWhiteList);
-    console.log(AirdropTimestamps);
+    console.log(AirdropTimestamps.map((item: any) => item.toNumber()));
     console.log(initialBlockNumberByRound);
     console.log('--------------------------------[');
+    setAirRoundData(roundData);
+    setAirBalance(airdropBalance.toNumber());
+    setAirWhiteList(airdropWhiteList);
+    setAirTimestamps(AirdropTimestamps.map((item: any) => item.toNumber()));
+    setInitialBlockNumber(initialBlockNumberByRound);
   };
 
   useEffect(() => {
@@ -1040,21 +168,23 @@ const Details: NextPage = () => {
             <div className="grow">
               <h2 className="font-bold text-lg mt-8 mb-2">Airdrop</h2>
             </div>
-            {/* <div className="flex-none">
-            <div className="flex items-center">
-              <div>
-                <span>100.00</span>
-                <span> ENS</span>
+            {/* {airWhiteList?.includes(ownerAddress) && (
+              <div className="flex-none">
+                <div className="flex items-center">
+                  <div>
+                    <span>100.00</span>
+                    <span> ENS</span>
+                  </div> *
+                  <div>
+                    <NextBtn>Claim</NextBtn>
+                  </div>
+                </div>
               </div>
-              <div>
-                <button className="btn btn-primary">Claim</button>
-              </div>
-            </div>
-          </div> */}
+            )} */}
           </div>
 
           <div className="bg-[#191919] p-8 mb-3 rounded-lg">
-            {amounts.map((amount, index) => {
+            {/* {amounts.map((amount, index) => {
               return (
                 <>
                   <div className="mb-4">
@@ -1071,7 +201,21 @@ const Details: NextPage = () => {
                   />
                 </>
               );
-            })}
+            })} */}
+            <>
+              <div className="mb-4">
+                <span className="opacity-50 w-40 inline-block">Total Amounts</span>
+                <span>{airBalance}</span>
+              </div>
+              <div
+                className="rounded-full"
+                style={{
+                  backgroundColor: '#FFE55C',
+                  height: '16px',
+                  width: `${(airBalance / total) * 100}%`,
+                }}
+              />
+            </>
           </div>
 
           <div className="bg-[#191919] p-8 rounded-lg">
@@ -1091,7 +235,7 @@ const Details: NextPage = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {airdrop_timestamps.map((airdrop, index) => (
+                  {airTimestamps?.map((airdrop, index) => (
                     <tr>
                       <td>{dayjs(airdrop).format('DD/MM/YYYY')}</td>
                       <td>{index + 1} Round</td>

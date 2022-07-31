@@ -16,12 +16,12 @@ function CardSpace(props: CardSpaceProps) {
   const handleClick = (value: string) => {
     const tempData = {
       governanceToken: {
-        hash: '0x114e425ee91a1e1f877f071fa3955c1e45b3c2ac0c5d8daf828d2922b589b382',
-        contractAddress: '0x44ac3fE79F7F6d8381BC1Ce6e1F25E69745eE233',
+        hash: '0xcd82a1396d3fd4c4acf88b84a945d605c50417f78da27b87be4c985bde0a5bea',
+        contractAddress: '0xf51a13303F50F7e80cf0C0C9a416ed9e21f5c1eF',
       },
       airdropContract: {
-        hash: '0x269935779637014f1bd9b3ab460e339ec62b799eadb8baec713f164022b3b5b8',
-        contractAddress: '0x47Dcc4000fE75F87C1A952BE0Cf4112f67E1a362',
+        hash: '0xb1f72c5ebf8d3d57f94a98ba42e5de5e883bd4905b906d665286e9e0800cb50d',
+        contractAddress: '0x986d5C2531e80A56315Ea15CD386a55E3178ed91',
       },
     };
 
