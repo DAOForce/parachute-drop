@@ -8,6 +8,7 @@ import UploadImage from '@src/components/CreateSpace/UploadImage';
 import { useRouter } from 'next/router';
 import BackBtn from '@src/components/common/BackBtn';
 import NextBtn from '@src/components/common/NextBtn';
+import { getTimestampArray } from '@src/utils/getTimstampArray';
 
 function spacedetail() {
   const router = useRouter();
@@ -59,6 +60,15 @@ function spacedetail() {
           : router?.query?.duration,
       },
     });
+    const startDateVal = startDateRef?.current?.value
+      ? startDateRef?.current?.value
+      : router?.query?.startDate;
+    const roundsVal = roundsRef?.current?.value ? roundsRef?.current?.value : router?.query?.rounds;
+    const intervalVal = intervaleRef?.current?.value
+      ? intervaleRef?.current?.value
+      : router?.query?.interval;
+    const timestampArray = getTimestampArray(startDateVal, Number(roundsVal), Number(intervalVal));
+    localStorage.setItem('timestampArray', JSON.stringify(timestampArray));
   };
 
   const handleBackClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -118,7 +128,9 @@ function spacedetail() {
           <input
             ref={startDateRef}
             type="text"
-            placeholder={router?.query?.startDate ? router.query.startDate.toString() : 'dd/mm/yy'}
+            placeholder={
+              router?.query?.startDate ? router.query.startDate.toString() : 'yyyy-mm-dd'
+            }
             className="input input-bordered w-full"
           />
           <label className="label w-full">

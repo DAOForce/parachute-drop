@@ -5,18 +5,19 @@ import React from 'react';
 interface BackBtnProps {
   isAbled?: boolean;
   onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  children?: string;
 }
 
-function BackBtn({ isAbled = true, onClick }: BackBtnProps) {
+function BackBtn({ isAbled = true, onClick, children = 'back' }: BackBtnProps) {
   return (
     <>
       {isAbled ? (
         <StyledButton isAbled={isAbled} className="btn btn-active rounded-full" onClick={onClick}>
-          Back
+          {children}
         </StyledButton>
       ) : (
         <StyledButton isAbled={isAbled} className="btn btn-disabled rounded-full" onClick={onClick}>
-          Back
+          {children}
         </StyledButton>
       )}
     </>
