@@ -1,6 +1,7 @@
 import { postAirdropInfo } from '@src/lib/api';
 import { postAirdropInfoInfoParams } from '@src/types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+const ethers = require('ethers');
 
 const useMintingToken = ({
   name,
@@ -37,6 +38,13 @@ const useMintingToken = ({
       onMutate: async () => {},
       onSuccess: ({ data }) => {
         localStorage.setItem('airdropInfo', JSON.stringify(data));
+        // try {
+        //   const provider = new ethers.providers.JsonRpcProvider('https://eth.bd.evmos.dev:8545');
+        //   const signer = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
+        //   const airdropContract = new ethers.Contract(contractAddr, abi, signer);
+
+        //   const receipt = await airdropContract.executeAirdropRound(tokenContractAddress);
+        // } catch (err) {}
       },
     },
   );
