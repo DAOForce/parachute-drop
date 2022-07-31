@@ -146,7 +146,7 @@ const StyledRoot = styled.main`
 const StyledForm = styled.form`
   width: 560px;
   & div {
-    margin-top: 125px;
+    margin-top: 80px;
     width: 100%;
   }
   & label {
@@ -156,7 +156,7 @@ const StyledForm = styled.form`
   }
   & input {
     background: rgba(255, 255, 255, 0.1);
-    margin-bottom: 36px;
+    margin-bottom: 20px;
   }
 `;
 const StyledButtonGroup = styled.div`

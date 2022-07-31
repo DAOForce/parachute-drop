@@ -46,8 +46,8 @@ function UploadFile({ setFileData }: UploadFileProps) {
   };
   return (
     <StyledRoot>
-      <p>No Address yet</p>
-      <button className="btn btn-active btn-primary rounded-full" onClick={getFileData}>
+      <p className="mb-6 inline-block">No Address yet</p>
+      <button className="btn btn-active btn-warning rounded-full" onClick={getFileData}>
         Upload File
       </button>
     </StyledRoot>
@@ -66,7 +66,6 @@ const StyledRoot = styled.div`
     margin-bottom: 12px;
   }
   & > button {
-    font-family: 'Poppins';
     font-style: normal;
     font-weight: 600;
     font-size: 16px;

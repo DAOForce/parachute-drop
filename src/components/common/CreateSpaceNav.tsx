@@ -31,11 +31,9 @@ const StyledHeader = styled.header`
   height: 57.65px;
   padding: 30px 25px;
   & div {
-    font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 16px;
 
     color: #ffffff;
   }

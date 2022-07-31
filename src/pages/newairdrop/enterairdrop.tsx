@@ -143,7 +143,7 @@ function spacedetail() {
             className="input input-bordered w-full"
           />
           <label className="label w-full">
-            <span className="label-text w-full">Interval</span>
+            <span className="label-text w-full">Interval (Days)</span>
           </label>
           <input
             ref={intervaleRef}
@@ -152,7 +152,7 @@ function spacedetail() {
             className="input input-bordered w-full"
           />
           <label className="label w-full">
-            <span className="label-text w-full">Claimable Duration</span>
+            <span className="label-text w-full">Claimable Duration (Days)</span>
           </label>
           <input
             ref={durationRef}
@@ -185,7 +185,7 @@ const StyledRoot = styled.main`
 const StyledForm = styled.form`
   width: 560px;
   & div {
-    margin-top: 125px;
+    margin-top: 80px;
     width: 100%;
   }
   & label {
@@ -195,7 +195,7 @@ const StyledForm = styled.form`
   }
   & input {
     background: rgba(255, 255, 255, 0.1);
-    margin-bottom: 36px;
+    margin-bottom: 20px;
   }
 `;
 const StyledButtonGroup = styled.div`

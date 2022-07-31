@@ -111,7 +111,6 @@ const StyledRecipt = styled.section`
   align-items: center;
   justify-content: center;
   & h2 {
-    font-family: 'Lato';
     font-style: normal;
     font-weight: 400;
     font-size: 13px;
@@ -124,7 +123,6 @@ const StyledRecipt = styled.section`
   }
 
   & p {
-    font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
     font-size: 40px;

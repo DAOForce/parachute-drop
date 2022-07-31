@@ -14,7 +14,7 @@ function NextBtn({ isAbled = true, onClick, children = 'Next' }: NextBtnProps) {
       {isAbled ? (
         <StyledButton
           isAbled={isAbled}
-          className="btn btn-active btn-primary rounded-full"
+          className="btn btn-active btn-warning rounded-full"
           onClick={onClick}
         >
           {children}
@@ -22,7 +22,7 @@ function NextBtn({ isAbled = true, onClick, children = 'Next' }: NextBtnProps) {
       ) : (
         <StyledButton
           isAbled={isAbled}
-          className="btn btn-disabled btn-primary rounded-full"
+          className="btn btn-disabled btn-warning rounded-full"
           onClick={onClick}
         >
           {children}
@@ -36,7 +36,6 @@ export default NextBtn;
 
 const StyledButton = styled.button<{ isAbled: boolean }>`
   width: 172px;
-  font-family: 'Poppins';
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
