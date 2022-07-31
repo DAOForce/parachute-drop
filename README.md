@@ -1,4 +1,6 @@
 # Parachute Drop Servie for HackAtom Seoul 2022
+<img width="1318" alt="Frame 5920 (2)" src="https://user-images.githubusercontent.com/81923229/182012073-05938c39-d2ce-4967-836e-643ba810d5bf.png">
+
 ## Purpose
 * **`Parachute Drop`** is an *airdrop in platform **`running on Evmos`** purposed to enhance economic sustainability for DAOs and projects.
 * Launch your own DAO and airdrop tokens in serveral pre-scheduled batch rounds run dividedly / fully on-chain, only with some initial settings.
