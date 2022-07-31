@@ -34,11 +34,9 @@ const useMintingToken = ({
         airdrop_round_airdrop_amounts,
       }),
     {
-      onMutate: async () => {
-        console.log('>>during onMutate');
-      },
-      onSuccess: () => {
-        console.log('>>success');
+      onMutate: async () => {},
+      onSuccess: ({ data }) => {
+        localStorage.setItem('airdropInfo', JSON.stringify(data));
       },
     },
   );

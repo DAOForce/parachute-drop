@@ -21,20 +21,20 @@ export const postAirdropInfo = async ({
   airdrop_target_addresses,
   airdrop_round_airdrop_amounts,
 }: postAirdropInfoInfoParams) => {
-  console.log(
-    '>>post api',
-    name,
-    ticker,
-    DAOName,
-    intro,
-    image,
-    link,
-    initial_supply,
-    owner,
-    airdrop_timestamps,
-    airdrop_target_addresses,
-    airdrop_round_airdrop_amounts,
-  );
+  // console.log(
+  //   '>>post api',
+  //   name,
+  //   ticker,
+  //   DAOName,
+  //   intro,
+  //   image,
+  //   link,
+  //   initial_supply,
+  //   owner,
+  //   airdrop_timestamps,
+  //   airdrop_target_addresses,
+  //   airdrop_round_airdrop_amounts,
+  // );
   const post = await client.post('/mint', {
     name,
     ticker,
@@ -49,7 +49,7 @@ export const postAirdropInfo = async ({
     airdrop_round_airdrop_amounts,
   });
 
-  console.log('>>post data result', post);
+  // console.log('>>post data result', post);
 
   return post;
 };
