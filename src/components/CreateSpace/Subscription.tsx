@@ -12,8 +12,8 @@ function Subscription({ children }: SubscriptionProps) {
 export default Subscription;
 
 const StyledSub = styled.p`
-  font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 18px;
+  opacity: 0.75;
 `;

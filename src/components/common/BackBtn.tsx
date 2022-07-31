@@ -28,11 +28,11 @@ export default BackBtn;
 
 const StyledButton = styled.button<{ isAbled: boolean }>`
   width: 172px;
-  font-family: 'Poppins';
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
   line-height: 24px;
+  margin-left: -64px;
 
   text-align: center;
   text-transform: capitalize;

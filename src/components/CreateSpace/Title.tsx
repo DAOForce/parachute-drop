@@ -15,5 +15,5 @@ const StyledH1 = styled.h1`
   font-weight: 700;
   font-size: 32px;
   line-height: 39px;
-  margin-bottom: 22px;
+  margin-bottom: 20px;
 `;

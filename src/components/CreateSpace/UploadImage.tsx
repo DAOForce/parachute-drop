@@ -72,8 +72,8 @@ function UploadImage({ setImageData }: UploadImageProps) {
 export default UploadImage;
 
 const StyledRoot = styled.div`
-  width: 271px;
-  height: 271px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.3);
   display: flex;
@@ -81,16 +81,16 @@ const StyledRoot = styled.div`
   align-items: center;
   overflow: hidden;
   .upload__image--input {
-    width: 271px;
-    height: 271px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     position: absolute;
     cursor: pointer;
   }
   & img {
     object-fit: cover;
-    min-height: 271px;
-    min-width: 271px;
+    min-height: 200px;
+    min-width: 200px;
   }
   #input-file {
     display: none;

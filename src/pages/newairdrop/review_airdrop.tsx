@@ -71,7 +71,8 @@ const StyleMain = styled.main`
 
 const StyledRecipt = styled.section`
   width: 512px;
-  height: 604px;
+  height: fit-content;
+  padding: 64px;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   display: flex;
@@ -79,7 +80,6 @@ const StyledRecipt = styled.section`
   align-items: center;
   justify-content: center;
   & h2 {
-    font-family: 'Lato';
     font-style: normal;
     font-weight: 400;
     font-size: 13px;
@@ -87,19 +87,17 @@ const StyledRecipt = styled.section`
 
     letter-spacing: 0.005em;
 
-    color: #f5f5f5;
-    margin-bottom: 10px;
+    opacity: 0.75;
   }
 
   & p {
-    font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
-    font-size: 40px;
+    font-size: 24px;
     line-height: 48px;
 
     color: #ffffff;
-    margin-bottom: 48px;
+    margin-bottom: 24px;
     width: 452px;
     text-align: center;
     word-break: break-all;

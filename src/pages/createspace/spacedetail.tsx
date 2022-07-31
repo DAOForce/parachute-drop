@@ -112,7 +112,7 @@ const StyledRoot = styled.main`
     margin-bottom: 120px;
   }
   & > p {
-    margin-bottom: 87px;
+    margin-bottom: 60px;
   }
   .upload__image {
     margin-bottom: 52px;
@@ -131,7 +131,7 @@ const StyledForm = styled.form`
   }
   & input {
     background: rgba(255, 255, 255, 0.1);
-    margin-bottom: 36px;
+    margin-bottom: 20px;
   }
 `;
 const StyledButtonGroup = styled.div`
