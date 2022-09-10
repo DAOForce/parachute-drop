@@ -1,8 +1,8 @@
+import Logo from '@src/assets/logo.svg';
 import TestEvmos from '@src/components/main/TestEvmos';
 import { getKeplrAddress, getMetamaskAddress } from '@src/utils/connectWallet';
-import React, { useEffect, useState } from 'react';
-import Logo from '@src/assets/logo.svg';
 import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 
 function Navbar() {
   const router = useRouter();
@@ -23,12 +23,14 @@ function Navbar() {
     switch (e.currentTarget.id) {
       case 'metamask':
         const metamaskAccounts = await getMetamaskAddress();
+
         setOwnerAddress(metamaskAccounts);
 
         // setOwnerAddress(await getMetamaskAddress());
         break;
       case 'keplr':
         const keplrAccounts = await getKeplrAddress();
+
         setOwnerAddress(keplrAccounts?.address);
         // console.log(await getKeplrAddress());
         break;
@@ -36,6 +38,7 @@ function Navbar() {
         break;
     }
   };
+
   return (
     <div className="navbar bg-[#000]">
       <div className="flex-1">

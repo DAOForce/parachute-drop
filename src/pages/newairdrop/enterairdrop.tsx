@@ -1,14 +1,14 @@
-import React, { useState, useRef, useEffect } from 'react';
 import styled from '@emotion/styled';
+import BackBtn from '@src/components/common/BackBtn';
 import CreateSpaceNav from '@src/components/common/CreateSpaceNav';
-import { HEADER_NAME, SUBSCRIPTION, TITLE } from '@src/constants';
+import NextBtn from '@src/components/common/NextBtn';
 import Subscription from '@src/components/CreateSpace/Subscription';
 import Title from '@src/components/CreateSpace/Title';
 import UploadImage from '@src/components/CreateSpace/UploadImage';
-import { useRouter } from 'next/router';
-import BackBtn from '@src/components/common/BackBtn';
-import NextBtn from '@src/components/common/NextBtn';
+import { HEADER_NAME, SUBSCRIPTION, TITLE } from '@src/constants';
 import { getTimestampArray } from '@src/utils/getTimstampArray';
+import { useRouter } from 'next/router';
+import React, { useEffect, useRef, useState } from 'react';
 
 function spacedetail() {
   const router = useRouter();
@@ -23,21 +23,27 @@ function spacedetail() {
     e.preventDefault();
     if (!router?.query?.treasuryAddress && !treasuryAddressRef?.current.value) {
       alert('Please enter the token name');
+
       return;
     } else if (!router?.query?.amounts && !amountsRef?.current.value) {
       alert('Please enter the token symbol');
+
       return;
     } else if (!router?.query?.startDate && !startDateRef?.current.value) {
       alert('Please enter the token supply');
+
       return;
     } else if (!router?.query?.rounds && !roundsRef?.current.value) {
       alert('Please upload the owner address');
+
       return;
     } else if (!router?.query?.interval && !intervaleRef?.current.value) {
       alert('Please upload the owner address');
+
       return;
     } else if (!router?.query?.duration && !durationRef?.current.value) {
       alert('Please upload the owner address');
+
       return;
     }
     router.push({
@@ -68,6 +74,7 @@ function spacedetail() {
       ? intervaleRef?.current?.value
       : router?.query?.interval;
     const timestampArray = getTimestampArray(startDateVal, Number(roundsVal), Number(intervalVal));
+
     localStorage.setItem('timestampArray', JSON.stringify(timestampArray));
   };
 

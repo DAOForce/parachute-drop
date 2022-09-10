@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
-import React, { Dispatch, SetStateAction, useState, useRef } from 'react';
 import PlusIcon from '@src/assets/Icon/PlusIcon.svg';
 import { create as ipfsHttpClient } from 'ipfs-http-client';
+import { useRouter } from 'next/router';
+import React, { Dispatch, SetStateAction, useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
 import ClipLoader from 'react-spinners/ClipLoader';
-import { useRouter } from 'next/router';
 
 interface UploadImageProps {
   setImageData: Dispatch<SetStateAction<string | null>>;
@@ -22,11 +22,13 @@ function UploadImage({ setImageData }: UploadImageProps) {
       setIsLoading(true);
     });
     const file = e.target.files[0];
+
     try {
       const added = await client.add(file, {
         progress: (prog) => console.log(`received: ${prog}`),
       });
       const url = `https://ipfs.infura.io/ipfs/${added.path}`;
+
       setImageData(url);
       console.log('>>url', url);
     } catch (error) {

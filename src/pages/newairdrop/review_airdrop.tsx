@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import Title from '@src/components/CreateSpace/Title';
-import Subscription from '@src/components/CreateSpace/Subscription';
-import UploadCsv from '@src/components/common/UploadCsv';
-import CreateSpaceNav from '@src/components/common/CreateSpaceNav';
-import { HEADER_NAME, SUBSCRIPTION, TITLE } from '@src/constants';
 import BackBtn from '@src/components/common/BackBtn';
+import CreateSpaceNav from '@src/components/common/CreateSpaceNav';
 import NextBtn from '@src/components/common/NextBtn';
-import { useRouter } from 'next/router';
+import UploadCsv from '@src/components/common/UploadCsv';
+import Subscription from '@src/components/CreateSpace/Subscription';
+import Title from '@src/components/CreateSpace/Title';
+import { HEADER_NAME, SUBSCRIPTION, TITLE } from '@src/constants';
 import { FreeObject } from '@src/types';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 
 function review_airdrop() {
   const router = useRouter();

@@ -1,13 +1,13 @@
-import React, { useState, useRef, useEffect } from 'react';
 import styled from '@emotion/styled';
+import BackBtn from '@src/components/common/BackBtn';
 import CreateSpaceNav from '@src/components/common/CreateSpaceNav';
-import { HEADER_NAME, SUBSCRIPTION, TITLE } from '@src/constants';
+import NextBtn from '@src/components/common/NextBtn';
 import Subscription from '@src/components/CreateSpace/Subscription';
 import Title from '@src/components/CreateSpace/Title';
 import UploadImage from '@src/components/CreateSpace/UploadImage';
+import { HEADER_NAME, SUBSCRIPTION, TITLE } from '@src/constants';
 import { useRouter } from 'next/router';
-import BackBtn from '@src/components/common/BackBtn';
-import NextBtn from '@src/components/common/NextBtn';
+import React, { useEffect, useRef, useState } from 'react';
 
 function spacedetail() {
   const router = useRouter();
@@ -20,15 +20,19 @@ function spacedetail() {
     e.preventDefault();
     if (!router?.query?.tokenName && !tokenNameRef?.current.value) {
       alert('Please enter the token name');
+
       return;
     } else if (!router?.query?.tokenSymbol && !tokenSymbolRef?.current.value) {
       alert('Please enter the token symbol');
+
       return;
     } else if (!router?.query?.tokenSupply && !tokenSupplyRef?.current.value) {
       alert('Please enter the token supply');
+
       return;
     } else if (!router?.query?.ownerAddrress && !ownerAddressRef?.current.value) {
       alert('Please upload the owner address');
+
       return;
     }
     router.push({

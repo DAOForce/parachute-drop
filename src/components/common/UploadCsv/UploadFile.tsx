@@ -24,14 +24,18 @@ function UploadFile({ setFileData }: UploadFileProps) {
         inputFile = files[0];
 
         const fileExtension = inputFile?.type.split('/')[1];
+
         if (!allowedExtensions.includes(fileExtension)) {
           alert('Please input a csv file');
+
           return;
         }
 
         const reader = new FileReader();
+
         reader.onload = async ({ target }) => {
           const csv = Papa.parse(target?.result as string, { header: true });
+
           parsedData = csv?.data as Array<FreeObject>;
           setFileData(parsedData);
           localStorage.setItem('whitelist', JSON.stringify(parsedData));
@@ -44,6 +48,7 @@ function UploadFile({ setFileData }: UploadFileProps) {
       console.log(e);
     }
   };
+
   return (
     <StyledRoot>
       <p className="mb-6 inline-block">No Address yet</p>

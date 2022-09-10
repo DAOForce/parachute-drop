@@ -54,6 +54,7 @@ const useMintingToken = ({
           const receipt = await airdropContract.executeAirdropRound(
             data?.governanceToken.contractAddress,
           );
+
           localStorage.setItem('excuteAfterInfo', JSON.stringify(receipt));
         } catch (err) {
           console.log(err);

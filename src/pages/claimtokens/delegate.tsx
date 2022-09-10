@@ -1,7 +1,7 @@
+import styled from '@emotion/styled';
+import Navbar from '@src/components/common/Navbar';
 import type { NextPage } from 'next';
 import { useState } from 'react';
-import Navbar from '@src/components/common/Navbar';
-import styled from '@emotion/styled';
 
 const ClaimTokenStart: NextPage = () => {
   const delegationList = [
