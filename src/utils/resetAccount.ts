@@ -1,6 +1,6 @@
 const resetEvent = new Event('resetAccount');
 
-export const logOutMetamask = async () => {
+export const resetAccount = async () => {
   try {
     const { ethereum } = window;
 
