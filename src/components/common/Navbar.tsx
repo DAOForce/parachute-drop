@@ -1,13 +1,23 @@
 import Logo from '@src/assets/logo.svg';
 // import TestEvmos from '@src/components/main/TestEvmos';
-import { getKeplrAddress, getMetamaskAddress } from '@src/utils/connectWallet';
+import {
+  communicateWithWallet,
+  getKeplrAddress,
+  getMetamaskAddress,
+  walletIdType,
+} from '@src/utils/connectWallet';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { logOutMetamask } from '@src/utils/logoutWallet';
+import { resetAccount } from '@src/utils/resetAccount';
 import { MetaMaskInpageProvider } from '@metamask/providers';
 
 const setAccountListener = (provider: MetaMaskInpageProvider) => {
-  provider.on('accountsChanged', () => window.location.reload());
+  provider.on('accountsChanged', async () => await communicateWithWallet('metamask'));
+
+  window.addEventListener('keplr_keystorechange', async () => await communicateWithWallet('evmos'));
+
+  document.addEventListener('connectAccount', () => window.location.reload());
+  document.addEventListener('resetAccount', () => window.location.reload());
 };
 
 function Navbar() {
@@ -17,7 +27,6 @@ function Navbar() {
   useEffect(() => {
     setOwnerAddress(localStorage.getItem('ownerAddress'));
     setAccountListener(window.ethereum);
-    document.addEventListener('resetAccount', () => window.location.reload());
   }, [ownerAddress]);
 
   const handleClick = () => {
@@ -28,24 +37,8 @@ function Navbar() {
   const ownerAddressShort2 = ownerAddress?.substring(ownerAddress.length - 5, ownerAddress.length);
 
   const handleWalletClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    switch (e.currentTarget.id) {
-      case 'metamask':
-        if (ownerAddress === '') {
-          const metamaskAccounts = await getMetamaskAddress();
-          setOwnerAddress(metamaskAccounts);
-          break;
-        }
-        await logOutMetamask();
-        break;
-      case 'keplr':
-        if (ownerAddress === '') {
-          const keplrAccounts = await getKeplrAddress();
-          setOwnerAddress(keplrAccounts?.address);
-        }
-        break;
-      default:
-        break;
-    }
+    const targetId = e.currentTarget.id as walletIdType;
+    await communicateWithWallet(targetId);
   };
 
   return (
