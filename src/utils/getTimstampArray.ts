@@ -3,7 +3,11 @@ interface getTimestampArrayParams {
   interval: number;
   rounds: number;
 }
-export const getTimestampArray = (startDate, interval, rounds) => {
+export const getTimestampArray = (
+  startDate: string | number | Date,
+  interval: number,
+  rounds: number,
+) => {
   console.log('>>>argsss', startDate, interval, rounds);
   const timeArray = [] as number[];
   const startDateObj = new Date(startDate);
