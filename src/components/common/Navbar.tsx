@@ -1,8 +1,14 @@
 import Logo from '@src/assets/logo.svg';
-import TestEvmos from '@src/components/main/TestEvmos';
+// import TestEvmos from '@src/components/main/TestEvmos';
 import { getKeplrAddress, getMetamaskAddress } from '@src/utils/connectWallet';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+import { logOutMetamask } from '@src/utils/logoutWallet';
+import { MetaMaskInpageProvider } from '@metamask/providers';
+
+const setAccountListener = (provider: MetaMaskInpageProvider) => {
+  provider.on('accountsChanged', () => window.location.reload());
+};
 
 function Navbar() {
   const router = useRouter();
@@ -10,29 +16,36 @@ function Navbar() {
 
   useEffect(() => {
     setOwnerAddress(localStorage.getItem('ownerAddress'));
+    setAccountListener(window.ethereum);
+    document.addEventListener('resetAccount', () => window.location.reload());
   }, [ownerAddress]);
 
   const handleClick = () => {
     router.push('/');
   };
 
-  const ownerAddressShort = ownerAddress?.substring(0, 5);
-  const ownerAddressShort2 = ownerAddress?.substring(ownerAddress.length - 5, ownerAddress.length);
+  const ownerAddressShort = typeof ownerAddress === 'string' ? ownerAddress.substring(0, 5) : '';
+  const ownerAddressShort2 =
+    typeof ownerAddress === 'string'
+      ? ownerAddress.substring(ownerAddress.length - 5, ownerAddress.length)
+      : '';
 
   const handleWalletClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     switch (e.currentTarget.id) {
       case 'metamask':
-        const metamaskAccounts = await getMetamaskAddress();
-
-        setOwnerAddress(metamaskAccounts);
-
-        // setOwnerAddress(await getMetamaskAddress());
+        if (ownerAddress === '') {
+          const metamaskAccounts = await getMetamaskAddress();
+          // @ts-ignore
+          setOwnerAddress(metamaskAccounts);
+          break;
+        }
+        await logOutMetamask();
         break;
       case 'keplr':
-        const keplrAccounts = await getKeplrAddress();
-
-        setOwnerAddress(keplrAccounts?.address);
-        // console.log(await getKeplrAddress());
+        if (ownerAddress === '') {
+          const keplrAccounts = await getKeplrAddress();
+          setOwnerAddress(keplrAccounts?.address);
+        }
         break;
       default:
         break;
@@ -48,9 +61,16 @@ function Navbar() {
       </div>
 
       {ownerAddress ? (
-        <div className="btn btn-sm">
-          {ownerAddressShort}...{ownerAddressShort2}
-        </div>
+        <>
+          <div className="btn btn-sm">
+            {ownerAddressShort}...{ownerAddressShort2}
+          </div>
+          <div className="btn btn-sm">
+            <button onClick={handleWalletClick} type="button" id="metamask">
+              Disconnect
+            </button>
+          </div>
+        </>
       ) : (
         <div className="flex-none">
           <label htmlFor="my-modal-4" className="btn modal-button">
