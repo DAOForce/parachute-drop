@@ -24,18 +24,14 @@ function Navbar() {
     router.push('/');
   };
 
-  const ownerAddressShort = typeof ownerAddress === 'string' ? ownerAddress.substring(0, 5) : '';
-  const ownerAddressShort2 =
-    typeof ownerAddress === 'string'
-      ? ownerAddress.substring(ownerAddress.length - 5, ownerAddress.length)
-      : '';
+  const ownerAddressShort = ownerAddress?.substring(0, 5);
+  const ownerAddressShort2 = ownerAddress?.substring(ownerAddress.length - 5, ownerAddress.length);
 
   const handleWalletClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     switch (e.currentTarget.id) {
       case 'metamask':
         if (ownerAddress === '') {
           const metamaskAccounts = await getMetamaskAddress();
-          // @ts-ignore
           setOwnerAddress(metamaskAccounts);
           break;
         }
