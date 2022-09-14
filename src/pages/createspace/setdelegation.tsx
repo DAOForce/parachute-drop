@@ -1,10 +1,10 @@
-import React from 'react';
 import styled from '@emotion/styled';
-import Title from '@src/components/CreateSpace/Title';
-import Subscription from '@src/components/CreateSpace/Subscription';
-import UploadCsv from '@src/components/common/UploadCsv';
 import CreateSpaceNav from '@src/components/common/CreateSpaceNav';
+import UploadCsv from '@src/components/common/UploadCsv';
+import Subscription from '@src/components/CreateSpace/Subscription';
+import Title from '@src/components/CreateSpace/Title';
 import { HEADER_NAME, SUBSCRIPTION, TITLE } from '@src/constants';
+import React from 'react';
 
 function setdelegation() {
   return (

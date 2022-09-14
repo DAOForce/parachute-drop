@@ -4,6 +4,10 @@
 /node_modules
 /.pnp
 .pnp.js
+node_modules
+.next
+.DS_Store
+src/.DS_Store
 
 # testing
 /coverage

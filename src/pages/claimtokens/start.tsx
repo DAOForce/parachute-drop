@@ -1,7 +1,7 @@
-import type { NextPage } from 'next';
 import Navbar from '@src/components/common/Navbar';
+import type { NextPage } from 'next';
 
-let isDelegate = false;
+const isDelegate = false;
 
 const ClaimTokenStart: NextPage = () => {
   return (

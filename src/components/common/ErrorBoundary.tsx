@@ -58,6 +58,7 @@ class ErrorBoundary extends React.Component<IProps, IErrorBoundaryState> {
         reset: this.resetErrorBoundary,
       });
     }
+
     return children;
   }
 }

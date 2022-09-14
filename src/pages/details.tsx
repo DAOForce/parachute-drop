@@ -1,9 +1,9 @@
-import type { NextPage } from 'next';
 import Navbar from '@src/components/common/Navbar';
-import { useEffect, useState } from 'react';
-import dayjs from 'dayjs';
-import { airdropAbi, daoAbi } from '@src/lib/abi';
 import NextBtn from '@src/components/common/NextBtn';
+import { airdropAbi, daoAbi } from '@src/lib/abi';
+import dayjs from 'dayjs';
+import type { NextPage } from 'next';
+import { useEffect, useState } from 'react';
 const ethers = require('ethers');
 
 const Details: NextPage = () => {
@@ -45,11 +45,13 @@ const Details: NextPage = () => {
 
   const getDAONameFromPromise = async () => {
     const result = await getDAOName();
+
     setDAOName(result);
   };
 
   const getIntroFromPromise = async () => {
     const result = await getIntro();
+
     setIntro(result);
   };
 
@@ -66,7 +68,7 @@ const Details: NextPage = () => {
 
   const daoDetails = {
     ticker: 'TELE',
-    DAOName: DAOName,
+    DAOName,
     intro: 'Telescope DAO is changing the world',
     image: 'https://m.media-amazon.com/images/I/41ViEgmMrOL._SY355_.jpg',
     link: 'https://telescope.dao',
@@ -101,6 +103,7 @@ const Details: NextPage = () => {
     console.log('==============================');
     const contractInfo = JSON.parse(localStorage.getItem('clickedCardInfo') as string);
     const ownerAddressTemp = '0x49388dCC82D36B6338871C00F26bF49fF9369A1D';
+
     setOwnerAddress(ownerAddressTemp);
     const airdropContract = new ethers.Contract(
       contractInfo.airdropContract.contractAddress,

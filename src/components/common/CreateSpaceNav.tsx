@@ -1,7 +1,7 @@
-import React from 'react';
 import styled from '@emotion/styled';
 import XIcon from '@src/assets/Icon/XIcon.svg';
 import { useRouter } from 'next/router';
+import React from 'react';
 
 interface CreateSpaceNavProps {
   children: string;
@@ -13,6 +13,7 @@ function CreateSpaceNav({ children, routingAddress }: CreateSpaceNavProps) {
   const handleClick = () => {
     router.push(routingAddress);
   };
+
   return (
     <StyledHeader>
       <div></div>
