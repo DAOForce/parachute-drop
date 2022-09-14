@@ -74,8 +74,8 @@ dependencies:
   react-dom: 18.1.0_react@18.1.0
   react-hook-form: 7.34.2_react@18.1.0
   react-spinners: 0.13.4_ef5jwxihqo6n7gxfmzogljlgcm
-  yup: 0.32.11
   react-toastify: 9.0.8_ef5jwxihqo6n7gxfmzogljlgcm
+  yup: 0.32.11
 
 devDependencies:
   '@babel/core': 7.18.9
