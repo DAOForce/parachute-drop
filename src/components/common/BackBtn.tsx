@@ -32,7 +32,7 @@ const StyledButton = styled.button<{ isAbled: boolean }>`
   font-weight: 600;
   font-size: 16px;
   line-height: 24px;
-  margin-left: -64px;
+  /* margin-left: -64px; */
 
   text-align: center;
   text-transform: capitalize;

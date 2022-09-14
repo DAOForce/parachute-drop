@@ -21,6 +21,8 @@ function UploadImage({ setImageData }: UploadImageProps) {
     flushSync(() => {
       setIsLoading(true);
     });
+
+    console.log('e.target.files[0]', e.target.files[0]);
     const file = e.target.files[0];
 
     try {
@@ -52,28 +54,40 @@ function UploadImage({ setImageData }: UploadImageProps) {
   };
 
   return (
-    <StyledRoot className="upload__image">
-      {router?.query?.imageData || previewImage ? (
-        <img
-          src={router?.query?.imageData ? router?.query?.imageData : previewImage}
-          alt="dao image"
-        />
-      ) : isLoadig ? (
-        <ClipLoader color="#FFE55C" loading={isLoadig} size={50} />
-      ) : (
-        <>
-          <label className="upload__image--input" htmlFor="input-file"></label>
-          <input ref={inputRef} id="input-file" type="file" name="Asset" onChange={handleChange} />
-          <PlusIcon />
-        </>
-      )}
+    <StyledRoot>
+      <StyledUploadButton className="upload__image">
+        {previewImage ? (
+          <img src={previewImage} alt="dao" />
+        ) : isLoadig ? (
+          <ClipLoader color="#FFE55C" loading={isLoadig} size={50} />
+        ) : (
+          <>
+            <label className="upload__image--input" htmlFor="input-file"></label>
+            <input
+              ref={inputRef}
+              id="input-file"
+              type="file"
+              name="Asset"
+              onChange={handleChange}
+            />
+            <PlusIcon />
+          </>
+        )}
+      </StyledUploadButton>
     </StyledRoot>
   );
 }
 
 export default UploadImage;
 
-const StyledRoot = styled.div`
+const StyledRoot = styled.section`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 80px;
+`;
+const StyledUploadButton = styled.section`
   width: 200px;
   height: 200px;
   border-radius: 50%;
