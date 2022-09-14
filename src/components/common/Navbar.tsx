@@ -1,3 +1,4 @@
+import { MetaMaskInpageProvider } from '@metamask/providers';
 import Logo from '@src/assets/logo.svg';
 // import TestEvmos from '@src/components/main/TestEvmos';
 import {
@@ -6,13 +7,12 @@ import {
   getMetamaskAddress,
   walletIdType,
 } from '@src/utils/connectWallet';
+import { resetAccount } from '@src/utils/resetAccount';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { resetAccount } from '@src/utils/resetAccount';
-import { MetaMaskInpageProvider } from '@metamask/providers';
 
 const setAccountListener = (provider: MetaMaskInpageProvider) => {
-  provider.on('accountsChanged', async () => await communicateWithWallet('metamask'));
+  provider?.on('accountsChanged', async () => await communicateWithWallet('metamask'));
 
   window.addEventListener('keplr_keystorechange', async () => await communicateWithWallet('evmos'));
 
@@ -26,7 +26,7 @@ function Navbar() {
 
   useEffect(() => {
     setOwnerAddress(localStorage.getItem('ownerAddress'));
-    setAccountListener(window.ethereum);
+    setAccountListener(window?.ethereum);
   }, [ownerAddress]);
 
   const handleClick = () => {
@@ -38,6 +38,7 @@ function Navbar() {
 
   const handleWalletClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const targetId = e.currentTarget.id as walletIdType;
+
     await communicateWithWallet(targetId);
   };
 

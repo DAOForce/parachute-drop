@@ -28,11 +28,13 @@ export const communicateWithWallet = async (walletId: walletIdType): Promise<voi
   if (walletId === 'metamask') {
     await getMetamaskAddress();
     document.dispatchEvent(connectEvent);
+
     return;
   }
 
   await getKeplrAddress();
   document.dispatchEvent(connectEvent);
+
   return;
 };
 
@@ -50,6 +52,7 @@ export const getMetamaskAddress = async () => {
 
     console.log('Connected', accounts[0]);
     localStorage.setItem('ownerAddress', accounts[0]);
+
     return accounts[0];
   } catch (error) {
     console.log(error);
@@ -60,6 +63,7 @@ export const getKeplrAddress = async () => {
   try {
     if (!window.getOfflineSigner || !window.keplr) {
       alert('Please install keplr extension');
+
       return;
     }
 
