@@ -16,6 +16,7 @@
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
+    "@hookform/resolvers": "^2.9.8",
     "@metamask/providers": "^9.0.0",
     "@tanstack/react-query": "^4.0.10",
     "axios": "^0.27.2",
@@ -31,8 +32,8 @@
     "react-dom": "18.1.0",
     "react-hook-form": "^7.34.2",
     "react-spinners": "^0.13.4",
-    "yup": "^0.32.11",
-    "react-toastify": "^9.0.8"
+    "react-toastify": "^9.0.8",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

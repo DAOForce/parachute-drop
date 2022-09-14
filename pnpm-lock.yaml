@@ -5,6 +5,7 @@ specifiers:
   '@emotion/babel-plugin': ^11.9.2
   '@emotion/react': ^11.9.0
   '@emotion/styled': ^11.8.1
+  '@hookform/resolvers': ^2.9.8
   '@keplr-wallet/types': ^0.10.13
   '@metamask/providers': ^9.0.0
   '@stylelint/postcss-css-in-js': ^0.38.0
@@ -59,6 +60,7 @@ specifiers:
 dependencies:
   '@emotion/react': 11.9.3_pyvpkphh3iojkm7duxxfd5cb3a
   '@emotion/styled': 11.9.3_jkt623t24ad26wpdnmua3hku6y
+  '@hookform/resolvers': 2.9.8_react-hook-form@7.34.2
   '@metamask/providers': 9.0.0
   '@tanstack/react-query': 4.0.10_ef5jwxihqo6n7gxfmzogljlgcm
   axios: 0.27.2
@@ -833,6 +835,14 @@ packages:
       '@ethersproject/logger': 5.7.0
       '@ethersproject/properties': 5.7.0
       '@ethersproject/strings': 5.7.0
+    dev: false
+
+  /@hookform/resolvers/2.9.8_react-hook-form@7.34.2:
+    resolution: {integrity: sha512-iVVjH0USq+1TqDdGkWe2M1x7Wn5OFPgVRo7CbWFsXTqqXqCaZtZcnzJu+UhljCWbthFWxWGXKLGYUDPZ04oVvQ==}
+    peerDependencies:
+      react-hook-form: ^7.0.0
+    dependencies:
+      react-hook-form: 7.34.2_react@18.1.0
     dev: false
 
   /@humanwhocodes/config-array/0.9.5:
