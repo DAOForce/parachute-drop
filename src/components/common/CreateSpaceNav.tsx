@@ -6,16 +6,17 @@ import React from 'react';
 interface CreateSpaceNavProps {
   children: string;
   routingAddress: string;
+  [key: string]: any;
 }
 
-function CreateSpaceNav({ children, routingAddress }: CreateSpaceNavProps) {
+function CreateSpaceNav({ children, routingAddress, ...props }: CreateSpaceNavProps) {
   const router = useRouter();
   const handleClick = () => {
     router.push(routingAddress);
   };
 
   return (
-    <StyledHeader>
+    <StyledHeader {...props}>
       <div></div>
       <div>{children}</div>
       <XIcon onClick={handleClick} />

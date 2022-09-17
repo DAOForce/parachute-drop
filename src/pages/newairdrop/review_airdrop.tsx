@@ -73,7 +73,7 @@ const StyledRecipt = styled.section`
   width: 512px;
   height: fit-content;
   padding: 64px;
-  background: rgba(255, 255, 255, 0.1);
+  background: #ffffff1a;
   border-radius: 20px;
   display: flex;
   flex-direction: column;

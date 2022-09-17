@@ -21,39 +21,31 @@ function CreateSpaceForm({ step, setStep }: CreateSpaceFormProps) {
       return (
         <>
           <SpaceDetail />
-          <StyledButtonGroup>
+          <div className="flex items-center justify-between mt-[30px] mb-[66px]">
             <div />
             <NextBtn
               onClick={() => {
                 setStep('CREATE_TOKEN');
               }}
             />
-          </StyledButtonGroup>
+          </div>
         </>
       );
     default:
       return (
         <>
           <CreateToken />
-          <StyledButtonGroup>
+          <div className="flex items-center justify-between mt-[30px] mb-[66px]">
             <BackBtn
               onClick={() => {
                 setStep('SPACE_DETAIL');
               }}
             />
             <NextBtn onClick={handleNextClick} />
-          </StyledButtonGroup>
+          </div>
         </>
       );
   }
 }
 
 export default CreateSpaceForm;
-const StyledButtonGroup = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 30px;
-  margin-bottom: 66px;
-  width: 620px;
-`;

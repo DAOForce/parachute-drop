@@ -44,12 +44,12 @@ const ClaimTokenStart: NextPage = () => {
 export default ClaimTokenStart;
 
 const CardSelected = styled.div`
-  background: rgba(255, 255, 255, 0.1);
+  background: #ffffff1a;
   padding: 12px;
   border: 1px solid yellow;
 `;
 
 const Card = styled.div`
-  background: rgba(255, 255, 255, 0.1);
+  background: #ffffff1a;
   padding: 12px;
 `;

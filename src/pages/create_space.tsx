@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import BackBtn from '@src/components/common/BackBtn';
 import CreateSpaceNav from '@src/components/common/CreateSpaceNav';
 import NextBtn from '@src/components/common/NextBtn';
-import CreateSpaceForm, { CreateSpaceFormType } from '@src/components/CreateSpace/Form';
+import CreateSpaceForm from '@src/components/CreateSpace/Form';
 import Subscription from '@src/components/CreateSpace/Subscription';
 import Title from '@src/components/CreateSpace/Title';
 import { HEADER_NAME, SUBSCRIPTION, TITLE } from '@src/constants';
@@ -59,6 +59,8 @@ function CreateSpace() {
     formState: { dirtyFields },
   } = methods;
 
+  console.log('>>dirtyFields', dirtyFields);
+
   const onSubmit = (data: CreateSpaceFormType) => {
     const notify = confirm('Are you sure you want to create the space?');
 
@@ -67,43 +69,19 @@ function CreateSpace() {
   };
 
   return (
-    <StyledRoot>
-      <CreateSpaceNav routingAddress="/">{HEADER_NAME.CREATE_SPACE}</CreateSpaceNav>
+    <div className="flex flex-col items-center justify-center">
+      <CreateSpaceNav routingAddress="/" className="mb-[120px]">
+        {HEADER_NAME.CREATE_SPACE}
+      </CreateSpaceNav>
       <Title>{TITLE[step]}</Title>
       <Subscription>{SUBSCRIPTION[step]}</Subscription>
-      <StyledForm onSubmit={handleSubmit(onSubmit)}>
+      <form className="w-[560px]" onSubmit={handleSubmit(onSubmit)}>
         <FormProvider {...methods}>
           <CreateSpaceForm step={step} setStep={setStep} />
         </FormProvider>
-      </StyledForm>
-    </StyledRoot>
+      </form>
+    </div>
   );
 }
 
 export default CreateSpace;
-
-const StyledRoot = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  & > header {
-    margin-bottom: 120px;
-  }
-`;
-const StyledForm = styled.form`
-  width: 560px;
-  & div {
-    margin-top: 80px;
-    width: 100%;
-  }
-  & label {
-    & span {
-      color: #ffffff;
-    }
-  }
-  & input {
-    background: rgba(255, 255, 255, 0.1);
-    margin-bottom: 20px;
-  }
-`;
