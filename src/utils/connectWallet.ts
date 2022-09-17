@@ -1,9 +1,5 @@
 import { KeplrWallet } from '@src/types';
 import networkInfo from '@src/utils/chainInfo';
-
-const connectEvent = new Event('connectAccount');
-const resetEvent = new Event('resetAccount');
-
 const EVMOS_MAINNET_INFO = networkInfo['evmos_9001-1'];
 
 export type walletIdType = 'metamask' | 'evmos';
@@ -13,6 +9,8 @@ const isLogout = (localStorage: Storage) => {
 };
 
 export const resetWallet = () => {
+  const resetEvent = new Event('resetAccount');
+
   localStorage.setItem('ownerAddress', '');
   document.dispatchEvent(resetEvent);
   console.log('DISCONNECTED');
@@ -20,6 +18,7 @@ export const resetWallet = () => {
 
 export const communicateWithWallet = async (walletId: walletIdType): Promise<void> => {
   console.log('walletId', walletId);
+  const connectEvent = new Event('connectAccount');
 
   if (isLogout(localStorage)) {
     return resetWallet();

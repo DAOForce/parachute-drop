@@ -1,5 +1,6 @@
 import { MetaMaskInpageProvider } from '@metamask/providers';
 import Logo from '@src/assets/logo.svg';
+import useMounted from '@src/hooks/useMounted';
 // import TestEvmos from '@src/components/main/TestEvmos';
 import {
   communicateWithWallet,
@@ -10,23 +11,29 @@ import {
 import { resetAccount } from '@src/utils/resetAccount';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-
-const setAccountListener = (provider: MetaMaskInpageProvider) => {
-  provider?.on('accountsChanged', async () => await communicateWithWallet('metamask'));
-
-  window.addEventListener('keplr_keystorechange', async () => await communicateWithWallet('evmos'));
-
-  document.addEventListener('connectAccount', () => window.location.reload());
-  document.addEventListener('resetAccount', () => window.location.reload());
-};
-
 function Navbar() {
   const router = useRouter();
+  const isMounted = useMounted();
   const [ownerAddress, setOwnerAddress] = useState<string | undefined | null>('');
 
+  const setAccountListener = (provider: MetaMaskInpageProvider) => {
+    provider?.on('accountsChanged', async () => await communicateWithWallet('metamask'));
+
+    window.addEventListener(
+      'keplr_keystorechange',
+      async () => await communicateWithWallet('evmos'),
+    );
+
+    document.addEventListener('connectAccount', () => window.location.reload());
+    document.addEventListener('resetAccount', () => window.location.reload());
+  };
+
   useEffect(() => {
-    setOwnerAddress(localStorage.getItem('ownerAddress'));
-    setAccountListener(window?.ethereum);
+    if (isMounted) {
+      console.log('로로');
+      setOwnerAddress(localStorage.getItem('ownerAddress'));
+      setAccountListener(window?.ethereum);
+    }
   }, [ownerAddress]);
 
   const handleClick = () => {
@@ -45,7 +52,7 @@ function Navbar() {
   return (
     <div className="navbar bg-[#000]">
       <div className="flex-1">
-        <a className="btn btn-ghost normal-case text-xl" onClick={() => handleClick()}>
+        <a className="btn btn-ghost normal-case text-xl" onClick={handleClick}>
           <Logo />
         </a>
       </div>
