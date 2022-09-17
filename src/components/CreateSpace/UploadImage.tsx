@@ -9,12 +9,10 @@ import ClipLoader from 'react-spinners/ClipLoader';
 
 function UploadImage() {
   const [isLoadig, setIsLoading] = useState(false);
-  const [previewImage, setPreviewImage] = useState('');
+  const [previewImage, setPreviewImage] = useState<string>('');
   const inputFileRef = useRef<HTMLInputElement | null>(null);
 
   const { setValue, getValues } = useFormContext();
-
-  console.log('>>', process.env.NEXT_PUBLIC_DAO_FORCE_IMG_KEY);
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     flushSync(() => {
@@ -27,7 +25,6 @@ function UploadImage() {
       const url = await uploadImage(file);
 
       setValue('image', url, { shouldDirty: true, shouldValidate: true });
-      // console.log(formContext.getValues());
     } catch (error) {
       console.log('Error uploading file: ', error);
     }
@@ -35,10 +32,9 @@ function UploadImage() {
 
     reader.readAsDataURL(file);
 
-    return new Promise((resolve) => {
+    return new Promise<void>((resolve) => {
       reader.onload = () => {
-        setPreviewImage(reader.result);
-        console.log('>>reader.result', reader.result);
+        setPreviewImage(reader.result as string);
 
         resolve();
         flushSync(() => {
