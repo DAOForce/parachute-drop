@@ -3,11 +3,11 @@ import styled from '@emotion/styled';
 import PlusIcon from '@src/assets/Icon/PlusIcon.svg';
 import { create as ipfsHttpClient } from 'ipfs-http-client';
 import { useRouter } from 'next/router';
+import { File, NFTStorage } from 'nft.storage';
 import React, { Dispatch, SetStateAction, useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
 import { useFormContext } from 'react-hook-form';
 import ClipLoader from 'react-spinners/ClipLoader';
-
 function UploadImage() {
   const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0');
   // const inputRef = useRef(null);
