@@ -1,16 +1,14 @@
-import styled from '@emotion/styled';
-import BackBtn from '@src/components/common/BackBtn';
+import { yupResolver } from '@hookform/resolvers/yup';
 import CreateSpaceNav from '@src/components/common/CreateSpaceNav';
-import NextBtn from '@src/components/common/NextBtn';
 import CreateSpaceForm from '@src/components/CreateSpace/Form';
 import Subscription from '@src/components/CreateSpace/Subscription';
 import Title from '@src/components/CreateSpace/Title';
 import { HEADER_NAME, SUBSCRIPTION, TITLE } from '@src/constants';
-import React, { useState } from 'react';
-export type Step = 'SPACE_DETAIL' | 'CREATE_TOKEN';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { useEffect, useState } from 'react';
 import { DefaultValues, FormProvider, useForm } from 'react-hook-form';
 import * as yup from 'yup';
+
+export type Step = 'SPACE_DETAIL' | 'CREATE_TOKEN';
 
 const DEFAULT_VALUES: DefaultValues<CreateSpaceFormType> = {
   image: '',
@@ -19,7 +17,7 @@ const DEFAULT_VALUES: DefaultValues<CreateSpaceFormType> = {
   homepage: '',
   tokenName: '',
   tokenSymbol: '',
-  tokenSupply: 0,
+  // tokenSupply: null,
   ownerAddress: '',
 };
 
@@ -58,9 +56,6 @@ function CreateSpace() {
     watch,
     formState: { dirtyFields },
   } = methods;
-
-  console.log('>>dirtyFields', dirtyFields);
-
   const onSubmit = (data: CreateSpaceFormType) => {
     const notify = confirm('Are you sure you want to create the space?');
 

@@ -2,7 +2,8 @@ import styled from '@emotion/styled';
 import BackBtn from '@src/components/common/BackBtn';
 import NextBtn from '@src/components/common/NextBtn';
 import { Step } from '@src/pages/create_space';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 
 import CreateToken from './CreateToken';
 import SpaceDetail from './SpaceDetail';
@@ -12,9 +13,40 @@ interface CreateSpaceFormProps {
 }
 
 function CreateSpaceForm({ step, setStep }: CreateSpaceFormProps) {
-  const handleNextClick = () => {};
+  const [isFirstStepDone, setIsFirstStepDone] = useState(false);
+  const [isFinalStepDone, setIsFinalStepDone] = useState(false);
+  const handleCreateSpace = () => {
+    // 1. 정보들 컨트랙트로 넘김
+    // 2. 페이지 로드
+  };
 
-  console.log('stop', step);
+  const { getValues } = useFormContext();
+
+  useEffect(() => {
+    const currentValue = getValues();
+
+    if (
+      currentValue?.image !== '' &&
+      currentValue?.homepage !== '' &&
+      currentValue?.intro !== '' &&
+      currentValue?.spaceName !== ''
+    ) {
+      setIsFirstStepDone(true);
+    } else {
+      setIsFirstStepDone(false);
+    }
+
+    if (
+      currentValue?.tokenName !== '' &&
+      currentValue?.tokenSupply !== '' &&
+      currentValue?.tokenSymbol !== '' &&
+      currentValue?.ownerAddress !== ''
+    ) {
+      setIsFinalStepDone(true);
+    } else {
+      setIsFinalStepDone(false);
+    }
+  }, [getValues()]);
 
   switch (step) {
     case 'SPACE_DETAIL':
@@ -24,9 +56,11 @@ function CreateSpaceForm({ step, setStep }: CreateSpaceFormProps) {
           <div className="flex items-center justify-between mt-[30px] mb-[66px]">
             <div />
             <NextBtn
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
                 setStep('CREATE_TOKEN');
               }}
+              isAbled={isFirstStepDone}
             />
           </div>
         </>
@@ -41,7 +75,7 @@ function CreateSpaceForm({ step, setStep }: CreateSpaceFormProps) {
                 setStep('SPACE_DETAIL');
               }}
             />
-            <NextBtn onClick={handleNextClick} />
+            <NextBtn onClick={handleCreateSpace} isAbled={isFinalStepDone} />
           </div>
         </>
       );
