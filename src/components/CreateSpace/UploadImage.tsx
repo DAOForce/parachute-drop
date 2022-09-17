@@ -1,8 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import styled from '@emotion/styled';
 import PlusIcon from '@src/assets/Icon/PlusIcon.svg';
 import { uploadImage } from '@src/utils/uploadImage';
-import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
 import { useFormContext } from 'react-hook-form';
 import ClipLoader from 'react-spinners/ClipLoader';
@@ -18,8 +17,13 @@ function UploadImage() {
     flushSync(() => {
       setIsLoading(true);
     });
+    const file = e?.target?.files && e.target.files[0];
 
-    const file = e.target.files[0];
+    if (!file) {
+      alert('fail to upload file');
+
+      return;
+    }
 
     try {
       const url = await uploadImage(file);
