@@ -1,37 +1,37 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import styled from '@emotion/styled';
 import PlusIcon from '@src/assets/Icon/PlusIcon.svg';
-import { create as ipfsHttpClient } from 'ipfs-http-client';
-import { useRouter } from 'next/router';
-import { File, NFTStorage } from 'nft.storage';
+import { uploadImage } from '@src/utils/uploadImage';
 import React, { Dispatch, SetStateAction, useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
 import { useFormContext } from 'react-hook-form';
 import ClipLoader from 'react-spinners/ClipLoader';
+
 function UploadImage() {
-  const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0');
-  // const inputRef = useRef(null);
   const [isLoadig, setIsLoading] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
-  // const { register } = useFormContext();
+
+  const formContext = useFormContext();
+
+  console.log('>>', process.env.NEXT_PUBLIC_DAO_FORCE_IMG_KEY);
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     flushSync(() => {
       setIsLoading(true);
     });
 
+    console.log('>>formContext', formContext);
+
     console.log('e.target.files[0]', e.target.files[0]);
     const file = e.target.files[0];
 
     try {
-      const added = await client.add(file, {
-        progress: (prog) => console.log(`received: ${prog}`),
-      });
-      const url = `https://ipfs.infura.io/ipfs/${added.path}`;
+      const url = await uploadImage(file);
 
-      console.log('e', e);
-      // register('image').onChange(url);
       console.log('>>url', url);
+      // formContext.register('image').onChange(url);
+      // formContext.setValue('image', url);
+      formContext.setValue('image', url, { shouldDirty: true, shouldValidate: true });
     } catch (error) {
       console.log('Error uploading file: ', error);
     }
@@ -62,13 +62,7 @@ function UploadImage() {
         ) : (
           <>
             <label className="upload__image--input" htmlFor="input-file"></label>
-            <input
-              // ref={inputRef}
-              id="input-file"
-              type="file"
-              // {...register('image')}
-              onChange={handleChange}
-            />
+            <input id="input-file" type="file" onChange={handleChange} />
             <PlusIcon />
           </>
         )}
