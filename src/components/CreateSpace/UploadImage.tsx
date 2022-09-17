@@ -2,7 +2,7 @@
 import styled from '@emotion/styled';
 import PlusIcon from '@src/assets/Icon/PlusIcon.svg';
 import { uploadImage } from '@src/utils/uploadImage';
-import React, { Dispatch, SetStateAction, useRef, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
 import { useFormContext } from 'react-hook-form';
 import ClipLoader from 'react-spinners/ClipLoader';
@@ -10,8 +10,9 @@ import ClipLoader from 'react-spinners/ClipLoader';
 function UploadImage() {
   const [isLoadig, setIsLoading] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
+  const inputFileRef = useRef<HTMLInputElement | null>(null);
 
-  const formContext = useFormContext();
+  const { setValue, getValues } = useFormContext();
 
   console.log('>>', process.env.NEXT_PUBLIC_DAO_FORCE_IMG_KEY);
 
@@ -20,18 +21,13 @@ function UploadImage() {
       setIsLoading(true);
     });
 
-    console.log('>>formContext', formContext);
-
-    console.log('e.target.files[0]', e.target.files[0]);
     const file = e.target.files[0];
 
     try {
       const url = await uploadImage(file);
 
-      console.log('>>url', url);
-      // formContext.register('image').onChange(url);
-      // formContext.setValue('image', url);
-      formContext.setValue('image', url, { shouldDirty: true, shouldValidate: true });
+      setValue('image', url, { shouldDirty: true, shouldValidate: true });
+      // console.log(formContext.getValues());
     } catch (error) {
       console.log('Error uploading file: ', error);
     }
@@ -52,59 +48,51 @@ function UploadImage() {
     });
   };
 
+  const handleClick = () => {
+    inputFileRef.current?.click();
+  };
+
+  useEffect(() => {
+    if (getValues().image) {
+      setPreviewImage(getValues().image);
+    }
+  }, []);
+
   return (
-    <StyledRoot>
-      <StyledUploadButton className="upload__image">
-        {previewImage ? (
-          <img src={previewImage} alt="dao" />
-        ) : isLoadig ? (
-          <ClipLoader color="#FFE55C" loading={isLoadig} size={50} />
+    <section className="w-full flex justify-center items-center mt-[80px]">
+      <div className="w-[200px] h-[200px] rounded-[50%] bg-[#ffffff4d] flex justify-center items-center overflow-hidden">
+        {previewImage && (
+          <img
+            src={previewImage}
+            alt="dao"
+            className="object-cover min-h-[200px] min-w-[200px] z-10"
+            onClick={handleClick}
+            // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
+            role="button"
+            tabIndex={0}
+          />
+        )}
+        {isLoadig ? (
+          <ClipLoader color="#FFE55C" loading={isLoadig} size={50} className="z-20 absolute" />
         ) : (
           <>
-            <label className="upload__image--input" htmlFor="input-file"></label>
-            <input id="input-file" type="file" onChange={handleChange} />
-            <PlusIcon />
+            <label
+              className="w-[200px] h-[200px] rounded-[50%] absolute cursor-pointer"
+              htmlFor="input-file"
+            ></label>
+            <input
+              ref={inputFileRef}
+              className="hidden"
+              type="file"
+              onChange={handleChange}
+              id="input-file"
+            />
+            <PlusIcon className="cursor-pointer" />
           </>
         )}
-      </StyledUploadButton>
-    </StyledRoot>
+      </div>
+    </section>
   );
 }
 
 export default UploadImage;
-
-const StyledRoot = styled.section`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 80px;
-`;
-const StyledUploadButton = styled.section`
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  .upload__image--input {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    position: absolute;
-    cursor: pointer;
-  }
-  & img {
-    object-fit: cover;
-    min-height: 200px;
-    min-width: 200px;
-  }
-  #input-file {
-    display: none;
-  }
-  & svg {
-    cursor: pointer;
-  }
-`;
