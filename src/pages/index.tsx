@@ -36,7 +36,7 @@ const Home: NextPage = () => {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push('/createspace/spacedetail');
+    router.push('/create_space');
   };
 
   return (

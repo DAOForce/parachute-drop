@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import BackBtn from '@src/components/common/BackBtn';
 import NextBtn from '@src/components/common/NextBtn';
 import { Step } from '@src/pages/create_space';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
@@ -15,9 +16,14 @@ interface CreateSpaceFormProps {
 function CreateSpaceForm({ step, setStep }: CreateSpaceFormProps) {
   const [isFirstStepDone, setIsFirstStepDone] = useState(false);
   const [isFinalStepDone, setIsFinalStepDone] = useState(false);
+  const router = useRouter();
   const handleCreateSpace = () => {
     // 1. 정보들 컨트랙트로 넘김
     // 2. 페이지 로드
+    router.push({
+      pathname: `/detail/${getValues()?.tokenName}`,
+      query: getValues(),
+    });
   };
 
   const { getValues } = useFormContext();
