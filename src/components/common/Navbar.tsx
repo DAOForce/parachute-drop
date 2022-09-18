@@ -14,7 +14,7 @@ function Navbar() {
     if (isMounted) {
       setOwnerAddress(localStorage.getItem('ownerAddress'));
     }
-  }, [ownerAddress]);
+  }, [ownerAddress, isMounted]);
 
   const handleClick = () => {
     router.push('/');

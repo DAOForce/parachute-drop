@@ -11,14 +11,6 @@ export const isLogout = () => {
   );
 };
 
-export const resetWallet = () => {
-  const resetEvent = new Event('resetAccount');
-
-  localStorage.setItem('ownerAddress', '');
-  document.dispatchEvent(resetEvent);
-  console.log('DISCONNECTED');
-};
-
 export const communicateWithWallet = async (
   walletId: walletIdType,
 ): Promise<string | undefined> => {
