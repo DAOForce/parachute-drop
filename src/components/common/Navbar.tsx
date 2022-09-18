@@ -2,13 +2,7 @@ import { MetaMaskInpageProvider } from '@metamask/providers';
 import Logo from '@src/assets/logo.svg';
 import useMounted from '@src/hooks/useMounted';
 // import TestEvmos from '@src/components/main/TestEvmos';
-import {
-  communicateWithWallet,
-  getKeplrAddress,
-  getMetamaskAddress,
-  walletIdType,
-} from '@src/utils/connectWallet';
-import { resetAccount } from '@src/utils/resetAccount';
+import { communicateWithWallet, isLogout, walletIdType } from '@src/utils/connectWallet';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 function Navbar() {
@@ -16,23 +10,9 @@ function Navbar() {
   const isMounted = useMounted();
   const [ownerAddress, setOwnerAddress] = useState<string | undefined | null>('');
 
-  const setAccountListener = (provider: MetaMaskInpageProvider) => {
-    provider?.on('accountsChanged', async () => await communicateWithWallet('metamask'));
-
-    window.addEventListener(
-      'keplr_keystorechange',
-      async () => await communicateWithWallet('evmos'),
-    );
-
-    document.addEventListener('connectAccount', () => window.location.reload());
-    document.addEventListener('resetAccount', () => window.location.reload());
-  };
-
   useEffect(() => {
     if (isMounted) {
-      console.log('로로');
       setOwnerAddress(localStorage.getItem('ownerAddress'));
-      setAccountListener(window?.ethereum);
     }
   }, [ownerAddress]);
 
@@ -45,8 +25,16 @@ function Navbar() {
 
   const handleWalletClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const targetId = e.currentTarget.id as walletIdType;
+    const address = await communicateWithWallet(targetId);
+    setOwnerAddress(address);
+  };
 
-    await communicateWithWallet(targetId);
+  const handleConnect = () => {
+    if (isLogout()) {
+      return;
+    }
+    setOwnerAddress('');
+    localStorage.removeItem('ownerAddress');
   };
 
   return (
@@ -59,18 +47,13 @@ function Navbar() {
 
       {ownerAddress ? (
         <>
-          <div className="btn btn-sm">
+          <button className="btn btn-sm" onClick={handleConnect}>
             {ownerAddressShort}...{ownerAddressShort2}
-          </div>
-          <div className="btn btn-sm">
-            <button onClick={handleWalletClick} type="button" id="metamask">
-              Disconnect
-            </button>
-          </div>
+          </button>
         </>
       ) : (
         <div className="flex-none">
-          <label htmlFor="my-modal-4" className="btn modal-button">
+          <label htmlFor="my-modal-4" className="btn btn-sm modal-button">
             Connect Wallet
           </label>
 

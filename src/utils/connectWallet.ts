@@ -4,8 +4,11 @@ const EVMOS_MAINNET_INFO = networkInfo['evmos_9001-1'];
 
 export type walletIdType = 'metamask' | 'evmos';
 
-const isLogout = (localStorage: Storage) => {
-  return localStorage.getItem('ownerAddress') !== '';
+export const isLogout = () => {
+  return (
+    localStorage.getItem('ownerAddress') === '' ||
+    localStorage.getItem('ownerAddress') === undefined
+  );
 };
 
 export const resetWallet = () => {
@@ -16,25 +19,20 @@ export const resetWallet = () => {
   console.log('DISCONNECTED');
 };
 
-export const communicateWithWallet = async (walletId: walletIdType): Promise<void> => {
+export const communicateWithWallet = async (
+  walletId: walletIdType,
+): Promise<string | undefined> => {
   console.log('walletId', walletId);
-  const connectEvent = new Event('connectAccount');
-
-  if (isLogout(localStorage)) {
-    return resetWallet();
-  }
 
   if (walletId === 'metamask') {
-    await getMetamaskAddress();
-    document.dispatchEvent(connectEvent);
+    const address = await getMetamaskAddress();
 
-    return;
+    return address;
   }
 
-  await getKeplrAddress();
-  document.dispatchEvent(connectEvent);
+  const address = await getKeplrAddress();
 
-  return;
+  return address;
 };
 
 export const getMetamaskAddress = async () => {
