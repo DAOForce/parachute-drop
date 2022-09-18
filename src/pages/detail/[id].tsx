@@ -1,6 +1,8 @@
 import Navbar from '@src/components/common/Navbar';
 import AirdropNav from '@src/components/Detail/AirdropNav';
+import AirdropResult from '@src/components/Detail/AirdropResult';
 import DaoProfile from '@src/components/Detail/DaoProfile';
+import DetailPortfolio from '@src/components/Detail/DetailPortfolio';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
@@ -11,18 +13,27 @@ import React, { useState } from 'react';
 export type CurrentTab = 'Airdrop' | 'Portfolio';
 
 function AirdropDetail() {
+  console.log('>http://localhost:3000/create_space');
   const router = useRouter();
   const [currentTab, setCurrentTab] = useState<CurrentTab>('Airdrop');
   const daoDetails = router?.query;
-  console.log('>>>daoDetails', daoDetails);
 
   return (
     <>
       <Navbar />
       <section className="container mx-auto mt-12 mb-2">
-        {/* 프로필 영역 */}
-        {daoDetails.image && <DaoProfile daoDetails={daoDetails} />}
-        <AirdropNav currentTab={currentTab} setCurrentTab={setCurrentTab} />
+        {daoDetails.image && (
+          <>
+            {/* 프로필 영역 */}
+            <DaoProfile daoDetails={daoDetails} />
+            <AirdropNav currentTab={currentTab} setCurrentTab={setCurrentTab} />
+            {currentTab === 'Airdrop' ? (
+              <AirdropResult daoDetails={daoDetails} />
+            ) : (
+              <DetailPortfolio />
+            )}
+          </>
+        )}
       </section>
     </>
   );
