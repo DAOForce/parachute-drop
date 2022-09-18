@@ -21,7 +21,7 @@ function CreateSpaceForm({ step, setStep }: CreateSpaceFormProps) {
     // 1. 정보들 컨트랙트로 넘김
     // 2. 페이지 로드
     router.push({
-      pathname: `/detail/${getValues()?.tokenName}`,
+      pathname: `/detail/${getValues()?.tokenName}#airdrop`,
       query: getValues(),
     });
   };

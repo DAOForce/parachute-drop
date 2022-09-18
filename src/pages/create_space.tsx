@@ -39,7 +39,7 @@ function CreateSpace() {
     image: yup.string().required('image is required.'),
     spaceName: yup.string().required('space name is required'),
     intro: yup.string().required('space intro is required'),
-    homepage: yup.string(),
+    homepage: yup.string().required('homepage url is required'),
     tokenName: yup.string().required('token name is required'),
     tokenSymbol: yup.string().required('token symbol is required'),
     tokenSupply: yup.number().required('token supply is required'),
