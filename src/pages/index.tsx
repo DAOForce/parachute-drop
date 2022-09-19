@@ -4,39 +4,18 @@ import CardSpace from '@src/components/main/CardSpace';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import {
+  beautifyAllGovernanceTokenInfoForIndex,
+  getAllGovernanceTokenInfo,
+} from '../utils/getAllGovernanceTokenInfo';
 
-const CardContents = [
-  {
-    image: 'https://i.pravatar.cc/300',
-    DAOName: 'Telescope DAO',
-    intro: 'Telescope DAO is changing the world',
-    ticker: 'TELE',
-  },
-  {
-    image: 'https://i.pravatar.cc/300',
-    DAOName: 'Telescope DAO',
-    intro: 'Telescope DAO is changing the world',
-    ticker: 'TELE',
-  },
-  {
-    image: 'https://i.pravatar.cc/300',
-    DAOName: 'Telescope DAO',
-    intro: 'Telescope DAO is changing the world',
-    ticker: 'TELE',
-  },
-  {
-    image: 'https://i.pravatar.cc/300',
-    DAOName: 'Telescope DAO',
-    intro: 'Telescope DAO is changing the world',
-    ticker: 'TELE',
-  },
-];
+const CardContents = await beautifyAllGovernanceTokenInfoForIndex();
 
 const Home: NextPage = () => {
   const router = useRouter();
 
-  const handleClick = () => {
-    router.push('/create_space');
+  const handleClick = async () => {
+    await router.push('/create_space');
   };
 
   return (
