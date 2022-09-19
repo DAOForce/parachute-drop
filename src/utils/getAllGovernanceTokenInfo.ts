@@ -250,6 +250,14 @@ const abi = [
   },
 ];
 
+export interface tokenInfo {
+  image: string;
+  DAOName: string;
+  intro: string;
+  symbol: string;
+  tokenContractAddress: string;
+}
+
 export const getAllGovernanceTokenInfo = async () => {
   const provider = ethers.providers.getDefaultProvider('goerli');
   console.log('>>>>>>>> PROVIDER >>>>>>>>>', provider);
@@ -261,14 +269,23 @@ export const getAllGovernanceTokenInfo = async () => {
 export const beautifyAllGovernanceTokenInfoForIndex = async () => {
   const getAllGovernanceTokenInfoResult = await getAllGovernanceTokenInfo();
   const response = [
-    getAllGovernanceTokenInfoResult.map((item: { tokenInfo: any }) => {
-      return {
-        image: item.tokenInfo.image,
-        DAOName: item.tokenInfo.DAOName,
-        intro: item.tokenInfo.intro,
-        ticker: item.tokenInfo.symbol,
-      };
-    }),
+    getAllGovernanceTokenInfoResult.map(
+      (item: {
+        airdropTokenAddress: string;
+        isAirdropContractOpened: boolean;
+        tokenInfo: tokenInfo;
+      }) => {
+        return {
+          image: item.tokenInfo.image,
+          DAOName: item.tokenInfo.DAOName,
+          intro: item.tokenInfo.intro,
+          ticker: item.tokenInfo.symbol,
+          governanceToken: item.tokenInfo.tokenContractAddress,
+          isAirdropContractOpened: item.isAirdropContractOpened,
+          airdropTokenAddress: item.airdropTokenAddress,
+        };
+      },
+    ),
   ][0];
   console.log('>>>>>>>>>>> RESPONSE', response);
   return response;
