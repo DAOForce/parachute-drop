@@ -7,6 +7,7 @@ import { useFormContext } from 'react-hook-form';
 
 import StartAirdrop from '../StartAirdrop';
 import EnterDetailAirdrop from './EnterDetailAirdrop';
+import SetDelegation from './SetDelegation';
 
 interface NewAirdropFormProps {
   step: AirdropStep;
@@ -36,7 +37,7 @@ function NewAirdropForm({ step, setStep }: NewAirdropFormProps) {
       setIsFirstStepDone(false);
     }
 
-    if (currentValue?.isDelegate !== '') {
+    if (currentValue?.isDelegate !== null) {
       setIsSecondSteopDone(true);
     } else {
       setIsSecondSteopDone(false);
@@ -73,7 +74,8 @@ function NewAirdropForm({ step, setStep }: NewAirdropFormProps) {
     case 'SET_DELEGATION':
       return (
         <>
-          <div className="flex items-center justify-between mt-[30px] mb-[66px]">
+          <SetDelegation />
+          <div className="flex items-center justify-between mt-[30px] mb-[66px] min-w-[868.5px]">
             <BackBtn
               onClick={() => {
                 setStep('ENTER_DETAIL_AIRDROP');
@@ -84,7 +86,7 @@ function NewAirdropForm({ step, setStep }: NewAirdropFormProps) {
                 e.preventDefault();
                 setStep('ADD_WHITELIST_ADDRRESS');
               }}
-              // isAbled={isSecondStepDone}
+              isAbled={isSecondStepDone}
             />
           </div>
         </>

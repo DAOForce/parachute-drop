@@ -3,51 +3,29 @@ import { FreeObject } from '@src/types';
 import React, { Dispatch, useEffect, useState } from 'react';
 
 import AddressList from './AddressList';
-import { css } from '@emotion/react';
 import UploadFile from './UploadFile';
 
 interface UploadCsvProps {
   fileData: Array<FreeObject> | null;
   setFileData: Dispatch<Array<FreeObject> | null>;
+  className: string;
+  [key: string]: any;
 }
-function UploadCsv({ fileData, setFileData }: UploadCsvProps) {
+function UploadCsv({ fileData, setFileData, className, ...props }: UploadCsvProps) {
   return (
-    <StyledRoot>
-      <StyledAddressBox>
+    <section className={`w-[868.5px] ${className}`} {...props}>
+      <div className="w-full pb-[12px] pl-[16px] border-b-[1px] border-solid border-slate-500">
         <p>Address</p>
-      </StyledAddressBox>
-      <StyledUploadBox fileData={fileData}>
+      </div>
+      <div
+        className={`w-[100%] flex flex-col justify-center items-center ${
+          fileData ? 'h-fit max-h-[374px] overflow-y-scroll' : 'h-[374px]'
+        }`}
+      >
         {fileData ? <AddressList fileData={fileData} /> : <UploadFile setFileData={setFileData} />}
-      </StyledUploadBox>
-    </StyledRoot>
+      </div>
+    </section>
   );
 }
 
 export default UploadCsv;
-
-const StyledRoot = styled.section`
-  width: 868.5px;
-`;
-const StyledAddressBox = styled.div`
-  width: 100%;
-  padding-bottom: 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  padding-left: 16px;
-`;
-
-const StyledUploadBox = styled.div<{ fileData: any }>`
-  width: 100%;
-  ${({ fileData }) =>
-    fileData
-      ? css`
-          height: fit-content;
-        `
-      : css`
-          height: 374px;
-        `}
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-`;

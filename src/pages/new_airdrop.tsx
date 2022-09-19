@@ -24,7 +24,7 @@ const DEFAULT_VALUES: DefaultValues<NewAirdropType> = {
   rounds: null,
   interval: null,
   duration: null,
-  isDelegate: true,
+  isDelegate: null,
 };
 
 export interface NewAirdropType {
@@ -34,7 +34,7 @@ export interface NewAirdropType {
   rounds: number | null;
   interval: number | null;
   duration: number | null;
-  isDelegate: boolean;
+  isDelegate: boolean | null;
   delegationList: Array<any>;
   whiteList: Array<any>;
 }
@@ -79,7 +79,7 @@ function NewAirdrop() {
       </CreateSpaceNav>
       <Title>{TITLE[step]}</Title>
       <Subscription>{SUBSCRIPTION[step]}</Subscription>
-      <form className="w-[560px]" onSubmit={handleSubmit(onSubmit)}>
+      <form className="w-fit min-w-[560px]" onSubmit={handleSubmit(onSubmit)}>
         <FormProvider {...methods}>
           <NewAirdropForm step={step} setStep={setStep} />
         </FormProvider>
