@@ -31,6 +31,8 @@ function CreateSpaceForm({ step, setStep }: CreateSpaceFormProps) {
   useEffect(() => {
     const currentValue = getValues();
 
+    console.log('**', currentValue);
+
     if (
       currentValue?.image !== '' &&
       currentValue?.homepage !== '' &&

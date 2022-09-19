@@ -103,118 +103,71 @@ function spacedetail() {
   };
 
   return (
-    <StyledRoot>
-      <CreateSpaceNav routingAddress="/">{HEADER_NAME.START_NEW_AIRDROP}</CreateSpaceNav>
-      <Title>{TITLE.ENTER_DETAIL_AIRDROP}</Title>
-      <Subscription>{SUBSCRIPTION.ENTER_DETAIL_AIRDROP}</Subscription>
-      <StyledForm>
-        <div className="form-control w-full">
-          <label className="label w-full" htmlFor="TreasuryAddress">
-            <span className="label-text w-full">Treasury address</span>
-          </label>
-          <input
-            id="TreasuryAddress"
-            ref={treasuryAddressRef}
-            type="text"
-            placeholder={
-              router?.query?.treasuryAddress ? router.query.treasuryAddress.toString() : 'Type here'
-            }
-            className="input input-bordered w-full"
-          />
-          <label className="label w-full" htmlFor="Amounts">
-            <span className="label-text w-full">Amounts</span>
-          </label>
-          <input
-            id="Amounts"
-            ref={amountsRef}
-            type="number"
-            placeholder={router?.query?.amounts ? router.query.amounts.toString() : '0.00'}
-            className="input input-bordered w-full"
-          />
-          <label className="label w-full" htmlFor="StartDate">
-            <span className="label-text w-full">Start Date</span>
-          </label>
-          <input
-            id="StartDate"
-            ref={startDateRef}
-            type="text"
-            placeholder={
-              router?.query?.startDate ? router.query.startDate.toString() : 'yyyy-mm-dd'
-            }
-            className="input input-bordered w-full"
-          />
-          <label className="label w-full" htmlFor="Rounds">
-            <span className="label-text w-full">Rounds</span>
-          </label>
-          <input
-            id="Rounds"
-            ref={roundsRef}
-            type="number"
-            placeholder={router?.query?.rounds ? router.query.rounds.toString() : '0'}
-            className="input input-bordered w-full"
-          />
-          <label className="label w-full" htmlFor="Interval">
-            <span className="label-text w-full">Interval (Days)</span>
-          </label>
-          <input
-            id="Interval"
-            ref={intervaleRef}
-            type="number"
-            placeholder={router?.query?.interval ? router.query.interval.toString() : '0'}
-            className="input input-bordered w-full"
-          />
-          <label className="label w-full" htmlFor="ClaimableDuration">
-            <span className="label-text w-full">Claimable Duration (Days)</span>
-          </label>
-          <input
-            id="ClaimableDuration"
-            ref={durationRef}
-            type="number"
-            placeholder={router?.query?.duration ? router.query.duration.toString() : '0'}
-            className="input input-bordered w-full"
-          />
-        </div>
-        <StyledButtonGroup>
-          <BackBtn onClick={handleBackClick} />
-          <NextBtn onClick={handleNextClick} />
-        </StyledButtonGroup>
-      </StyledForm>
-    </StyledRoot>
+    <div className="form-control w-full">
+      <label className="label w-full" htmlFor="TreasuryAddress">
+        <span className="label-text w-full">Treasury address</span>
+      </label>
+      <input
+        id="TreasuryAddress"
+        ref={treasuryAddressRef}
+        type="text"
+        placeholder={
+          router?.query?.treasuryAddress ? router.query.treasuryAddress.toString() : 'Type here'
+        }
+        className="input input-bordered w-full"
+      />
+      <label className="label w-full" htmlFor="Amounts">
+        <span className="label-text w-full">Amounts</span>
+      </label>
+      <input
+        id="Amounts"
+        ref={amountsRef}
+        type="number"
+        placeholder={router?.query?.amounts ? router.query.amounts.toString() : '0.00'}
+        className="input input-bordered w-full"
+      />
+      <label className="label w-full" htmlFor="StartDate">
+        <span className="label-text w-full">Start Date</span>
+      </label>
+      <input
+        id="StartDate"
+        ref={startDateRef}
+        type="text"
+        placeholder={router?.query?.startDate ? router.query.startDate.toString() : 'yyyy-mm-dd'}
+        className="input input-bordered w-full"
+      />
+      <label className="label w-full" htmlFor="Rounds">
+        <span className="label-text w-full">Rounds</span>
+      </label>
+      <input
+        id="Rounds"
+        ref={roundsRef}
+        type="number"
+        placeholder={router?.query?.rounds ? router.query.rounds.toString() : '0'}
+        className="input input-bordered w-full"
+      />
+      <label className="label w-full" htmlFor="Interval">
+        <span className="label-text w-full">Interval (Days)</span>
+      </label>
+      <input
+        id="Interval"
+        ref={intervaleRef}
+        type="number"
+        placeholder={router?.query?.interval ? router.query.interval.toString() : '0'}
+        className="input input-bordered w-full"
+      />
+      <label className="label w-full" htmlFor="ClaimableDuration">
+        <span className="label-text w-full">Claimable Duration (Days)</span>
+      </label>
+      <input
+        id="ClaimableDuration"
+        ref={durationRef}
+        type="number"
+        placeholder={router?.query?.duration ? router.query.duration.toString() : '0'}
+        className="input input-bordered w-full"
+      />
+    </div>
   );
 }
 
 export default spacedetail;
-
-const StyledRoot = styled.main`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  & > header {
-    margin-bottom: 120px;
-  }
-`;
-
-const StyledForm = styled.form`
-  width: 560px;
-  & div {
-    margin-top: 80px;
-    width: 100%;
-  }
-  & label {
-    & span {
-      color: #ffffff;
-    }
-  }
-  & input {
-    background: #ffffff1a;
-    margin-bottom: 20px;
-  }
-`;
-const StyledButtonGroup = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 30px;
-  margin-bottom: 150px;
-`;

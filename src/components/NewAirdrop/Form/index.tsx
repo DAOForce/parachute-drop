@@ -4,7 +4,9 @@ import { AirdropStep } from '@src/pages/new_airdrop';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+
 import StartAirdrop from '../StartAirdrop';
+import EnterDetailAirdrop from './EnterDetailAirdrop';
 
 interface NewAirdropFormProps {
   step: AirdropStep;
@@ -18,16 +20,16 @@ function NewAirdropForm({ step, setStep }: NewAirdropFormProps) {
   const [isFinalStepDone, setIsFinalStepDone] = useState(false);
   const { getValues } = useFormContext();
 
+  const currentValue = getValues();
   useEffect(() => {
-    const currentValue = getValues();
-
+    console.log('currentValue', currentValue);
     if (
       currentValue?.treasuryAddress !== '' &&
-      currentValue?.amounts !== '' &&
+      currentValue?.amounts !== null &&
       currentValue?.startDate !== '' &&
-      currentValue?.rounds !== '' &&
-      currentValue?.interval !== '' &&
-      currentValue?.duration !== ''
+      currentValue?.rounds !== null &&
+      currentValue?.interval !== null &&
+      currentValue?.duration !== null
     ) {
       setIsFirstStepDone(true);
     } else {
@@ -45,12 +47,13 @@ function NewAirdropForm({ step, setStep }: NewAirdropFormProps) {
     } else {
       setIsFinalStepDone(false);
     }
-  }, [getValues()]);
+  }, [currentValue]);
 
   switch (step) {
     case 'ENTER_DETAIL_AIRDROP':
       return (
         <>
+          <EnterDetailAirdrop />
           <div className="flex items-center justify-between mt-[30px] mb-[66px]">
             <BackBtn
               onClick={() => {
@@ -62,7 +65,7 @@ function NewAirdropForm({ step, setStep }: NewAirdropFormProps) {
                 e.preventDefault();
                 setStep('SET_DELEGATION');
               }}
-              // isAbled={isFirstStepDone}
+              isAbled={isFirstStepDone}
             />
           </div>
         </>

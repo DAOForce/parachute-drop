@@ -19,17 +19,21 @@ type SubscriptionStep = 'ENTER_DETAIL_AIRDROP' | 'SET_DELEGATION';
 
 const DEFAULT_VALUES: DefaultValues<NewAirdropType> = {
   treasuryAddress: '',
+  amounts: null,
   startDate: '',
+  rounds: null,
+  interval: null,
+  duration: null,
   isDelegate: true,
 };
 
 export interface NewAirdropType {
   treasuryAddress: string;
-  amounts: number;
+  amounts: number | null;
   startDate: string;
-  rounds: number;
-  interval: number;
-  duration: number;
+  rounds: number | null;
+  interval: number | null;
+  duration: number | null;
   isDelegate: boolean;
   delegationList: Array<any>;
   whiteList: Array<any>;
@@ -48,7 +52,7 @@ const schema = yup.object().shape({
 
 function NewAirdrop() {
   const [step, setStep] = useState<AirdropStep>('ENTER_DETAIL_AIRDROP');
-  console.log('>step', typeof step);
+  console.log('>step', step);
 
   const methods = useForm<NewAirdropType>({
     resolver: yupResolver(schema),
