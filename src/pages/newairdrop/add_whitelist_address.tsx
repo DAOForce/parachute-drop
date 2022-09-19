@@ -44,7 +44,7 @@ function add_whitelist_address() {
   return (
     <StyleMain>
       <CreateSpaceNav routingAddress="/">{HEADER_NAME.START_NEW_AIRDROP}</CreateSpaceNav>
-      <Title>{TITLE.ADD_WISHLIST_ADDRRESS}</Title>
+      <Title>{TITLE.ADD_WHITELIST_ADDRRESS}</Title>
       <UploadCsv fileData={fileData} setFileData={setFileData} />
       <StyledButtonGroup>
         <BackBtn onClick={handleBackClick} />

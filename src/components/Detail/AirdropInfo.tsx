@@ -22,11 +22,6 @@ const AirdropInfo = () => {
 };
 
 function Resolved() {
-  /**
-   * case 1 : owner address === dao space owner address && airdrop 컨트랙트 deploy X
-   * case 2 : claim 대상자
-   * case 3 : claim 비대상자
-   */
   const airdrop_timestamps = [1651354641, 1653946641, 1656625041];
   const airdrop_round_airdrop_amounts = 4000;
 

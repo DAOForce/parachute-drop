@@ -1,3 +1,6 @@
+interface openObjectType {
+  [key: string]: any;
+}
 export const HEADER_NAME = {
   START_NEW_AIRDROP: 'Start new airdrop',
   CREATE_SPACE: 'Create a space',
@@ -10,13 +13,18 @@ export const TITLE = {
   CONFIRM_WALLET: 'Confirm with wallet',
   ENTER_DETAIL_AIRDROP: 'Enter details of airdrop',
   SET_DELEGATION: 'Set Delegation',
-  ADD_WISHLIST_ADDRRESS: 'Add whitelist address',
+  ADD_WHITELIST_ADDRRESS: 'Add whitelist address',
   REVIEW_AIRDROP: 'Review your airdrop',
   AIRDROP_START: 'Airdrop has started!',
 };
-export const SUBSCRIPTION = {
+export const SUBSCRIPTION: openObjectType = {
   SPACE_DETAIL: 'Please tell me about this space',
   CREATE_TOKEN: 'Enter a information of Token',
   ENTER_DETAIL_AIRDROP: 'Set treasury address, rounds, duration of the airdrop.',
   SET_DELEGATION: 'Check if you want to make user to delegate',
+};
+
+export const AIRDROP_TITLE = {
+  MY_AIRDROP: 'My Airdrop',
+  AIRDROP_SETTING: 'Airdrop Setting',
 };
