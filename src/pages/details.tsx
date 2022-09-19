@@ -99,9 +99,17 @@ const Details: NextPage = () => {
   const [initialBlockNumber, setInitialBlockNumber] = useState<number>(0);
   const [ownerAddress, setOwnerAddress] = useState<string>('');
 
+  const contractInfo = JSON.parse(localStorage.getItem('clickedCardInfo') as string);
+
+  const isAirdropContractIntialized = () => {
+    // TODO: receive isAirdropContractOpened field value to check if airdrop contract is initialized
+    return (
+      contractInfo.airdropContract.contractAddress !== '0x0000000000000000000000000000000000000000'
+    );
+  };
+
   const getAirdropInfo = async () => {
     console.log('==============================');
-    const contractInfo = JSON.parse(localStorage.getItem('clickedCardInfo') as string);
     const ownerAddressTemp = '0x49388dCC82D36B6338871C00F26bF49fF9369A1D';
 
     setOwnerAddress(ownerAddressTemp);
@@ -134,8 +142,8 @@ const Details: NextPage = () => {
   };
 
   useEffect(() => {
-    if (typeof window !== undefined) {
-      getAirdropInfo();
+    if (typeof window !== undefined && isAirdropContractIntialized()) {
+      getAirdropInfo().then((r) => console.log('getAirdropInfo', r));
     }
   }, []);
 

@@ -52,6 +52,9 @@ const Home: NextPage = () => {
               intro={card.intro}
               DAOName={card.DAOName}
               image={card.image}
+              governanceToken={card.governanceToken}
+              isAirdropContractOpened={card.isAirdropContractOpened}
+              airdropTokenAddress={card.airdropTokenAddress}
             />
           ))}
         </div>
