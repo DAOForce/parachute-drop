@@ -1,7 +1,8 @@
 import { abi } from '@src/utils/abi';
 import { ethers } from 'ethers';
 
-export const STORE_ADDRESS = '0x838D974c4fB94537bFA9e700B1a09b8324743471'; // Goerli
+// export const STORE_ADDRESS = '0x838D974c4fB94537bFA9e700B1a09b8324743471'; // Goerli
+export const STORE_ADDRESS = '0x24516E7EA22C009288eC666bCaa2593385D096D5';
 
 export interface tokenInfo {
   image: string;

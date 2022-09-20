@@ -15,7 +15,7 @@ export const airdropContractDeploy = async ({
 }: any) => {
   const airdropTimestamp = getTimestampArray(startDate, interval, rounds);
 
-  const targetAddresseList = whiteList?.map((o) => o.address);
+  const targetAddresseList = whiteList?.map((o) => ethers.utils.getAddress(o.address));
   let totalValue = 0;
   const targetAmountList = whiteList?.map((o) => {
     totalValue += Number(o.amounts);
@@ -43,8 +43,29 @@ export const airdropContractDeploy = async ({
     ethers.utils.getAddress(tokenContractAddress.toString()),
   );
 
+  // 0x24516E7EA22C009288eC666bCaa2593385D096D5
+  // 0x838d974c4fb94537bfa9e700b1a09b8324743471
+
   console.log(
-    '>>>>>>>>>>>>> input >>>>>>>>',
+    'tokenContractAddr',
+    tokenContractAddress,
+    'airdrop',
+    airdropTimestamp,
+    'duration',
+    duration,
+    'rounds',
+    rounds,
+    'targetList',
+    targetAddresseList,
+    'targetAmount',
+    targetAmountList,
+    'perRound',
+    totalValuePerRound,
+    'store',
+    '0x24516E7EA22C009288eC666bCaa2593385D096D5',
+  );
+
+  const result = await airdropFactory.deploy(
     tokenContractAddress,
     airdropTimestamp,
     duration,
@@ -54,18 +75,12 @@ export const airdropContractDeploy = async ({
     totalValuePerRound,
     '0x24516E7EA22C009288eC666bCaa2593385D096D5',
   );
-  const result = await airdropFactory.deploy(
-    tokenContractAddress.toString(),
-    airdropTimestamp,
-    duration,
-    rounds,
-    targetAddresseList,
-    targetAmountList,
-    totalValuePerRound,
-    '0x24516E7EA22C009288eC666bCaa2593385D096D5',
-  );
 
-  console.log('>>>>>>>>>> RESULT >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', result);
+  const receipt = await result.deployed();
+
+  const receipt2 = await result.deployTransaction.wait();
+
+  console.log('>>>>>>>>>> RESULT >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', receipt2);
 
   console.log(result.address);
 };
