@@ -1,8 +1,10 @@
+import useMounted from '@src/hooks/useMounted';
 import { findAllEligibleAirdroppedTokenByUser } from '@src/utils/findAllEligibleAirdroppedTokenByUser';
 import { getAirdropAmountsPerRound } from '@src/utils/getAirdropAmounts';
 import { getAirdropSnapshotTimestamps } from '@src/utils/getAirdropSnapshotTimestamps';
 import { getAirdropTargetAddresses } from '@src/utils/getAirdropTargetAddresses';
 import dayjs from 'dayjs';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { ClipLoader } from 'react-spinners';
 
@@ -10,54 +12,42 @@ import CommonError from '../common/ComomonError';
 import ErrorBoundary from '../common/ErrorBoundary';
 import SSRSafeSuspense from '../common/SSRSafeSuspense';
 
-const userAddress = localStorage.getItem('ownerAddress');
-
-const userEligibleTokenList = await findAllEligibleAirdroppedTokenByUser(userAddress);
-
-console.log('>>>>>> USER ELIGIBLE TOKEN LIST >>>>>>> ', userEligibleTokenList);
-
 {
   /* claim 대상자의 경우 airdrop info */
 }
 
-interface AirdropInfoProps {
-  isAirdropContractOpened: boolean;
-  airdropTokenAddress: string;
-  governanceToken: string;
-  tokenSupply: number;
-}
-
-const AirdropInfo = ({
-  isAirdropContractOpened,
-  airdropTokenAddress,
-  governanceToken,
-  tokenSupply,
-}: AirdropInfoProps) => {
-  console.log('AIRDROP INFO >>>>>>>>>>>>>>>> ', tokenSupply);
-
+const AirdropInfo = () => {
   return (
     <ErrorBoundary
       renderFallback={({ error, reset }) => <CommonError error={error} reset={reset} />}
     >
       {/*  TODO skeleton 추가 */}
       <SSRSafeSuspense fallback={<ClipLoader size={50} color={'#ffffff'} />}>
-        <Resolved
-          isAirdropContractOpened={isAirdropContractOpened}
-          airdropTokenAddress={airdropTokenAddress}
-          governanceToken={governanceToken}
-          tokenSupply={tokenSupply}
-        />
+        <Resolved />
       </SSRSafeSuspense>
     </ErrorBoundary>
   );
 };
 
-function Resolved({
-  isAirdropContractOpened,
-  airdropTokenAddress,
-  governanceToken,
-  tokenSupply,
-}: AirdropInfoProps) {
+function Resolved() {
+  const isMounted = useMounted();
+
+  const router = useRouter();
+
+  const { isAirdropContractOpened, airdropTokenAddress, governanceToken, tokenSupply } =
+    router?.query;
+  const userAddress = isMounted && localStorage?.getItem('ownerAddress');
+  const [userEligibleTokenList, setUserEligibleTokenList] = useState();
+
+  const getList = async () => {
+    const data = await findAllEligibleAirdroppedTokenByUser(userAddress as string);
+    setUserEligibleTokenList(data);
+  };
+
+  useEffect(() => {
+    getList();
+  }, []);
+
   const total = parseInt(tokenSupply.toString());
 
   const [nowAirdropTimestamp, setNewAirdropTimestamp] = useState('');
