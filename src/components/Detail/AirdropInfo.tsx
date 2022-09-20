@@ -1,16 +1,25 @@
 import { findAllEligibleAirdroppedTokenByUser } from '@src/utils/findAllEligibleAirdroppedTokenByUser';
 import dayjs from 'dayjs';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ClipLoader } from 'react-spinners';
 
 import CommonError from '../common/ComomonError';
 import ErrorBoundary from '../common/ErrorBoundary';
 import SSRSafeSuspense from '../common/SSRSafeSuspense';
 
+const userAddress = localStorage.getItem('ownerAddress');
+
+const userEligibleTokenList = await findAllEligibleAirdroppedTokenByUser(userAddress);
+
 {
   /* claim 대상자의 경우 airdrop info */
 }
-const AirdropInfo = ({ isAirdropContractOpened }: boolean, { airdropTokenAddress }: string) => {
+
+const AirdropInfo = ({
+  isAirdropContractOpened,
+  airdropTokenAddress,
+  governanceToken,
+}: string | boolean) => {
   return (
     <ErrorBoundary
       renderFallback={({ error, reset }) => <CommonError error={error} reset={reset} />}
@@ -20,13 +29,18 @@ const AirdropInfo = ({ isAirdropContractOpened }: boolean, { airdropTokenAddress
         <Resolved
           isAirdropContractOpened={isAirdropContractOpened}
           airdropTokenAddress={airdropTokenAddress}
+          governanceToken={governanceToken}
         />
       </SSRSafeSuspense>
     </ErrorBoundary>
   );
 };
 
-function Resolved({ isAirdropContractOpened }: boolean, { airdropTokenAddress }: string) {
+function Resolved({
+  isAirdropContractOpened,
+  airdropTokenAddress,
+  governanceToken,
+}: string | boolean) {
   /**
    * case 1 : owner address === dao space owner address && airdrop 컨트랙트 deploy X
    * case 2 : claim 대상자
@@ -42,6 +56,27 @@ function Resolved({ isAirdropContractOpened }: boolean, { airdropTokenAddress }:
             <div className="grow">
               <h2 className="font-bold text-lg mt-8 mb-2">
                 The owner has not initialized Airdrop Contract for the Governance Token yet.
+              </h2>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
+
+  // iterate userEligibleTokenList and check whether there is no matched address with airdropTokenAddress
+  if (
+    !userEligibleTokenList.some(
+      (token: { governanceTokenAddress: any }) => token.governanceTokenAddress === governanceToken,
+    )
+  ) {
+    return (
+      <>
+        <div className="pb-8">
+          <div className="flex items-center">
+            <div className="grow">
+              <h2 className="font-bold text-lg mt-8 mb-2">
+                You are not eligible to claim for the token.
               </h2>
             </div>
           </div>
