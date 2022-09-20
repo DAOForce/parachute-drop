@@ -1,6 +1,7 @@
 import { findAllEligibleAirdroppedTokenByUser } from '@src/utils/findAllEligibleAirdroppedTokenByUser';
 import { getAirdropAmountsPerRound } from '@src/utils/getAirdropAmounts';
 import { getAirdropSnapshotTimestamps } from '@src/utils/getAirdropSnapshotTimestamps';
+import { getAirdropTargetAddresses } from '@src/utils/getAirdropTargetAddresses';
 import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
 import { ClipLoader } from 'react-spinners';
@@ -12,6 +13,8 @@ import SSRSafeSuspense from '../common/SSRSafeSuspense';
 const userAddress = localStorage.getItem('ownerAddress');
 
 const userEligibleTokenList = await findAllEligibleAirdroppedTokenByUser(userAddress);
+
+console.log('>>>>>> USER ELIGIBLE TOKEN LIST >>>>>>> ', userEligibleTokenList);
 
 {
   /* claim 대상자의 경우 airdrop info */
@@ -59,19 +62,39 @@ function Resolved({
 
   const [nowAirdropTimestamp, setNewAirdropTimestamp] = useState('');
   const [AirdropPerRoundAmount, SetAirdropPerRoundAmount] = useState(0);
+  const [airdropTargetAddr, setAirdropTargetAddr] = useState([]);
+  const [nowAddrWhiteListed, setNowAddrWhiteListed] = useState(false);
 
-  if (isAirdropContractOpened) {
-    (async () => {
-      // airdropTokenAddress
-      const sample = '0xF76cb57df586D9DdEb2BB20652CF633417887Ca3';
-      const airdropTimestamps = await getAirdropSnapshotTimestamps(sample);
-      const airdropAmountsPerRound = await getAirdropAmountsPerRound(sample);
+  const getData = async () => {
+    // airdropTokenAddress
+    const zeroAddr = '0x0000000000000000000000000000000000000000';
+    const sample = '0xF76cb57df586D9DdEb2BB20652CF633417887Ca3';
 
-      setNewAirdropTimestamp(airdropTimestamps);
-      SetAirdropPerRoundAmount(airdropAmountsPerRound);
-      console.log('airdropContractData >>>>>>>>> ', airdropAmountsPerRound);
-    })();
-  }
+    if (airdropTokenAddress === zeroAddr) {
+      airdropTokenAddress = sample;
+    }
+
+    const airdropTimestamps = await getAirdropSnapshotTimestamps(airdropTokenAddress);
+    const airdropAmountsPerRound = await getAirdropAmountsPerRound(airdropTokenAddress);
+    const airdropWhiteList = await getAirdropTargetAddresses(airdropTokenAddress);
+
+    setNewAirdropTimestamp(airdropTimestamps);
+    SetAirdropPerRoundAmount(airdropAmountsPerRound);
+    setAirdropTargetAddr(airdropWhiteList);
+
+    setNowAddrWhiteListed(
+      airdropTargetAddr.some((whiteAddr) => whiteAddr.toLowerCase() === userAddress),
+    );
+
+    console.log('nowAddrWhiteListed >>>>>>>>>>> ', nowAddrWhiteListed);
+    console.log('airdropWhiteList >>>>>>>>> ', airdropWhiteList);
+  };
+
+  useEffect(() => {
+    if (isAirdropContractOpened) {
+      getData().then((r) => console.log(r));
+    }
+  }, [airdropTargetAddr]);
 
   /**
    * case 1 : owner address === dao space owner address && airdrop 컨트랙트 deploy X
@@ -97,18 +120,19 @@ function Resolved({
   }
 
   // iterate userEligibleTokenList and check whether there is no matched address with airdropTokenAddress
-  if (
-    !userEligibleTokenList.some(
-      (token: { governanceTokenAddress: any }) => token.governanceTokenAddress === governanceToken,
-    )
-  ) {
+  if (!nowAddrWhiteListed) {
     return (
       <>
         <div className="pb-8">
           <div className="flex items-center">
             <div className="grow">
               <h2 className="font-bold text-lg mt-8 mb-2">
-                You are not eligible to claim for the token.
+                The page has fetched the whitelist addresses to analyze your availability to be
+                airdropped.
+              </h2>
+              <h2 className="font-bold text-lg mt-8 mb-2">
+                If the page does not change, it means that you are not eligible to claim for the
+                token. Please check again.
               </h2>
             </div>
           </div>
