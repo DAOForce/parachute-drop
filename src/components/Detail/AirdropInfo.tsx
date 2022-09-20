@@ -1,40 +1,136 @@
+import { findAllEligibleAirdroppedTokenByUser } from '@src/utils/findAllEligibleAirdroppedTokenByUser';
+import { getAirdropAmountsPerRound } from '@src/utils/getAirdropAmounts';
+import { getAirdropSnapshotTimestamps } from '@src/utils/getAirdropSnapshotTimestamps';
 import dayjs from 'dayjs';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ClipLoader } from 'react-spinners';
+
 import CommonError from '../common/ComomonError';
 import ErrorBoundary from '../common/ErrorBoundary';
 import SSRSafeSuspense from '../common/SSRSafeSuspense';
 
+const userAddress = localStorage.getItem('ownerAddress');
+
+const userEligibleTokenList = await findAllEligibleAirdroppedTokenByUser(userAddress);
+
 {
   /* claim 대상자의 경우 airdrop info */
 }
-const AirdropInfo = () => {
+
+interface AirdropInfoProps {
+  isAirdropContractOpened: boolean;
+  airdropTokenAddress: string;
+  governanceToken: string;
+  tokenSupply: number;
+}
+
+const AirdropInfo = ({
+  isAirdropContractOpened,
+  airdropTokenAddress,
+  governanceToken,
+  tokenSupply,
+}: AirdropInfoProps) => {
+  console.log('AIRDROP INFO >>>>>>>>>>>>>>>> ', tokenSupply);
+
   return (
     <ErrorBoundary
       renderFallback={({ error, reset }) => <CommonError error={error} reset={reset} />}
     >
       {/*  TODO skeleton 추가 */}
       <SSRSafeSuspense fallback={<ClipLoader size={50} color={'#ffffff'} />}>
-        <Resolved />
+        <Resolved
+          isAirdropContractOpened={isAirdropContractOpened}
+          airdropTokenAddress={airdropTokenAddress}
+          governanceToken={governanceToken}
+          tokenSupply={tokenSupply}
+        />
       </SSRSafeSuspense>
     </ErrorBoundary>
   );
 };
 
-function Resolved() {
-  const airdrop_timestamps = [1651354641, 1653946641, 1656625041];
-  const airdrop_round_airdrop_amounts = 4000;
+function Resolved({
+  isAirdropContractOpened,
+  airdropTokenAddress,
+  governanceToken,
+  tokenSupply,
+}: AirdropInfoProps) {
+  const total = parseInt(tokenSupply.toString());
+
+  const [nowAirdropTimestamp, setNewAirdropTimestamp] = useState('');
+  const [AirdropPerRoundAmount, SetAirdropPerRoundAmount] = useState(0);
+
+  if (isAirdropContractOpened) {
+    (async () => {
+      // airdropTokenAddress
+      const sample = '0xF76cb57df586D9DdEb2BB20652CF633417887Ca3';
+      const airdropTimestamps = await getAirdropSnapshotTimestamps(sample);
+      const airdropAmountsPerRound = await getAirdropAmountsPerRound(sample);
+
+      setNewAirdropTimestamp(airdropTimestamps);
+      SetAirdropPerRoundAmount(airdropAmountsPerRound);
+      console.log('airdropContractData >>>>>>>>> ', airdropAmountsPerRound);
+    })();
+  }
+
+  /**
+   * case 1 : owner address === dao space owner address && airdrop 컨트랙트 deploy X
+   * case 2 : claim 대상자
+   * case 3 : claim 비대상자
+   */
+
+  // Airdrop Contract가 열려있지 않다면 별도 메시지를 반환한다.
+  if (isAirdropContractOpened === false) {
+    return (
+      <>
+        <div className="pb-8">
+          <div className="flex items-center">
+            <div className="grow">
+              <h2 className="font-bold text-lg mt-8 mb-2">
+                The owner has not initialized Airdrop Contract for the Governance Token yet.
+              </h2>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
+
+  // iterate userEligibleTokenList and check whether there is no matched address with airdropTokenAddress
+  if (
+    !userEligibleTokenList.some(
+      (token: { governanceTokenAddress: any }) => token.governanceTokenAddress === governanceToken,
+    )
+  ) {
+    return (
+      <>
+        <div className="pb-8">
+          <div className="flex items-center">
+            <div className="grow">
+              <h2 className="font-bold text-lg mt-8 mb-2">
+                You are not eligible to claim for the token.
+              </h2>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
+
+  // Airdrop Contract의 Claim 대상자인지 확인하고, 대상자가 아니라면 별도 메시지를 반환한다.
+
+  const airdrop_timestamps = nowAirdropTimestamp;
 
   const date1 = dayjs(airdrop_timestamps[1]);
   const date2 = dayjs(airdrop_timestamps[0]);
-  const airBalance = 10000;
-  const total = 100000;
+  const airBalance = AirdropPerRoundAmount;
 
   const airdropDetails = [
     { label: 'Start Date', value: airdrop_timestamps[0] },
     { label: 'Rounds', value: airdrop_timestamps.length },
     { label: 'Interval', value: date1.diff(date2, 'day') + ' Days' },
   ];
+
   return (
     <>
       <div className="pb-8">

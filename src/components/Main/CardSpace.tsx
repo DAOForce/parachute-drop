@@ -2,30 +2,37 @@ import { useRouter } from 'next/router';
 
 interface CardSpaceProps {
   index: number;
-  ticker: string;
+  tokenSymbol: string;
   intro: string;
-  DAOName: string;
+  tokenName: string;
   image: string;
   governanceToken: string;
   isAirdropContractOpened: string;
   airdropTokenAddress: string;
+  [key: string]: any;
 }
 
 function CardSpace(props: CardSpaceProps) {
   const {
+    key,
     index,
-    ticker,
-    intro,
-    DAOName,
+    homepage,
     image,
+    intro,
+    ownerAddress,
+    spaceName,
+    tokenName,
+    tokenSupply,
+    tokenSymbol,
     governanceToken,
     isAirdropContractOpened,
     airdropTokenAddress,
+    ...propsRest
   } = props;
 
   const router = useRouter();
 
-  const handleClick = (value: string) => {
+  const handleClick = () => {
     const tempData = {
       governanceToken: {
         hash: '0xcd82a1396d3fd4c4acf88b84a945d605c50417f78da27b87be4c985bde0a5bea',
@@ -52,20 +59,31 @@ function CardSpace(props: CardSpaceProps) {
 
     localStorage.setItem('clickedCardInfo', JSON.stringify(realData));
     router.push({
-      pathname: '/details',
-      query: value,
+      pathname: `/detail/${tokenName}#airdrop`,
+      query: {
+        homepage,
+        image: 'https://www.nme.com/wp-content/uploads/2021/08/nme-sigrid-cover-2021-696x442.jpeg',
+        intro,
+        ownerAddress,
+        spaceName,
+        tokenName,
+        tokenSupply,
+        tokenSymbol,
+        governanceToken,
+        isAirdropContractOpened,
+        airdropTokenAddress,
+      },
     });
   };
 
   return (
-    <div key={index} className="card shadow-xl bg-[#191919]">
+    <div key={index} className="card shadow-xl bg-[#191919]" {...propsRest}>
       <div className="card-body items-center text-center mb-2">
         <img src={image} className="w-24 rounded-full" />
-
-        <h2 className="card-title">{DAOName}</h2>
+        <h2 className="card-title">{spaceName}</h2>
         <p>{intro}</p>
         <div className="card-actions justify-center mt-2">
-          <button className="btn btn-warning" onClick={() => handleClick(ticker)}>
+          <button className="btn btn-warning" onClick={handleClick}>
             Join
           </button>
         </div>

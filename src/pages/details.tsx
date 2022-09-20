@@ -151,7 +151,7 @@ const Details: NextPage = () => {
     if (typeof window !== undefined && isAirdropContractIntialized()) {
       getAirdropInfo().then((r) => console.log('getAirdropInfo', r));
     }
-  }, []);
+  }, [getAirdropInfo, isAirdropContractIntialized]);
 
   return (
     <>
@@ -161,7 +161,8 @@ const Details: NextPage = () => {
         <div className="flex items-center">
           <div className="avatar mr-5">
             <div className="w-24 rounded-full">
-              <img src="https://placeimg.com/192/192/people" />
+              <img src={image} alt="profile" />
+              <img src={image} alt="profile" />
             </div>
           </div>
           <div>

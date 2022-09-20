@@ -2,14 +2,15 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['ipfs.io'],
+    domains: ['ipfs.io', 'www.nme.com', '*'],
   },
   experiments: {
-    topLevelAwait: true
+    topLevelAwait: true,
   },
   webpack: (config) => {
     config.experiments = config.experiments || {};
     config.experiments.topLevelAwait = true;
+
     return config;
   },
 };

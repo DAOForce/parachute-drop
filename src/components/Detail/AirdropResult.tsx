@@ -2,6 +2,9 @@ import AirdropAdmin from './AirdropAdmin';
 import AirdropInfo from './AirdropInfo';
 
 interface DaoProfileProps {
+  isAirdropContractOpened: boolean;
+  airdropTokenAddress: string;
+  governanceToken: string;
   image?: string;
   spaceName?: string;
   intro?: string;
@@ -18,16 +21,28 @@ interface DaoDetails {
 
 function AirdropResult({ daoDetails }: DaoDetails) {
   const ownerAddress = localStorage.getItem('ownerAddress');
-  /**
-   * case 1 : owner address === dao space owner address && airdrop 컨트랙트 deploy X
-   * case 2 : owner address === dao space owner address && airdrop 컨트랙트 deploy O
-   * case 3 : claim 대상자
-   * case 4 : claim 비대상자
-   */
-  return daoDetails.ownerAddress?.toLowerCase() === ownerAddress ? (
+  const isAirdropContractOpened: boolean = JSON.parse(String(daoDetails.isAirdropContractOpened));
+  const airdropTokenAddress: string = daoDetails.airdropTokenAddress;
+  const governanceToken: string = daoDetails.governanceToken;
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  const tokenSupply = parseInt(daoDetails.tokenSupply);
+
+  console.log('>>>>>>>>>>>>>>>>>>>>>>>> daoDetails Raw', daoDetails);
+
+  console.log(daoDetails.ownerAddress);
+
+  console.log('AIRDROP AirdropResult', governanceToken);
+
+  return daoDetails.ownerAddress === ownerAddress ? (
     <AirdropAdmin />
   ) : (
-    <AirdropInfo />
+    <AirdropInfo
+      isAirdropContractOpened={isAirdropContractOpened}
+      airdropTokenAddress={airdropTokenAddress}
+      governanceToken={governanceToken}
+      tokenSupply={tokenSupply}
+    />
   );
 }
 
