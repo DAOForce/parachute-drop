@@ -26,7 +26,7 @@ export const airdropContractDeploy = async ({
 
   const totalValuePerRound = utils.parseEther(totalValue.toString());
 
-  const infoStoreAddress = '0x838d974c4fb94537bfa9e700b1a09b8324743471';
+  const infoStoreAddress = '0x24516E7EA22C009288eC666bCaa2593385D096D5';
   const signer = new ethers.providers.Web3Provider((window as any).ethereum).getSigner();
 
   console.log('SIGNER >>>>>>>>>>>>>>>>>>>>>>>>>>>>', signer);

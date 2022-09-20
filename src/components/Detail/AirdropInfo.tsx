@@ -138,7 +138,8 @@ function Resolved() {
 
   const date1 = dayjs(airdrop_timestamps[1]);
   const date2 = dayjs(airdrop_timestamps[0]);
-  const airBalance = AirdropPerRoundAmount;
+  // const airBalance = AirdropPerRoundAmount;
+  const airBalance = 100;
 
   const airdropDetails = [
     { label: 'Start Date', value: airdrop_timestamps[0] },
@@ -235,7 +236,7 @@ function Resolved() {
             </div>
           ))}
           <h5 className="text-base mb-4 mt-8 ">Vest Events</h5>
-          <div className="overflow-x-auto">
+          {/* <div className="overflow-x-auto">
             <table className="table w-full">
               <thead>
                 <tr>
@@ -243,16 +244,16 @@ function Resolved() {
                   <th>Round</th>
                 </tr>
               </thead>
-              {/* <tbody>
+              <tbody>
                 {airdrop_timestamps?.map((airdrop, index) => (
                   <tr>
                     <td>{dayjs(airdrop).format('DD/MM/YYYY')}</td>
                     <td>{index + 1} Round</td>
                   </tr>
                 ))}
-              </tbody> */}
+              </tbody>
             </table>
-          </div>
+          </div> */}
         </div>
       </div>
     </>
