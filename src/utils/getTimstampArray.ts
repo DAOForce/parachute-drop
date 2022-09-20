@@ -1,8 +1,3 @@
-interface getTimestampArrayParams {
-  startDate: string;
-  interval: number;
-  rounds: number;
-}
 export const getTimestampArray = (
   startDate: string | number | Date,
   interval: number,

@@ -1,6 +1,6 @@
 import BackBtn from '@src/components/common/BackBtn';
 import NextBtn from '@src/components/common/NextBtn';
-import { AirdropStep } from '@src/pages/new_airdrop';
+import { AirdropStep, HeaderType } from '@src/pages/new_airdrop';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -14,9 +14,10 @@ import SetDelegation from './SetDelegation';
 interface NewAirdropFormProps {
   step: AirdropStep;
   setStep: React.Dispatch<React.SetStateAction<AirdropStep>>;
+  setHeader: React.Dispatch<React.SetStateAction<HeaderType>>;
 }
 
-function NewAirdropForm({ step, setStep }: NewAirdropFormProps) {
+function NewAirdropForm({ step, setStep, setHeader }: NewAirdropFormProps) {
   const router = useRouter();
   const [isFirstStepDone, setIsFirstStepDone] = useState(false);
   const [isSecondStepDone, setIsSecondSteopDone] = useState(false);
@@ -28,7 +29,6 @@ function NewAirdropForm({ step, setStep }: NewAirdropFormProps) {
     console.log('currentValue', currentValue);
     if (
       currentValue?.treasuryAddress !== '' &&
-      currentValue?.amounts !== null &&
       currentValue?.startDate !== '' &&
       currentValue?.rounds !== null &&
       currentValue?.interval !== null &&
@@ -45,7 +45,7 @@ function NewAirdropForm({ step, setStep }: NewAirdropFormProps) {
       setIsSecondSteopDone(false);
     }
 
-    if (currentValue?.whiteList !== '') {
+    if (currentValue?.whiteList !== null) {
       setIsFinalStepDone(true);
     } else {
       setIsFinalStepDone(false);
@@ -130,6 +130,7 @@ function NewAirdropForm({ step, setStep }: NewAirdropFormProps) {
               onClick={(e) => {
                 e.preventDefault();
                 setStep('AIRDROP_START');
+                setHeader('CLAIM_TOKEN');
               }}
             >
               Done

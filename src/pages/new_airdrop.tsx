@@ -13,34 +13,35 @@ export type AirdropStep =
   | 'SET_DELEGATION'
   | 'ADD_WHITELIST_ADDRRESS'
   | 'REVIEW_AIRDROP'
+  | 'CONFIRM_WALLET'
   | 'AIRDROP_START';
+
+export type HeaderType = 'START_NEW_AIRDROP' | 'CLAIM_TOKEN';
 
 type SubscriptionStep = 'ENTER_DETAIL_AIRDROP' | 'SET_DELEGATION';
 
 const DEFAULT_VALUES: DefaultValues<NewAirdropType> = {
   treasuryAddress: '',
-  amounts: null,
   startDate: '',
   rounds: null,
   interval: null,
   duration: null,
   isDelegate: null,
+  whiteList: null,
 };
 
 export interface NewAirdropType {
   treasuryAddress: string;
-  amounts: number | null;
   startDate: string;
   rounds: number | null;
   interval: number | null;
   duration: number | null;
   isDelegate: boolean | null;
   delegationList: Array<any>;
-  whiteList: Array<any>;
+  whiteList: Array<any> | null;
 }
 const schema = yup.object().shape({
   treasuryAddress: yup.string().required('treasury address is required.'),
-  amounts: yup.number().required('amouts is required'),
   startDate: yup.string().required('start date is required'),
   rounds: yup.number().required('rounds is required'),
   interval: yup.number().required('interval is required'),
@@ -52,6 +53,7 @@ const schema = yup.object().shape({
 
 function NewAirdrop() {
   const [step, setStep] = useState<AirdropStep>('ENTER_DETAIL_AIRDROP');
+  const [header, setHeader] = useState<HeaderType>('START_NEW_AIRDROP');
   console.log('>step', step);
 
   const methods = useForm<NewAirdropType>({
@@ -75,13 +77,13 @@ function NewAirdrop() {
   return (
     <div className="flex flex-col items-center justify-center">
       <CreateSpaceNav routingAddress="/" className="mb-[120px]">
-        {HEADER_NAME.START_NEW_AIRDROP}
+        {HEADER_NAME[header]}
       </CreateSpaceNav>
       <Title>{TITLE[step]}</Title>
       <Subscription>{SUBSCRIPTION[step]}</Subscription>
       <form className="w-fit min-w-[560px]" onSubmit={handleSubmit(onSubmit)}>
         <FormProvider {...methods}>
-          <NewAirdropForm step={step} setStep={setStep} />
+          <NewAirdropForm step={step} setStep={setStep} setHeader={setHeader} />
         </FormProvider>
       </form>
     </div>

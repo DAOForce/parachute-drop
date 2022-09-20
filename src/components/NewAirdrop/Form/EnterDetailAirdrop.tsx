@@ -15,16 +15,6 @@ function EnterDetailAirdrop() {
         id="treasuryAddress"
         {...register('treasuryAddress')}
       />
-      <label className="label w-full" htmlFor="amounts">
-        <span className="label-text w-full decoration-white">Amounts</span>
-      </label>
-      <input
-        type="number"
-        placeholder="0.00"
-        className="input input-bordered w-full bg-[#ffffff1a] mb-[20px]"
-        id="amounts"
-        {...register('amounts')}
-      />
       <label className="label w-full" htmlFor="space_homepace">
         <span className="label-text w-full decoration-white">Start Date</span>
       </label>

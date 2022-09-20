@@ -63,23 +63,3 @@ function UploadFile({ setFileData }: UploadFileProps) {
 }
 
 export default UploadFile;
-
-const StyledRoot = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  & > p {
-    color: #ffffff;
-    margin-bottom: 12px;
-  }
-  & > button {
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 24px;
-    color: #141416;
-    width: 172px;
-    text-transform: capitalize;
-  }
-`;
