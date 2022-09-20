@@ -120,12 +120,12 @@ function Resolved({
           <div className="flex items-center">
             <div className="grow">
               <h2 className="font-bold text-lg mt-8 mb-2">
-                The page is now fetching the whitelist addresses to analyze your availiability to be
+                The page has fetched the whitelist addresses to analyze your availability to be
                 airdropped.
               </h2>
               <h2 className="font-bold text-lg mt-8 mb-2">
-                If the page does not change, it probably means that you are not eligible to claim
-                for the token.
+                If the page does not change, it means that you are not eligible to claim for the
+                token. Please check again.
               </h2>
             </div>
           </div>
