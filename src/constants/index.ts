@@ -17,6 +17,7 @@ export const TITLE: openObjectType = {
   REVIEW_AIRDROP: 'Review your airdrop',
   AIRDROP_START: 'Airdrop has started!',
   CLAIM_SUCCESS: 'Claim successful!',
+  CLAIM_TOKEN: 'Claim Your Token',
 };
 export const SUBSCRIPTION: openObjectType = {
   SPACE_DETAIL: 'Please tell me about this space',

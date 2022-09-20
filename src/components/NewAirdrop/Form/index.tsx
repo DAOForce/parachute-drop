@@ -150,7 +150,7 @@ function NewAirdropForm({ step, setStep, setHeader }: NewAirdropFormProps) {
       return (
         <>
           <StartAirdrop setStep={setStep} />
-          <div className="flex items-center justify-between mt-[30px] mb-[66px]">
+          {/* <div className="flex items-center justify-between mt-[30px] mb-[66px]">
             <BackBtn
               onClick={(e) => {
                 e.preventDefault();
@@ -158,7 +158,7 @@ function NewAirdropForm({ step, setStep, setHeader }: NewAirdropFormProps) {
               }}
             />
             <BackBtn onClick={handleTryAgain}>Try Again</BackBtn>
-          </div>
+          </div> */}
         </>
       );
   }
