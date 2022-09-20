@@ -1,6 +1,7 @@
 import BackBtn from '@src/components/common/BackBtn';
 import NextBtn from '@src/components/common/NextBtn';
 import { AirdropStep, HeaderType } from '@src/pages/new_airdrop';
+import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -51,6 +52,13 @@ function NewAirdropForm({ step, setStep, setHeader }: NewAirdropFormProps) {
       setIsFinalStepDone(false);
     }
   }, [currentValue]);
+
+  const queryClient = useQueryClient();
+
+  const handleTryAgain = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    queryClient.invalidateQueries(['airdropToken']);
+  };
 
   switch (step) {
     case 'ENTER_DETAIL_AIRDROP':
@@ -139,7 +147,20 @@ function NewAirdropForm({ step, setStep, setHeader }: NewAirdropFormProps) {
         </>
       );
     default:
-      return <StartAirdrop setStep={setStep} />;
+      return (
+        <>
+          <StartAirdrop setStep={setStep} />
+          <div className="flex items-center justify-between mt-[30px] mb-[66px]">
+            <BackBtn
+              onClick={(e) => {
+                e.preventDefault();
+                setStep('REVIEW_AIRDROP');
+              }}
+            />
+            <BackBtn onClick={handleTryAgain}>Try Again</BackBtn>
+          </div>
+        </>
+      );
   }
 }
 

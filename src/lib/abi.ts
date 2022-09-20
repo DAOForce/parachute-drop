@@ -2,7 +2,7 @@ export const airdropAbi = [
   {
     inputs: [
       {
-        internalType: 'address',
+        internalType: 'contract DAOForceToken',
         name: '_tokenAddress',
         type: 'address',
       },
@@ -10,6 +10,11 @@ export const airdropAbi = [
         internalType: 'uint64[]',
         name: '_airdropSnapshotTimestamps',
         type: 'uint64[]',
+      },
+      {
+        internalType: 'uint32',
+        name: '_roundDurationInDays',
+        type: 'uint32',
       },
       {
         internalType: 'uint32',
@@ -22,9 +27,19 @@ export const airdropAbi = [
         type: 'address[]',
       },
       {
+        internalType: 'uint256[]',
+        name: '_airdropAmountsPerRoundByAddress',
+        type: 'uint256[]',
+      },
+      {
         internalType: 'uint256',
         name: '_totalAirdropVolumePerRound',
         type: 'uint256',
+      },
+      {
+        internalType: 'contract ContractInfoStore',
+        name: '_contractInfoStoreAddress',
+        type: 'address',
       },
     ],
     stateMutability: 'nonpayable',
@@ -38,19 +53,14 @@ export const airdropAbi = [
         type: 'address',
       },
       {
-        internalType: 'uint16',
-        name: '_roundNumber',
-        type: 'uint16',
-      },
-      {
-        internalType: 'uint16',
-        name: '_roundIndex',
-        type: 'uint16',
-      },
-      {
         internalType: 'uint256',
         name: '_airdropUnitVolume',
         type: 'uint256',
+      },
+      {
+        internalType: 'uint16',
+        name: '_roundNumber',
+        type: 'uint16',
       },
     ],
     name: '_computeAirdropAmounts',
@@ -86,6 +96,25 @@ export const airdropAbi = [
       },
     ],
     stateMutability: 'pure',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
+    ],
+    name: 'addressToAirdropVolumePerRound',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'view',
     type: 'function',
   },
   {
@@ -129,14 +158,46 @@ export const airdropAbi = [
   {
     inputs: [
       {
-        internalType: 'address',
-        name: '_tokenContractAddress',
+        internalType: 'uint16',
+        name: '_roundNumber',
+        type: 'uint16',
+      },
+    ],
+    name: 'claimAirdrop',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'contractInfoStore',
+    outputs: [
+      {
+        internalType: 'contract ContractInfoStore',
+        name: '',
         type: 'address',
       },
     ],
-    name: 'executeAirdropRound',
-    outputs: [],
-    stateMutability: 'payable',
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: '_address',
+        type: 'address',
+      },
+    ],
+    name: 'getAirdropAmountPerRoundByAddress',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'view',
     type: 'function',
   },
   {
@@ -160,6 +221,30 @@ export const airdropAbi = [
         internalType: 'address[]',
         name: '',
         type: 'address[]',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint16',
+        name: '_round',
+        type: 'uint16',
+      },
+      {
+        internalType: 'address',
+        name: '_address',
+        type: 'address',
+      },
+    ],
+    name: 'getCalculatedAirdropAmountPerRoundByAddress',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
       },
     ],
     stateMutability: 'view',
@@ -199,6 +284,92 @@ export const airdropAbi = [
   },
   {
     inputs: [],
+    name: 'getRoundDurationInDays',
+    outputs: [
+      {
+        internalType: 'uint32',
+        name: '',
+        type: 'uint32',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'getTokenAddress',
+    outputs: [
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'getTokenInfo',
+    outputs: [
+      {
+        components: [
+          {
+            internalType: 'uint256',
+            name: 'totalSupply',
+            type: 'uint256',
+          },
+          {
+            internalType: 'string',
+            name: 'name',
+            type: 'string',
+          },
+          {
+            internalType: 'string',
+            name: 'symbol',
+            type: 'string',
+          },
+          {
+            internalType: 'string',
+            name: 'DAOName',
+            type: 'string',
+          },
+          {
+            internalType: 'string',
+            name: 'intro',
+            type: 'string',
+          },
+          {
+            internalType: 'string',
+            name: 'image',
+            type: 'string',
+          },
+          {
+            internalType: 'string',
+            name: 'link',
+            type: 'string',
+          },
+          {
+            internalType: 'address',
+            name: 'owner',
+            type: 'address',
+          },
+          {
+            internalType: 'address',
+            name: 'tokenContractAddress',
+            type: 'address',
+          },
+        ],
+        internalType: 'struct CommonStructs.TokenInfo',
+        name: '',
+        type: 'tuple',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
     name: 'getTotalAirdropVolumePerRound',
     outputs: [
       {
@@ -231,12 +402,45 @@ export const airdropAbi = [
   },
   {
     inputs: [],
+    name: 'initiateAirdropRound',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [],
     name: 'numOfTotalRounds',
     outputs: [
       {
         internalType: 'uint32',
         name: '',
         type: 'uint32',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'roundDurationInDays',
+    outputs: [
+      {
+        internalType: 'uint32',
+        name: '',
+        type: 'uint32',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'token',
+    outputs: [
+      {
+        internalType: 'contract DAOForceToken',
+        name: '',
+        type: 'address',
       },
     ],
     stateMutability: 'view',

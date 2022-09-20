@@ -11,6 +11,7 @@ import SSRSafeSuspense from '../common/SSRSafeSuspense';
 import { useRouter } from 'next/router';
 import { AirdropStep } from '@src/pages/new_airdrop';
 import Title from '../CreateSpace/Title';
+import { airdropContractDeploy } from '@src/utils/airdropContractDeploy';
 
 interface StartAirdropProps {
   setStep: React.Dispatch<React.SetStateAction<AirdropStep>>;
@@ -37,8 +38,9 @@ const StartAirdrop = ({ setStep }: StartAirdropProps) => {
 
 function Resolved({ setStep }: StartAirdropProps) {
   const { getValues } = useFormContext();
-  console.log('getValues', getValues());
-  const { data } = useQuery(['airdropToken'], () => {}, {
+
+  const currentValue = getValues();
+  const { data } = useQuery(['airdropToken'], () => airdropContractDeploy({ ...currentValue }), {
     suspense: true,
   });
   useEffect(() => {

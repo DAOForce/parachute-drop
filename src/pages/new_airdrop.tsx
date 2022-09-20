@@ -38,7 +38,7 @@ export interface NewAirdropType {
   interval: number | null;
   duration: number | null;
   isDelegate: boolean | null;
-  delegationList: Array<any>;
+  delegationList?: Array<any>;
   whiteList: Array<any> | null;
 }
 const schema = yup.object().shape({

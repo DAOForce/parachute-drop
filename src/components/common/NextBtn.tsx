@@ -6,7 +6,7 @@ interface NextBtnProps {
   isAbled?: boolean;
   onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   children?: string;
-  className: string;
+  className?: string;
   [key: string]: any;
 }
 

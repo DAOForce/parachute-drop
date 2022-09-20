@@ -1,7 +1,7 @@
 export const getTimestampArray = (
   startDate: string | number | Date,
-  interval: number,
-  rounds: number,
+  interval: number | null,
+  rounds: number | null,
 ) => {
   console.log('>>>argsss', startDate, interval, rounds);
   const timeArray = [] as number[];
