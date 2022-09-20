@@ -4,10 +4,8 @@ import CardSpace from '@src/components/main/CardSpace';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import {
-  beautifyAllGovernanceTokenInfoForIndex,
-  getAllGovernanceTokenInfo,
-} from '../utils/getAllGovernanceTokenInfo';
+
+import { beautifyAllGovernanceTokenInfoForIndex } from '../utils/getAllGovernanceTokenInfo';
 
 const CardContents = await beautifyAllGovernanceTokenInfoForIndex();
 
@@ -48,10 +46,14 @@ const Home: NextPage = () => {
             <CardSpace
               key={card.id}
               index={index}
-              ticker={card.ticker}
-              intro={card.intro}
-              DAOName={card.DAOName}
+              homepage={card.homepage}
               image={card.image}
+              intro={card.intro}
+              ownerAddress={card.ownerAddress}
+              spaceName={card.spaceName}
+              tokenName={card.tokenName}
+              tokenSupply={card.tokenSupply}
+              tokenSymbol={card.tokenSymbol}
               governanceToken={card.governanceToken}
               isAirdropContractOpened={card.isAirdropContractOpened}
               airdropTokenAddress={card.airdropTokenAddress}

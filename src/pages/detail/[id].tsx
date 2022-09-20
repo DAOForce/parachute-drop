@@ -28,6 +28,8 @@ function AirdropDetail() {
             <DaoProfile daoDetails={daoDetails} />
             <AirdropNav currentTab={currentTab} setCurrentTab={setCurrentTab} />
             {currentTab === 'Airdrop' ? (
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
               <AirdropResult daoDetails={daoDetails} />
             ) : (
               <DetailPortfolio />

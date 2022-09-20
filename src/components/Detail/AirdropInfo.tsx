@@ -1,6 +1,8 @@
+import { findAllEligibleAirdroppedTokenByUser } from '@src/utils/findAllEligibleAirdroppedTokenByUser';
 import dayjs from 'dayjs';
 import React from 'react';
 import { ClipLoader } from 'react-spinners';
+
 import CommonError from '../common/ComomonError';
 import ErrorBoundary from '../common/ErrorBoundary';
 import SSRSafeSuspense from '../common/SSRSafeSuspense';
@@ -8,25 +10,48 @@ import SSRSafeSuspense from '../common/SSRSafeSuspense';
 {
   /* claim 대상자의 경우 airdrop info */
 }
-const AirdropInfo = () => {
+const AirdropInfo = ({ isAirdropContractOpened }: boolean, { airdropTokenAddress }: string) => {
   return (
     <ErrorBoundary
       renderFallback={({ error, reset }) => <CommonError error={error} reset={reset} />}
     >
       {/*  TODO skeleton 추가 */}
       <SSRSafeSuspense fallback={<ClipLoader size={50} color={'#ffffff'} />}>
-        <Resolved />
+        <Resolved
+          isAirdropContractOpened={isAirdropContractOpened}
+          airdropTokenAddress={airdropTokenAddress}
+        />
       </SSRSafeSuspense>
     </ErrorBoundary>
   );
 };
 
-function Resolved() {
+function Resolved({ isAirdropContractOpened }: boolean, { airdropTokenAddress }: string) {
   /**
    * case 1 : owner address === dao space owner address && airdrop 컨트랙트 deploy X
    * case 2 : claim 대상자
    * case 3 : claim 비대상자
    */
+
+  // Airdrop Contract가 열려있지 않다면 별도 메시지를 반환한다.
+  if (isAirdropContractOpened === false) {
+    return (
+      <>
+        <div className="pb-8">
+          <div className="flex items-center">
+            <div className="grow">
+              <h2 className="font-bold text-lg mt-8 mb-2">
+                The owner has not initialized Airdrop Contract for the Governance Token yet.
+              </h2>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
+
+  // Airdrop Contract의 Claim 대상자인지 확인하고, 대상자가 아니라면 별도 메시지를 반환한다.
+
   const airdrop_timestamps = [1651354641, 1653946641, 1656625041];
   const airdrop_round_airdrop_amounts = 4000;
 
@@ -40,6 +65,7 @@ function Resolved() {
     { label: 'Rounds', value: airdrop_timestamps.length },
     { label: 'Interval', value: date1.diff(date2, 'day') + ' Days' },
   ];
+
   return (
     <>
       <div className="pb-8">
