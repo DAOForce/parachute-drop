@@ -40,12 +40,12 @@ function Resolved({ setStep }: StartAirdropProps) {
   const { getValues } = useFormContext();
 
   const currentValue = getValues();
-  const { data } = useQuery(['airdropToken'], () => airdropContractDeploy({ ...currentValue }), {
-    suspense: true,
-  });
-  useEffect(() => {
-    console.log('data', data);
-  }, [data]);
+  // const { data } = useQuery(['airdropToken'], () => airdropContractDeploy({ ...currentValue }), {
+  //   suspense: true,
+  // });
+  // useEffect(() => {
+  //   console.log('data', data);
+  // }, [data]);
   const router = useRouter();
   const handleHomeClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();

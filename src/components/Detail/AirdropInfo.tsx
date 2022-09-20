@@ -10,6 +10,7 @@ import { ClipLoader } from 'react-spinners';
 
 import CommonError from '../common/ComomonError';
 import ErrorBoundary from '../common/ErrorBoundary';
+import NextBtn from '../common/NextBtn';
 import SSRSafeSuspense from '../common/SSRSafeSuspense';
 
 {
@@ -110,26 +111,26 @@ function Resolved() {
   }
 
   // iterate userEligibleTokenList and check whether there is no matched address with airdropTokenAddress
-  if (!nowAddrWhiteListed) {
-    return (
-      <>
-        <div className="pb-8">
-          <div className="flex items-center">
-            <div className="grow">
-              <h2 className="font-bold text-lg mt-8 mb-2">
-                The page has fetched the whitelist addresses to analyze your availability to be
-                airdropped.
-              </h2>
-              <h2 className="font-bold text-lg mt-8 mb-2">
-                If the page does not change, it means that you are not eligible to claim for the
-                token. Please check again.
-              </h2>
-            </div>
-          </div>
-        </div>
-      </>
-    );
-  }
+  // if (!nowAddrWhiteListed) {
+  //   return (
+  //     <>
+  //       <div className="pb-8">
+  //         <div className="flex items-center">
+  //           <div className="grow">
+  //             <h2 className="font-bold text-lg mt-8 mb-2">
+  //               The page has fetched the whitelist addresses to analyze your availability to be
+  //               airdropped.
+  //             </h2>
+  //             <h2 className="font-bold text-lg mt-8 mb-2">
+  //               If the page does not change, it means that you are not eligible to claim for the
+  //               token. Please check again.
+  //             </h2>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </>
+  //   );
+  // }
 
   // Airdrop Contract의 Claim 대상자인지 확인하고, 대상자가 아니라면 별도 메시지를 반환한다.
 
@@ -150,7 +151,31 @@ function Resolved() {
       <div className="pb-8">
         <div className="flex items-center">
           <div className="grow">
-            <h2 className="font-bold text-lg mt-8 mb-2">Airdrop</h2>
+            <h2 className="font-bold text-2xl mt-8 mb-8">My Airdrop</h2>
+          </div>
+          <div className="flex-none">
+            <div className="flex items-center">
+              {/* <div>
+                <span>100.00</span>
+                <span> TEL</span>
+              </div>{' '} */}
+              <h2 className="font-bold text-2xl mt-8 mb-8 mr-4">{airBalance} TEL</h2>
+              <div>
+                <NextBtn
+                  className="max-w-[100px] max-h-8"
+                  onClick={() => {
+                    router.push({
+                      pathname: '/claim_token',
+                      query: {
+                        balance: airBalance,
+                      },
+                    });
+                  }}
+                >
+                  Claim
+                </NextBtn>
+              </div>
+            </div>
           </div>
           {/* {airWhiteList?.includes(ownerAddress) && (
               <div className="flex-none">
@@ -218,14 +243,14 @@ function Resolved() {
                   <th>Round</th>
                 </tr>
               </thead>
-              <tbody>
+              {/* <tbody>
                 {airdrop_timestamps?.map((airdrop, index) => (
                   <tr>
                     <td>{dayjs(airdrop).format('DD/MM/YYYY')}</td>
                     <td>{index + 1} Round</td>
                   </tr>
                 ))}
-              </tbody>
+              </tbody> */}
             </table>
           </div>
         </div>

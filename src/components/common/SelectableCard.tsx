@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import CheckMiniIcon from '@src/assets/Icon/CheckMiniIcon.svg';
 
 interface SelectableCardProps {
   isSelected?: boolean;
   className?: string;
-  children: string;
+  children: string | ReactNode;
   [key: string]: any;
 }
 
