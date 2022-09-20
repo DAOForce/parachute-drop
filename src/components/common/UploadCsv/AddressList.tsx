@@ -8,28 +8,22 @@ interface AddressListProps {
 
 function AddressList({ fileData }: AddressListProps) {
   return (
-    <StyledRoot className="overflow-x-auto">
+    <div className="overflow-x-auto w-full">
       <table className="table w-full">
         <tbody>
           {fileData.map((item, idx) => {
             return (
               <tr key={idx}>
-                <td>{item.address}</td>
+                <td className="border-b-[1px] border-solid border-slate-500 bg-transparent">
+                  {item.address}
+                </td>
               </tr>
             );
           })}
         </tbody>
       </table>
-    </StyledRoot>
+    </div>
   );
 }
 
 export default AddressList;
-
-const StyledRoot = styled.div`
-  width: 100%;
-  & td {
-    background: transparent;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  }
-`;

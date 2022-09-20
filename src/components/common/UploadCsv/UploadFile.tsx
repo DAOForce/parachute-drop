@@ -50,12 +50,15 @@ function UploadFile({ setFileData }: UploadFileProps) {
   };
 
   return (
-    <StyledRoot>
-      <p className="mb-6 inline-block">No Address yet</p>
-      <button className="btn btn-active btn-warning rounded-full" onClick={getFileData}>
+    <div className="flex flex-col justify-center items-center">
+      <p className="mb-6 inline-block text-white">No Address yet</p>
+      <button
+        className="btn btn-active btn-warning rounded-full font-normal text-base text-[#141416] w-[172px] capitalize"
+        onClick={getFileData}
+      >
         Upload File
       </button>
-    </StyledRoot>
+    </div>
   );
 }
 
