@@ -139,7 +139,7 @@ function NewAirdropForm({ step, setStep, setHeader }: NewAirdropFormProps) {
         </>
       );
     default:
-      return <StartAirdrop />;
+      return <StartAirdrop setStep={setStep} />;
   }
 }
 

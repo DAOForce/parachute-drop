@@ -7,7 +7,7 @@ export const HEADER_NAME = {
   CLAIM_TOKEN: 'Claim Token',
 };
 
-export const TITLE = {
+export const TITLE: openObjectType = {
   SPACE_DETAIL: 'Space Details',
   CREATE_TOKEN: 'Create Token',
   CONFIRM_WALLET: 'Confirm with wallet',
@@ -16,6 +16,7 @@ export const TITLE = {
   ADD_WHITELIST_ADDRRESS: 'Add whitelist address',
   REVIEW_AIRDROP: 'Review your airdrop',
   AIRDROP_START: 'Airdrop has started!',
+  CLAIM_SUCCESS: 'Claim successful!',
 };
 export const SUBSCRIPTION: openObjectType = {
   SPACE_DETAIL: 'Please tell me about this space',

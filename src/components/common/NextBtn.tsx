@@ -6,16 +6,23 @@ interface NextBtnProps {
   isAbled?: boolean;
   onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   children?: string;
+  className: string;
   [key: string]: any;
 }
 
-function NextBtn({ isAbled = true, onClick, children = 'Next', ...props }: NextBtnProps) {
+function NextBtn({
+  isAbled = true,
+  onClick,
+  children = 'Next',
+  className,
+  ...props
+}: NextBtnProps) {
   return (
     <>
       {isAbled ? (
         <StyledButton
           isAbled={isAbled}
-          className="btn btn-active btn-warning rounded-full"
+          className={`btn btn-active btn-warning rounded-full ${className} font-semibold`}
           onClick={onClick}
           {...props}
         >
@@ -24,7 +31,7 @@ function NextBtn({ isAbled = true, onClick, children = 'Next', ...props }: NextB
       ) : (
         <StyledButton
           isAbled={isAbled}
-          className="btn btn-disabled btn-warning rounded-full"
+          className={`btn btn-disabled btn-warning rounded-full ${className} font-semibold`}
           onClick={onClick}
           {...props}
         >

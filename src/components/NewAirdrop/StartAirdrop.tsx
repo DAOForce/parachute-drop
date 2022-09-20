@@ -1,12 +1,22 @@
+import { TITLE } from '@src/constants';
+import CheckIcon from '@src/assets/Icon/CheckIcon.svg';
 import { useQuery } from '@tanstack/react-query';
 import React, { useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { ClipLoader } from 'react-spinners';
 import CommonError from '../common/ComomonError';
 import ErrorBoundary from '../common/ErrorBoundary';
+import NextBtn from '../common/NextBtn';
 import SSRSafeSuspense from '../common/SSRSafeSuspense';
+import { useRouter } from 'next/router';
+import { AirdropStep } from '@src/pages/new_airdrop';
+import Title from '../CreateSpace/Title';
 
-const StartAirdrop = () => {
+interface StartAirdropProps {
+  setStep: React.Dispatch<React.SetStateAction<AirdropStep>>;
+}
+
+const StartAirdrop = ({ setStep }: StartAirdropProps) => {
   return (
     <ErrorBoundary
       renderFallback={({ error, reset }) => <CommonError error={error} reset={reset} />}
@@ -19,22 +29,38 @@ const StartAirdrop = () => {
           </div>
         }
       >
-        <Resolved />
+        <Resolved setStep={setStep} />
       </SSRSafeSuspense>
     </ErrorBoundary>
   );
 };
 
-function Resolved() {
-  // const { data } = useQuery(['airdropToken'], () => {}, {
-  //   suspense: true,
-  // });
-  // useEffect(() => {
-  //   console.log('data', data);
-  // }, [data]);
+function Resolved({ setStep }: StartAirdropProps) {
   const { getValues } = useFormContext();
   console.log('getValues', getValues());
-  return <div>StartAirdrop</div>;
+  const { data } = useQuery(['airdropToken'], () => {}, {
+    suspense: true,
+  });
+  useEffect(() => {
+    console.log('data', data);
+  }, [data]);
+  const router = useRouter();
+  const handleHomeClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    router.push({
+      pathname: '/',
+    });
+  };
+  setStep('NONE');
+  return (
+    <div className="w-[512px] flex flex-col items-center justify-center">
+      <CheckIcon className="mt-[140px] mb-[30px]" />
+      <Title>{TITLE.CLAIM_SUCCESS}</Title>
+      <NextBtn onClick={handleHomeClick} className="mt-[83px]">
+        Return To Home
+      </NextBtn>
+    </div>
+  );
 }
 
 export default StartAirdrop;

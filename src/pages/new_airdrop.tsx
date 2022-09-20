@@ -14,7 +14,8 @@ export type AirdropStep =
   | 'ADD_WHITELIST_ADDRRESS'
   | 'REVIEW_AIRDROP'
   | 'CONFIRM_WALLET'
-  | 'AIRDROP_START';
+  | 'AIRDROP_START'
+  | 'NONE';
 
 export type HeaderType = 'START_NEW_AIRDROP' | 'CLAIM_TOKEN';
 
