@@ -1,7 +1,7 @@
 import { abi } from '@src/utils/abi';
 import { ethers } from 'ethers';
 
-export const STORE_ADDRESS = '0xfb6a4661e035b58e6eac9c713ab9ba59ee657022'; // Goerli
+export const STORE_ADDRESS = '0x838D974c4fB94537bFA9e700B1a09b8324743471'; // Goerli
 
 export interface tokenInfo {
   image: string;
@@ -16,7 +16,9 @@ export interface tokenInfo {
 }
 
 export const getAllGovernanceTokenInfo = async () => {
-  const provider = ethers.providers.getDefaultProvider('goerli');
+  // const provider = ethers.providers.getDefaultProvider('goerli');
+  console.log('<<<<<<<<<<<<<<<< SDFSDFDS');
+  const provider = new ethers.providers.JsonRpcProvider('https://eth.bd.evmos.dev:8545');
 
   console.log('>>>>>>>> PROVIDER >>>>>>>>>', provider);
   const ContractInfoStore = new ethers.Contract(STORE_ADDRESS, abi, provider);

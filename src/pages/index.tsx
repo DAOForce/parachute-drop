@@ -7,7 +7,10 @@ import { useRouter } from 'next/router';
 
 import { beautifyAllGovernanceTokenInfoForIndex } from '../utils/getAllGovernanceTokenInfo';
 
+console.log('STARTING CARD CONTENTS');
 const CardContents = await beautifyAllGovernanceTokenInfoForIndex();
+
+console.log('>>>>>>>>>>> CARD CONTENTS >>>>>>>>>>>> ', CardContents);
 
 const Home: NextPage = () => {
   const router = useRouter();
