@@ -6,10 +6,22 @@ interface CardSpaceProps {
   intro: string;
   DAOName: string;
   image: string;
+  governanceToken: string;
+  isAirdropContractOpened: string;
+  airdropTokenAddress: string;
 }
 
 function CardSpace(props: CardSpaceProps) {
-  const { index, ticker, intro, DAOName, image } = props;
+  const {
+    index,
+    ticker,
+    intro,
+    DAOName,
+    image,
+    governanceToken,
+    isAirdropContractOpened,
+    airdropTokenAddress,
+  } = props;
 
   const router = useRouter();
 
@@ -25,8 +37,20 @@ function CardSpace(props: CardSpaceProps) {
       },
     };
 
-    // @TODO 실제 데이터로 채우기
-    localStorage.setItem('clickedCardInfo', JSON.stringify(tempData));
+    // localStorage.setItem('clickedCardInfo', JSON.stringify(tempData));
+
+    const realData = {
+      governanceToken: {
+        hash: '0x0', // no info
+        contractAddress: governanceToken,
+      },
+      airdropContract: {
+        hash: '0x0', // no info
+        contractAddress: airdropTokenAddress,
+      },
+    };
+
+    localStorage.setItem('clickedCardInfo', JSON.stringify(realData));
     router.push({
       pathname: '/details',
       query: value,
