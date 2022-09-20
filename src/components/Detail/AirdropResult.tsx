@@ -24,6 +24,11 @@ function AirdropResult({ daoDetails }: DaoDetails) {
   const isAirdropContractOpened: boolean = JSON.parse(String(daoDetails.isAirdropContractOpened));
   const airdropTokenAddress: string = daoDetails.airdropTokenAddress;
   const governanceToken: string = daoDetails.governanceToken;
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  const tokenSupply = parseInt(daoDetails.tokenSupply);
+
+  console.log('>>>>>>>>>>>>>>>>>>>>>>>> daoDetails Raw', daoDetails);
 
   console.log(daoDetails.ownerAddress);
 
@@ -36,6 +41,7 @@ function AirdropResult({ daoDetails }: DaoDetails) {
       isAirdropContractOpened={isAirdropContractOpened}
       airdropTokenAddress={airdropTokenAddress}
       governanceToken={governanceToken}
+      tokenSupply={tokenSupply}
     />
   );
 }

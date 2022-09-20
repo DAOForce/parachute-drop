@@ -45,7 +45,11 @@ export const beautifyAllGovernanceTokenInfoForIndex = async () => {
           airdropTokenAddress: item.airdropTokenAddress,
           homepage: item.tokenInfo.link,
           ownerAddress: item.tokenInfo.owner,
-          tokenSupply: item.tokenInfo.totalSupply,
+          tokenSupply:
+            Number(item.tokenInfo.totalSupply._hex.toString()).toLocaleString('fullwide', {
+              useGrouping: false,
+            }) /
+            10 ** 18,
           tokenSymbol: item.tokenInfo.symbol,
         };
       },

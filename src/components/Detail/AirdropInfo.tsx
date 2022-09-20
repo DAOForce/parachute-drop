@@ -21,7 +21,10 @@ const AirdropInfo = ({
   isAirdropContractOpened,
   airdropTokenAddress,
   governanceToken,
+  tokenSupply,
 }: string | boolean) => {
+  console.log('AIRDROP INFO >>>>>>>>>>>>>>>> ', tokenSupply);
+
   return (
     <ErrorBoundary
       renderFallback={({ error, reset }) => <CommonError error={error} reset={reset} />}
@@ -32,6 +35,7 @@ const AirdropInfo = ({
           isAirdropContractOpened={isAirdropContractOpened}
           airdropTokenAddress={airdropTokenAddress}
           governanceToken={governanceToken}
+          tokenSupply={tokenSupply}
         />
       </SSRSafeSuspense>
     </ErrorBoundary>
@@ -42,7 +46,10 @@ function Resolved({
   isAirdropContractOpened,
   airdropTokenAddress,
   governanceToken,
+  tokenSupply,
 }: string | boolean) {
+  const total = parseInt(tokenSupply);
+
   const [nowAirdropTimestamp, setNewAirdropTimestamp] = useState('');
   const [AirdropPerRoundAmount, SetAirdropPerRoundAmount] = useState(0);
 
@@ -109,8 +116,7 @@ function Resolved({
 
   const date1 = dayjs(airdrop_timestamps[1]);
   const date2 = dayjs(airdrop_timestamps[0]);
-  const airBalance = 10000;
-  const total = 100000;
+  const airBalance = AirdropPerRoundAmount;
 
   const airdropDetails = [
     { label: 'Start Date', value: airdrop_timestamps[0] },
