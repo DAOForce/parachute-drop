@@ -62,7 +62,7 @@ function CardSpace(props: CardSpaceProps) {
       pathname: `/detail/${tokenName}#airdrop`,
       query: {
         homepage,
-        image: 'https://www.nme.com/wp-content/uploads/2021/08/nme-sigrid-cover-2021-696x442.jpeg',
+        image,
         intro,
         ownerAddress,
         spaceName,

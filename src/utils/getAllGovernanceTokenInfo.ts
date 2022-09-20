@@ -36,7 +36,10 @@ export const beautifyAllGovernanceTokenInfoForIndex = async () => {
         tokenInfo: tokenInfo;
       }) => {
         return {
-          image: item.tokenInfo.image,
+          image:
+            item.tokenInfo.image === 'some_image_url'
+              ? 'https://www.nme.com/wp-content/uploads/2021/08/nme-sigrid-cover-2021-696x442.jpeg'
+              : item.tokenInfo.image,
           spaceName: item.tokenInfo.DAOName,
           intro: item.tokenInfo.intro,
           tokenName: item.tokenInfo.name,
