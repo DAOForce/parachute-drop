@@ -1,3 +1,5 @@
+import useMounted from '@src/hooks/useMounted';
+import { useEffect, useState } from 'react';
 import AirdropAdmin from './AirdropAdmin';
 import AirdropInfo from './AirdropInfo';
 
@@ -20,21 +22,23 @@ interface DaoDetails {
 }
 
 function AirdropResult({ daoDetails }: DaoDetails) {
-  const ownerAddress = localStorage.getItem('ownerAddress');
-  const isAirdropContractOpened: boolean = JSON.parse(String(daoDetails.isAirdropContractOpened));
-  const airdropTokenAddress: string = daoDetails.airdropTokenAddress;
-  const governanceToken: string = daoDetails.governanceToken;
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  const tokenSupply = parseInt(daoDetails.tokenSupply);
+  const isMounted = useMounted();
+  const [currentOwnerAddress, setCurrentOwnerAddress] = useState<string | null>(null);
+  if (isMounted) {
+    const ownerAddress = localStorage && localStorage.getItem('ownerAddress');
+    setCurrentOwnerAddress(ownerAddress);
+  }
 
   console.log('>>>>>>>>>>>>>>>>>>>>>>>> daoDetails Raw', daoDetails);
 
-  console.log(daoDetails.ownerAddress);
+  const isAirdropContractOpened: boolean = JSON.parse(String(daoDetails?.isAirdropContractOpened));
+  const airdropTokenAddress: string = daoDetails?.airdropTokenAddress;
+  const governanceToken: string = daoDetails?.governanceToken;
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  const tokenSupply = parseInt(daoDetails?.tokenSupply);
 
-  console.log('AIRDROP AirdropResult', governanceToken);
-
-  return daoDetails.ownerAddress === ownerAddress ? (
+  return daoDetails?.ownerAddress === currentOwnerAddress ? (
     <AirdropAdmin />
   ) : (
     <AirdropInfo
