@@ -23,7 +23,11 @@ function SetDelegation() {
   const handleClick = (e: React.MouseEvent<HTMLUListElement, MouseEvent>) => {
     if (e.target.id === 'active') {
       setIsDelegateActive(true);
-      setValue('isDelegate', true, { shouldDirty: true, shouldValidate: true });
+      if (fileData) {
+        setValue('isDelegate', true, { shouldDirty: true, shouldValidate: true });
+      } else {
+        setValue('isDelegate', null, { shouldDirty: true, shouldValidate: true });
+      }
     } else {
       setIsDelegateActive(false);
       setValue('isDelegate', false, { shouldDirty: true, shouldValidate: true });

@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import StartAirdrop from '../StartAirdrop';
+import AddWhiteList from './AddWhiteList';
 import EnterDetailAirdrop from './EnterDetailAirdrop';
 import SetDelegation from './SetDelegation';
 
@@ -77,7 +78,8 @@ function NewAirdropForm({ step, setStep }: NewAirdropFormProps) {
           <SetDelegation />
           <div className="flex items-center justify-between mt-[30px] mb-[66px] min-w-[868.5px]">
             <BackBtn
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
                 setStep('ENTER_DETAIL_AIRDROP');
               }}
             />
@@ -94,9 +96,11 @@ function NewAirdropForm({ step, setStep }: NewAirdropFormProps) {
     case 'ADD_WHITELIST_ADDRRESS':
       return (
         <>
+          <AddWhiteList />
           <div className="flex items-center justify-between mt-[30px] mb-[66px]">
             <BackBtn
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
                 setStep('SET_DELEGATION');
               }}
             />
@@ -105,7 +109,7 @@ function NewAirdropForm({ step, setStep }: NewAirdropFormProps) {
                 e.preventDefault();
                 setStep('REVIEW_AIRDROP');
               }}
-              // isAbled={isFinalStepDone}
+              isAbled={isFinalStepDone}
             />
           </div>
         </>
@@ -115,12 +119,14 @@ function NewAirdropForm({ step, setStep }: NewAirdropFormProps) {
         <>
           <div className="flex items-center justify-between mt-[30px] mb-[66px]">
             <BackBtn
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
                 setStep('ADD_WHITELIST_ADDRRESS');
               }}
             />
             <NextBtn
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
                 setStep('AIRDROP_START');
               }}
             >
