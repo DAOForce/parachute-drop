@@ -4,6 +4,7 @@ import { AirdropStep } from '@src/pages/new_airdrop';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+import ReviewAirdrop from '../ReviewAirdrop';
 
 import StartAirdrop from '../StartAirdrop';
 import AddWhiteList from './AddWhiteList';
@@ -117,6 +118,7 @@ function NewAirdropForm({ step, setStep }: NewAirdropFormProps) {
     case 'REVIEW_AIRDROP':
       return (
         <>
+          <ReviewAirdrop />
           <div className="flex items-center justify-between mt-[30px] mb-[66px]">
             <BackBtn
               onClick={(e) => {
