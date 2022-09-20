@@ -5,9 +5,10 @@ import { Step } from '@src/pages/create_space';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-
 import CreateToken from './CreateToken';
 import SpaceDetail from './SpaceDetail';
+import { createSpace } from '../../../utils/createSpace';
+
 interface CreateSpaceFormProps {
   step: Step;
   setStep: React.Dispatch<React.SetStateAction<Step>>;
@@ -19,6 +20,10 @@ function CreateSpaceForm({ step, setStep }: CreateSpaceFormProps) {
   const router = useRouter();
   const handleCreateSpace = () => {
     // 1. 정보들 컨트랙트로 넘김
+    const data = getValues();
+
+    console.log(data);
+    createSpace(data);
     // 2. 페이지 로드
     router.push({
       pathname: `/detail/${getValues()?.tokenName}#airdrop`,
