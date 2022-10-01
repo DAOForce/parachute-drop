@@ -2,6 +2,7 @@ import { AIRDROP_TITLE } from '@src/constants';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { ClipLoader } from 'react-spinners';
+
 import CommonError from '../common/ComomonError';
 import ErrorBoundary from '../common/ErrorBoundary';
 import NextBtn from '../common/NextBtn';
@@ -28,6 +29,7 @@ function Resolved() {
   const handleClick = () => {
     router.push('/new_airdrop');
   };
+
   return (
     <section>
       <h2 className="mt-[46.5px] mb-[46.5px] text-[24px] text-white font-['Inter'] font-bold">

@@ -28,6 +28,8 @@ export const getAllGovernanceTokenInfo = async () => {
 
 export const beautifyAllGovernanceTokenInfoForIndex = async () => {
   const getAllGovernanceTokenInfoResult = await getAllGovernanceTokenInfo();
+
+  console.log('>all result', getAllGovernanceTokenInfoResult);
   const response = [
     getAllGovernanceTokenInfoResult.map(
       (item: {

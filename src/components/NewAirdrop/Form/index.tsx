@@ -5,8 +5,8 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import ReviewAirdrop from '../ReviewAirdrop';
 
+import ReviewAirdrop from '../ReviewAirdrop';
 import StartAirdrop from '../StartAirdrop';
 import AddWhiteList from './AddWhiteList';
 import EnterDetailAirdrop from './EnterDetailAirdrop';
@@ -26,6 +26,7 @@ function NewAirdropForm({ step, setStep, setHeader }: NewAirdropFormProps) {
   const { getValues } = useFormContext();
 
   const currentValue = getValues();
+
   useEffect(() => {
     console.log('currentValue', currentValue);
     if (

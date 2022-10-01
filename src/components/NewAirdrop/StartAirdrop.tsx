@@ -1,17 +1,18 @@
-import { TITLE } from '@src/constants';
 import CheckIcon from '@src/assets/Icon/CheckIcon.svg';
+import { TITLE } from '@src/constants';
+import { AirdropStep } from '@src/pages/new_airdrop';
+import { airdropContractDeploy } from '@src/utils/airdropContractDeploy';
 import { useQuery } from '@tanstack/react-query';
+import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { ClipLoader } from 'react-spinners';
+
 import CommonError from '../common/ComomonError';
 import ErrorBoundary from '../common/ErrorBoundary';
 import NextBtn from '../common/NextBtn';
 import SSRSafeSuspense from '../common/SSRSafeSuspense';
-import { useRouter } from 'next/router';
-import { AirdropStep } from '@src/pages/new_airdrop';
 import Title from '../CreateSpace/Title';
-import { airdropContractDeploy } from '@src/utils/airdropContractDeploy';
 
 interface StartAirdropProps {
   setStep: React.Dispatch<React.SetStateAction<AirdropStep>>;
@@ -53,7 +54,9 @@ function Resolved({ setStep }: StartAirdropProps) {
       pathname: '/',
     });
   };
+
   setStep('NONE');
+
   return (
     <div className="w-[512px] flex flex-col items-center justify-center">
       <CheckIcon className="mt-[140px] mb-[30px]" />

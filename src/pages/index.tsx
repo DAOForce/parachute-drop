@@ -1,17 +1,10 @@
 import Add from '@src/assets/Icon/add.svg';
 import Navbar from '@src/components/common/Navbar';
 import CardSpace from '@src/components/main/CardSpace';
+import CardSpcaeList from '@src/components/Main/CardSpcaeList';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-
-import { beautifyAllGovernanceTokenInfoForIndex } from '../utils/getAllGovernanceTokenInfo';
-
-console.log('STARTING CARD CONTENTS');
-const CardContents = await beautifyAllGovernanceTokenInfoForIndex();
-
-console.log('>>>>>>>>>>> CARD CONTENTS >>>>>>>>>>>> ', CardContents);
-
 const Home: NextPage = () => {
   const router = useRouter();
 
@@ -45,23 +38,7 @@ const Home: NextPage = () => {
         </div>
 
         <div className="grid grid-cols-3 gap-4 pb-8">
-          {CardContents.map((card, index) => (
-            <CardSpace
-              key={card.id}
-              index={index}
-              homepage={card.homepage}
-              image={card.image}
-              intro={card.intro}
-              ownerAddress={card.ownerAddress}
-              spaceName={card.spaceName}
-              tokenName={card.tokenName}
-              tokenSupply={card.tokenSupply}
-              tokenSymbol={card.tokenSymbol}
-              governanceToken={card.governanceToken}
-              isAirdropContractOpened={card.isAirdropContractOpened}
-              airdropTokenAddress={card.airdropTokenAddress}
-            />
-          ))}
+          <CardSpcaeList />
         </div>
       </div>
     </>
