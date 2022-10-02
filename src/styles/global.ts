@@ -12,4 +12,7 @@ export const global = css`
     font-family: 'Poppins', sans-serif;
     -webkit-font-smoothing: antialiased;
   }
+  * {
+    box-sizing: border-box;
+  }
 `;

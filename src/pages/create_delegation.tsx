@@ -34,6 +34,7 @@ function CreateDelegation() {
       },
     });
   };
+
   return (
     <section className="flex flex-col items-center justify-center">
       <CreateSpaceNav routingAddress="/" className="mb-[120px]">
@@ -47,7 +48,7 @@ function CreateDelegation() {
             <SelectableCard
               key={item.address}
               id={item.address}
-              className="w-[286px] h-[155px] break-all p-6 rounded-m flex-col"
+              className="break-all p-6 rounded-m flex-col max-w-[286px] max-h-[155px]"
               onClick={handleClick}
               isSelected={currentAddress === item.address}
             >

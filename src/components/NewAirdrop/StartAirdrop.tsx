@@ -16,9 +16,10 @@ import Title from '../CreateSpace/Title';
 
 interface StartAirdropProps {
   setStep: React.Dispatch<React.SetStateAction<AirdropStep>>;
+  airdropContractDeploy: any;
 }
 
-const StartAirdrop = ({ setStep }: StartAirdropProps) => {
+const StartAirdrop = ({ setStep, airdropContractDeploy }: StartAirdropProps) => {
   return (
     <ErrorBoundary
       renderFallback={({ error, reset }) => <CommonError error={error} reset={reset} />}
@@ -26,18 +27,18 @@ const StartAirdrop = ({ setStep }: StartAirdropProps) => {
       {/*  TODO skeleton 추가 */}
       <SSRSafeSuspense
         fallback={
-          <div className="w-[512px] h-[130px] bg-[#ffffff1a] rounded-[20px] flex flex-col justify-center items-center">
+          <div className="w-[512px] h-[130px] bg-[#ffffff1a] rounded-[20px] flex flex-col justify-center items-center ml-[24px]">
             <ClipLoader size={50} color={'#FCFF70'} />
           </div>
         }
       >
-        <Resolved setStep={setStep} />
+        <Resolved setStep={setStep} airdropContractDeploy={airdropContractDeploy} />
       </SSRSafeSuspense>
     </ErrorBoundary>
   );
 };
 
-function Resolved({ setStep }: StartAirdropProps) {
+function Resolved({ setStep, airdropContractDeploy }: StartAirdropProps) {
   const { getValues } = useFormContext();
 
   const currentValue = getValues();

@@ -7,8 +7,8 @@ import { useEffect, useState } from 'react';
 const ethers = require('ethers');
 
 const Details: NextPage = () => {
-  // const provider = new ethers.providers.JsonRpcProvider('https://eth.bd.evmos.dev:8545'); // EVMOS
-  const provider = ethers.providers.getDefaultProvider('goerli');
+  const provider = new ethers.providers.JsonRpcProvider('https://eth.bd.evmos.dev:8545'); // EVMOS
+  // const provider = ethers.providers.getDefaultProvider('goerli');
   const contractInfo = JSON.parse(localStorage.getItem('clickedCardInfo') as string);
   const governanceTokenAddress = contractInfo.governanceToken.contractAddress;
 

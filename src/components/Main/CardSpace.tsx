@@ -79,7 +79,11 @@ function CardSpace(props: CardSpaceProps) {
   return (
     <div key={index} className="card shadow-xl bg-[#191919]" {...propsRest}>
       <div className="card-body items-center text-center mb-2">
-        <img src={image} className="w-24 rounded-full" />
+        <img
+          src={image}
+          className="w-24 min-w-24 min-h-24 h-24 rounded-full object-cover"
+          alt="dao"
+        />
         <h2 className="card-title">{spaceName}</h2>
         <p>{intro}</p>
         <div className="card-actions justify-center mt-2">

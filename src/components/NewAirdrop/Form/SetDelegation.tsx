@@ -10,6 +10,7 @@ function SetDelegation() {
   const { setValue, getValues } = useFormContext();
 
   const currentValue = getValues();
+
   useEffect(() => {
     if (fileData) {
       setValue('delegationList', fileData, { shouldDirty: true, shouldValidate: true });
@@ -33,6 +34,7 @@ function SetDelegation() {
       setValue('isDelegate', false, { shouldDirty: true, shouldValidate: true });
     }
   };
+
   return (
     <section className="flex flex-col justify-center items-center">
       <ul className="flex flex-row w-full justify-between mt-[151px]" onClick={handleClick}>
