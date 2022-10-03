@@ -18,4 +18,6 @@ export const uploadImage = async (image: File) => {
 
     return prefix + ipfsUrl.slice(2);
   }
+
+  throw new Error('No API key found');
 };
