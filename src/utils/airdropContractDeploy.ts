@@ -83,4 +83,6 @@ export const airdropContractDeploy = async ({
   console.log('>>>>>>>>>> RESULT >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', receipt2);
 
   console.log(result.address);
+
+  return result.address;
 };
