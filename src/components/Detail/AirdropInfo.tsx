@@ -121,6 +121,22 @@ function Resolved() {
         </div>
       </>
     );
+    // if ownerAddress does not include in nowAddrWhiteListed
+  } else if (!nowAddrWhiteListed) {
+    return (
+      <>
+        <div className="pb-8">
+          <div className="flex items-center">
+            <div className="grow">
+              <h2 className="font-bold text-lg mt-8 mb-2">
+                You are not eligible to claim the Governance Token since you are not on the
+                whitelist.
+              </h2>
+            </div>
+          </div>
+        </div>
+      </>
+    );
   } else {
     // iterate userEligibleTokenList and check whether there is no matched address with airdropTokenAddress
     // if (!nowAddrWhiteListed) {
