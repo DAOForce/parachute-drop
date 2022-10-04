@@ -8,22 +8,26 @@ import ErrorBoundary from '../common/ErrorBoundary';
 import NextBtn from '../common/NextBtn';
 import SSRSafeSuspense from '../common/SSRSafeSuspense';
 
-const AirdropAdmin = () => {
+const AirdropAdmin = (daoDetails: never) => {
+  console.log(' DAO DETAILS >>>>>>>>>>>>>>>>>>>>>>>>> ', daoDetails);
+
   return (
     <ErrorBoundary
       renderFallback={({ error, reset }) => <CommonError error={error} reset={reset} />}
     >
       {/*  TODO skeleton 추가 */}
       <SSRSafeSuspense fallback={<ClipLoader size={50} color={'#ffffff'} />}>
-        <Resolved />
+        <Resolved daoDetails={daoDetails} />
       </SSRSafeSuspense>
     </ErrorBoundary>
   );
 };
 
-function Resolved() {
-  // @TODO 이 여부 판단하는 utils 필요
-  const isDeployAirdrop = false;
+function Resolved({ daoDetails }: any) {
+  // @TODO 왜 nested지?
+  const nestedDaoDetails = daoDetails.daoDetails;
+  const isDeployAirdrop = nestedDaoDetails.isAirdropContractOpened === 'true';
+  console.log(' nestedDaoDetails >>>>>>>>>>>>> ', nestedDaoDetails);
   const router = useRouter();
 
   const handleClick = () => {
@@ -40,7 +44,9 @@ function Resolved() {
           <h3 className="mb-[24px] text-[25px] text-white font-['Inter'] font-bold">
             Activated airdrop info
           </h3>
-          {/* @TODO 순회하면서 airdrop info 정보 출력 */}
+          <h4 className="mb-[20px] text-[20px] text-white font-['Inter']">
+            airdropTokenAddress: {nestedDaoDetails.airdropTokenAddress}
+          </h4>
         </article>
       ) : (
         <article className="flex flex-col justify-center items-center w-[100%] h-[335px] bg-[#ffffff1a] rounded-[20px]">
