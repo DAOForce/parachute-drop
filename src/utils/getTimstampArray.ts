@@ -3,9 +3,9 @@ export const getTimestampArray = (
   interval: number | null,
   rounds: number | null,
 ) => {
-  console.log('>>>argsss', startDate, interval, rounds);
+  const dateArray = startDate.toString().split('/');
   const timeArray = [] as number[];
-  const startDateObj = new Date(startDate);
+  const startDateObj = new Date(`20${dateArray[0]}`, dateArray[1], dateArray[2]);
   const iterator = new Array(rounds).fill(0);
   let currentDate = startDateObj;
 

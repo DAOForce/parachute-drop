@@ -1,8 +1,9 @@
 import { airdropAbi } from '@src/lib/abi';
+import ScheduledAirdrop from '@src/lib/ScheduledAirdrop';
 import { NewAirdropType } from '@src/pages/new_airdrop';
 import { ethers, utils } from 'ethers';
+
 import { getTimestampArray } from './getTimstampArray';
-import ScheduledAirdrop from '@src/lib/ScheduledAirdrop';
 export const airdropContractDeploy = async ({
   treasuryAddress,
   startDate,
@@ -13,18 +14,30 @@ export const airdropContractDeploy = async ({
   delegationList,
   whiteList,
 }: any) => {
+  console.log('startDate, interval, rounds', startDate, interval, rounds);
   const airdropTimestamp = getTimestampArray(startDate, interval, rounds);
 
-  const targetAddresseList = whiteList?.map((o) => ethers.utils.getAddress(o.address));
+  console.log('airdropTimestamp', airdropTimestamp);
+  const targetAddresseList = whiteList?.map((o) => ethers.utils.getAddress(o?.address));
   let totalValue = 0;
   const targetAmountList = whiteList?.map((o) => {
-    totalValue += Number(o.amounts);
-    return utils.parseEther(o.amounts.toString());
+    console.log('o양', o?.amounts);
+    console.log('o양', o);
+    if (o?.amounts === undefined) {
+      throw Error('invalid csv file format');
+    }
+    totalValue += Number(o?.amounts);
+    console.log('totalValue', totalValue);
+
+    return utils.parseEther(o?.amounts?.toString());
   });
 
   const tokenContractAddress = localStorage.getItem('tokenContractAddress');
 
   const totalValuePerRound = utils.parseEther(totalValue.toString());
+
+  console.log('totalValuePerRound', totalValuePerRound);
+  console.log('tokenContractAddress', tokenContractAddress);
 
   const infoStoreAddress = '0x24516E7EA22C009288eC666bCaa2593385D096D5';
   const signer = new ethers.providers.Web3Provider((window as any).ethereum).getSigner();
@@ -38,10 +51,10 @@ export const airdropContractDeploy = async ({
 
   console.log('>>>>>>>>>>>>>>>>>>> AIRDROP FACTORY >>>>>>>>>>>>>>>>>', airdropFactory);
 
-  console.log(
-    '>>>>>>>>>>>>>>>>>>>>>>>> tokenContractAddress >>>>>>>>>>>>>>>>>>>>>>> ',
-    ethers.utils.getAddress(tokenContractAddress.toString()),
-  );
+  // console.log(
+  //   '>>>>>>>>>>>>>>>>>>>>>>>> tokenContractAddress >>>>>>>>>>>>>>>>>>>>>>> ',
+  //   ethers.utils.getAddress(tokenContractAddress.toString()),
+  // );
 
   // 0x24516E7EA22C009288eC666bCaa2593385D096D5
   // 0x838d974c4fb94537bfa9e700b1a09b8324743471
