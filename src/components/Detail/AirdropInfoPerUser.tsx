@@ -94,6 +94,7 @@ function Resolved({
                       pathname: '/claim_token',
                       query: {
                         balance: airdropAmountsPerRound,
+                        tokenSymbol,
                       },
                     });
                   }}
