@@ -17,7 +17,7 @@ const Home: NextPage = () => {
       <Head>
         <title>Parachute</title>
         <meta name="description" content="Shooting Star" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
       <Navbar />
       <div className="container mx-auto">
