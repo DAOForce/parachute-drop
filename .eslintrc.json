@@ -19,28 +19,30 @@
     "next/core-web-vitals"
   ],
   "rules": {
+    "@typescript-eslint/explicit-module-boundary-types": "off",
     "jsx-a11y/no-static-element-interactions": "off",
     "jsx-a11y/click-events-have-key-events": "off",
     "@next/next/no-img-element": "off",
-    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/rules-of-hooks": "warn",
     "react-hooks/exhaustive-deps": "warn",
-    "prettier/prettier": "error",
-    "simple-import-sort/imports": "error",
-    "simple-import-sort/exports": "error",
+    "prettier/prettier": "warn",
+    "simple-import-sort/imports": "warn",
+    "simple-import-sort/exports": "warn",
     "import/no-anonymous-default-export": 0,
-    "no-multiple-empty-lines": ["error", { "max": 1 }],
-    "eol-last": ["error", "always"],
-    "comma-dangle": ["error", "always-multiline"],
-    "object-curly-spacing": ["error", "always"],
-    "space-in-parens": ["error", "never"],
-    "computed-property-spacing": ["error", "never"],
-    "comma-spacing": ["error", { "before": false, "after": true }],
-    "quotes": ["error", "single"],
-    "no-tabs": ["error", { "allowIndentationTabs": true }],
-    "semi": ["error", "always"],
-    "object-shorthand": "error",
+    "no-multiple-empty-lines": ["warn", { "max": 1 }],
+    "eol-last": ["warn", "always"],
+    "comma-dangle": ["warn", "always-multiline"],
+    "object-curly-spacing": ["warn", "always"],
+    "space-in-parens": ["warn", "never"],
+    "computed-property-spacing": ["warn", "never"],
+    "@typescript-eslint/ban-ts-ignore": "off",
+    "comma-spacing": ["warn", { "before": false, "after": true }],
+    "quotes": ["warn", "single"],
+    "no-tabs": ["warn", { "allowIndentationTabs": true }],
+    "semi": ["warn", "always"],
+    "object-shorthand": "warn",
     "padding-line-between-statements": [
-      "error",
+      "warn",
       { "blankLine": "always", "prev": "*", "next": "return" },
       { "blankLine": "always", "prev": ["const", "let", "var"], "next": "*" },
       {
@@ -48,8 +50,7 @@
         "prev": ["const", "let", "var"],
         "next": ["const", "let", "var"]
       }
-    ],
-    "@typescript-eslint/explicit-module-boundary-types": "off"
+    ]
   },
   "settings": {
     "import/resolver": {

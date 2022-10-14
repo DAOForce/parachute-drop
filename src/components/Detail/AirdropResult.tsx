@@ -23,7 +23,9 @@ function AirdropResult() {
   const router = useRouter();
   const daoDetails = router?.query;
 
-  return daoDetails?.ownerAddress?.toLocaleLowerCase() === ownerAddress?.toLocaleLowerCase() ? (
+  const queryOwnerAddress = daoDetails?.ownerAddress as string;
+
+  return queryOwnerAddress.toLocaleLowerCase() === ownerAddress?.toLocaleLowerCase() ? (
     <AirdropAdmin daoDetails={daoDetails} />
   ) : (
     <AirdropInfo />

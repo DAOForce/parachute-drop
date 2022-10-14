@@ -1,8 +1,8 @@
+import CheckIcon from '@src/assets/Icon/CheckIcon.svg';
 import CreateSpaceNav from '@src/components/common/CreateSpaceNav';
 import NextBtn from '@src/components/common/NextBtn';
 import Title from '@src/components/CreateSpace/Title';
 import { HEADER_NAME, TITLE } from '@src/constants';
-import CheckIcon from '@src/assets/Icon/CheckIcon.svg';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
@@ -15,6 +15,7 @@ function ReviewClaim() {
       pathname: '/',
     });
   };
+
   return (
     <>
       <section className="flex flex-col items-center justify-center">
@@ -30,7 +31,7 @@ function ReviewClaim() {
               <p className="mb-[24px] mt-[10px] text-center font-bold color-white w-[452px] break-words text-[40px]">
                 {router.query.balance ? router.query.balance : 100.0} TEL
               </p>
-              <h2 className="font-normal text-sm">You're delegating to</h2>
+              <h2 className="font-normal text-sm">You&rsquo;re delegating to</h2>
               <p className="mb-[24px] mt-[10px] text-center font-bold color-white w-[452px] break-words text-[40px]">
                 {router.query.address}
               </p>

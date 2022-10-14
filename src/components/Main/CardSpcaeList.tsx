@@ -38,23 +38,41 @@ const Resolved = () => {
 
   return (
     <>
-      {data.map((card, index) => (
-        <CardSpace
-          key={card.id}
-          index={index}
-          homepage={card.homepage}
-          image={card.image}
-          intro={card.intro}
-          ownerAddress={card.ownerAddress}
-          spaceName={card.spaceName}
-          tokenName={card.tokenName}
-          tokenSupply={card.tokenSupply}
-          tokenSymbol={card.tokenSymbol}
-          governanceToken={card.governanceToken}
-          isAirdropContractOpened={card.isAirdropContractOpened}
-          airdropTokenAddress={card.airdropTokenAddress}
-        />
-      ))}
+      {data.map(
+        (
+          card: {
+            id: React.Key | null | undefined;
+            homepage: any;
+            image: string;
+            intro: string;
+            ownerAddress: any;
+            spaceName: any;
+            tokenName: string;
+            tokenSupply: any;
+            tokenSymbol: string;
+            governanceToken: string;
+            isAirdropContractOpened: string;
+            airdropTokenAddress: string;
+          },
+          index: number,
+        ) => (
+          <CardSpace
+            key={card.id}
+            index={index}
+            homepage={card.homepage}
+            image={card.image}
+            intro={card.intro}
+            ownerAddress={card.ownerAddress}
+            spaceName={card.spaceName}
+            tokenName={card.tokenName}
+            tokenSupply={card.tokenSupply}
+            tokenSymbol={card.tokenSymbol}
+            governanceToken={card.governanceToken}
+            isAirdropContractOpened={card.isAirdropContractOpened}
+            airdropTokenAddress={card.airdropTokenAddress}
+          />
+        ),
+      )}
     </>
   );
 };

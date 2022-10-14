@@ -6,6 +6,7 @@ import MobileMain from '@src/components/Main/MobileMain';
 import useWindowSize from '@src/hooks/useWindowSize';
 import { global } from '@src/styles/global';
 import theme from '@src/styles/theme';
+// eslint-disable-next-line import/named
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';

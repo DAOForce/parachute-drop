@@ -22,14 +22,14 @@ const DEFAULT_VALUES: DefaultValues<CreateSpaceFormType> = {
 };
 
 export interface CreateSpaceFormType {
-  image: string;
-  spaceName: string;
-  intro: string;
-  homepage: string;
-  tokenName: string;
-  tokenSymbol: string;
-  tokenSupply: number;
-  ownerAddress: string;
+  image?: string;
+  spaceName?: string;
+  intro?: string;
+  homepage?: string;
+  tokenName?: string;
+  tokenSymbol?: string;
+  tokenSupply?: number;
+  ownerAddress?: string;
 }
 
 function CreateSpace() {

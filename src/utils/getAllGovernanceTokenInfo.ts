@@ -52,6 +52,7 @@ export const beautifyAllGovernanceTokenInfoForIndex = async () => {
           homepage: item.tokenInfo.link,
           ownerAddress: item.tokenInfo.owner,
           tokenSupply:
+            // @ts-ignore
             Number(item.tokenInfo.totalSupply._hex.toString()).toLocaleString('fullwide', {
               useGrouping: false,
             }) /

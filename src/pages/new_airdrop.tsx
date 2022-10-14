@@ -1,12 +1,12 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import CreateSpaceNav from '@src/components/common/CreateSpaceNav';
 import Subscription from '@src/components/CreateSpace/Subscription';
 import Title from '@src/components/CreateSpace/Title';
-import { HEADER_NAME, TITLE, SUBSCRIPTION } from '@src/constants';
+import NewAirdropForm from '@src/components/NewAirdrop/Form';
+import { HEADER_NAME, SUBSCRIPTION, TITLE } from '@src/constants';
 import React, { useState } from 'react';
 import { DefaultValues, FormProvider, useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-import NewAirdropForm from '@src/components/NewAirdrop/Form';
 
 export type AirdropStep =
   | 'ENTER_DETAIL_AIRDROP'
@@ -55,6 +55,7 @@ const schema = yup.object().shape({
 function NewAirdrop() {
   const [step, setStep] = useState<AirdropStep>('ENTER_DETAIL_AIRDROP');
   const [header, setHeader] = useState<HeaderType>('START_NEW_AIRDROP');
+
   console.log('>step', step);
 
   const methods = useForm<NewAirdropType>({

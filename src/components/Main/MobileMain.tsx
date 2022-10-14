@@ -1,17 +1,8 @@
-import Add from '@src/assets/Icon/add.svg';
 import Navbar from '@src/components/common/Navbar';
-import CardSpace from '@src/components/main/CardSpace';
-import CardSpcaeList from '@src/components/Main/CardSpcaeList';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
+
 const MobileMain: NextPage = () => {
-  const router = useRouter();
-
-  const handleClick = async () => {
-    await router.push('/create_space');
-  };
-
   return (
     <>
       <Head>

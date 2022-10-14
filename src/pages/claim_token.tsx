@@ -3,13 +3,14 @@ import NextBtn from '@src/components/common/NextBtn';
 import CreateSpaceForm from '@src/components/CreateSpace/Form';
 import Subscription from '@src/components/CreateSpace/Subscription';
 import Title from '@src/components/CreateSpace/Title';
-import { HEADER_NAME, TITLE, SUBSCRIPTION } from '@src/constants';
+import { HEADER_NAME, SUBSCRIPTION, TITLE } from '@src/constants';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { FormProvider } from 'react-hook-form';
 
 function ClaimToken() {
   const router = useRouter();
+
   return (
     <section className="flex flex-col items-center justify-center">
       <CreateSpaceNav routingAddress="/" className="mb-[120px]">

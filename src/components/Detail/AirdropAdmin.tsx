@@ -8,7 +8,7 @@ import ErrorBoundary from '../common/ErrorBoundary';
 import NextBtn from '../common/NextBtn';
 import SSRSafeSuspense from '../common/SSRSafeSuspense';
 
-const AirdropAdmin = (daoDetails: never) => {
+const AirdropAdmin = (daoDetails: any) => {
   console.log(' DAO DETAILS >>>>>>>>>>>>>>>>>>>>>>>>> ', daoDetails);
 
   return (
@@ -27,6 +27,7 @@ function Resolved({ daoDetails }: any) {
   // @TODO 왜 nested지?
   const nestedDaoDetails = daoDetails.daoDetails;
   const isDeployAirdrop = nestedDaoDetails.isAirdropContractOpened === 'true';
+
   console.log(' nestedDaoDetails >>>>>>>>>>>>> ', nestedDaoDetails);
   const router = useRouter();
 

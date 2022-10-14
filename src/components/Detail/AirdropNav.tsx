@@ -11,6 +11,7 @@ function AirdropNav({ currentTab, setCurrentTab }: AirdropNavProps) {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     setCurrentTab(e.currentTarget.id as CurrentTab);
   };
+
   return (
     <ul className="flex flex-row mt-[37px] bg-transparent space-x-8  border-solid border-b-[1px] border-slate-500">
       <li>

@@ -21,8 +21,8 @@ function SetDelegation() {
     }
   }, [fileData]);
 
-  const handleClick = (e: React.MouseEvent<HTMLUListElement, MouseEvent>) => {
-    if (e.target.id === 'active') {
+  const handleClick = (e: React.MouseEvent<HTMLUListElement, MouseEvent> | any) => {
+    if (e.target?.id === 'active') {
       setIsDelegateActive(true);
       if (fileData) {
         setValue('isDelegate', true, { shouldDirty: true, shouldValidate: true });
@@ -37,7 +37,13 @@ function SetDelegation() {
 
   return (
     <section className="flex flex-col justify-center items-center">
-      <ul className="flex flex-row w-full justify-between mt-[151px]" onClick={handleClick}>
+      <ul
+        // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
+        role="button"
+        tabIndex={0}
+        className="flex flex-row w-full justify-between mt-[151px]"
+        onClick={handleClick}
+      >
         <SelectableCard
           id="active"
           className="w-[49%] h-[108px]"

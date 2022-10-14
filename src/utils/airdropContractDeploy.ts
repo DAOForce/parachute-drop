@@ -18,19 +18,21 @@ export const airdropContractDeploy = async ({
   const airdropTimestamp = getTimestampArray(startDate, interval, rounds);
 
   console.log('airdropTimestamp', airdropTimestamp);
-  const targetAddresseList = whiteList?.map((o) => ethers.utils.getAddress(o?.address));
+  const targetAddresseList = whiteList?.map((o: { address: string }) =>
+    ethers.utils.getAddress(o?.address),
+  );
   let totalValue = 0;
-  const targetAmountList = whiteList?.map((o) => {
-    console.log('o양', o?.amounts);
-    console.log('o양', o);
-    if (o?.amounts === undefined) {
-      throw Error('invalid csv file format');
-    }
-    totalValue += Number(o?.amounts);
-    console.log('totalValue', totalValue);
+  const targetAmountList = whiteList?.map(
+    (o: { amounts: { toString: () => string } | undefined }) => {
+      if (o?.amounts === undefined) {
+        throw Error('invalid csv file format');
+      }
+      totalValue += Number(o?.amounts);
+      console.log('totalValue', totalValue);
 
-    return utils.parseEther(o?.amounts?.toString());
-  });
+      return utils.parseEther(o?.amounts?.toString());
+    },
+  );
 
   const tokenContractAddress = localStorage.getItem('tokenContractAddress');
 

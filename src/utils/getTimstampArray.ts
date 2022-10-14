@@ -5,6 +5,7 @@ export const getTimestampArray = (
 ) => {
   const dateArray = startDate.toString().split('/');
   const timeArray = [] as number[];
+  // @ts-ignore
   const startDateObj = new Date(`20${dateArray[0]}`, dateArray[1], dateArray[2]);
   const iterator = new Array(rounds).fill(0);
   let currentDate = startDateObj;
@@ -16,6 +17,7 @@ export const getTimestampArray = (
     currentDate = new Date(
       currentDate.getFullYear(),
       currentDate.getMonth(),
+      // @ts-ignore
       currentDate.getDate() + interval,
     );
   });

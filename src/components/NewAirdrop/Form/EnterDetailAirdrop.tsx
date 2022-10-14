@@ -3,6 +3,7 @@ import { useFormContext } from 'react-hook-form';
 
 function EnterDetailAirdrop() {
   const { register } = useFormContext();
+
   return (
     <div className="form-control w-full mt-[80px]">
       <label className="label w-full" htmlFor="treasuryAddress">
