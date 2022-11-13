@@ -5,9 +5,10 @@ import { Step } from '@src/pages/create_space';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+
+import { createSpace } from '../../../utils/createSpace';
 import CreateToken from './CreateToken';
 import SpaceDetail from './SpaceDetail';
-import { createSpace } from '../../../utils/createSpace';
 
 interface CreateSpaceFormProps {
   step: Step;
