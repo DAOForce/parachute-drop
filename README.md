@@ -1,4 +1,4 @@
-# Parachute Drop Servie for HackAtom Seoul 2022 # DAOForce-frontend
+# Parachute Drop
 
 <img width="1318" alt="Frame 5920 (2)" src="https://user-images.githubusercontent.com/81923229/182012073-05938c39-d2ce-4967-836e-643ba810d5bf.png">
 

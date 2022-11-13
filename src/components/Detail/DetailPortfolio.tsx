@@ -1,5 +1,6 @@
-import React from 'react';
 import IBC from '@src/assets/Icon/IBC.svg';
+import React from 'react';
+
 import Title from '../CreateSpace/Title';
 
 function DetailPortfolio() {

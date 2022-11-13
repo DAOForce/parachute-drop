@@ -1,6 +1,7 @@
 import useMounted from '@src/hooks/useMounted';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+
 import AirdropAdmin from './AirdropAdmin';
 import AirdropInfo from './AirdropInfo';
 
