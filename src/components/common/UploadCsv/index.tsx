@@ -1,13 +1,12 @@
-import styled from '@emotion/styled';
-import { FreeObject } from '@src/types';
-import React, { Dispatch, useEffect, useState } from 'react';
+import { csvFile, FreeObject } from '@src/types';
+import { Dispatch } from 'react';
 
 import AddressList from './AddressList';
 import UploadFile from './UploadFile';
 
 interface UploadCsvProps {
-  fileData: Array<FreeObject> | null;
-  setFileData: Dispatch<Array<FreeObject> | null>;
+  fileData: csvFile | null;
+  setFileData: Dispatch<csvFile | null>;
   className: string;
   [key: string]: any;
 }

@@ -1,10 +1,10 @@
 import UploadCsv from '@src/components/common/UploadCsv';
-import { FreeObject } from '@src/types';
+import { csvFile, FreeObject } from '@src/types';
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 function AddWhiteList() {
-  const [fileData, setFileData] = useState<Array<FreeObject> | null>(null);
+  const [fileData, setFileData] = useState<csvFile | null>(null);
   const { setValue, getValues } = useFormContext();
   const currentValue = getValues();
 

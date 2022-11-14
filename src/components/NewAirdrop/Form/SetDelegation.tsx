@@ -1,17 +1,18 @@
 import SelectableCard from '@src/components/common/SelectableCard';
 import UploadCsv from '@src/components/common/UploadCsv';
-import { FreeObject } from '@src/types';
+import { csvFile, FreeObject } from '@src/types';
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 function SetDelegation() {
-  const [fileData, setFileData] = useState<Array<FreeObject> | null>(null);
+  const [fileData, setFileData] = useState<csvFile | null>(null);
   const [isDelegateActive, setIsDelegateActive] = useState(true);
   const { setValue, getValues } = useFormContext();
 
   const currentValue = getValues();
 
   useEffect(() => {
+    console.log('file data format', fileData);
     if (fileData) {
       setValue('delegationList', fileData, { shouldDirty: true, shouldValidate: true });
       setValue('isDelegate', true, { shouldDirty: true, shouldValidate: true });

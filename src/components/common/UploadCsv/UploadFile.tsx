@@ -1,15 +1,16 @@
 import styled from '@emotion/styled';
-import { FreeObject } from '@src/types';
+import { csvFile, FreeObject } from '@src/types';
+import { uploadCsvFile } from '@src/utils/uploadFile';
 import Papa from 'papaparse';
 import React, { Dispatch, SetStateAction } from 'react';
 
 interface UploadFileProps {
-  setFileData: Dispatch<Array<FreeObject> | null>;
+  setFileData: Dispatch<csvFile | null>;
 }
 
 function UploadFile({ setFileData }: UploadFileProps) {
   const allowedExtensions = ['csv'];
-  const getFileData = () => {
+  const getFileData = async () => {
     try {
       const input = document.createElement('input');
       let inputFile;
@@ -22,7 +23,6 @@ function UploadFile({ setFileData }: UploadFileProps) {
         const files = Array.from(input?.files as ArrayLike<File>);
 
         inputFile = files[0];
-
         const fileExtension = inputFile?.type.split('/')[1];
 
         if (!allowedExtensions.includes(fileExtension)) {
@@ -37,7 +37,7 @@ function UploadFile({ setFileData }: UploadFileProps) {
           const csv = Papa.parse(target?.result as string, { header: true });
 
           parsedData = csv?.data as Array<FreeObject>;
-          setFileData(parsedData);
+          setFileData({ parsedData, originalFile: files[0] });
           localStorage.setItem('whitelist', JSON.stringify(parsedData));
         };
 

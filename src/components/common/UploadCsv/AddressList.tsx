@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
-import { FreeObject } from '@src/types';
+import { csvFile, FreeObject } from '@src/types';
 import React from 'react';
 
 interface AddressListProps {
-  fileData: Array<FreeObject>;
+  fileData: csvFile | null;
 }
 
 function AddressList({ fileData }: AddressListProps) {
@@ -11,7 +11,7 @@ function AddressList({ fileData }: AddressListProps) {
     <div className="overflow-x-auto w-full">
       <table className="table w-full">
         <tbody>
-          {fileData.map((item, idx) => {
+          {fileData?.parsedData.map((item, idx) => {
             return (
               <tr key={idx}>
                 <td className="border-b-[1px] border-solid border-slate-500 bg-transparent">

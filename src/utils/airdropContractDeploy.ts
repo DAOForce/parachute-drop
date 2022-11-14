@@ -4,6 +4,7 @@ import { NewAirdropType } from '@src/pages/new_airdrop';
 import { ethers, utils } from 'ethers';
 
 import { getTimestampArray } from './getTimstampArray';
+import { uploadCsvFile } from './uploadFile';
 export const airdropContractDeploy = async ({
   treasuryAddress,
   startDate,
@@ -18,11 +19,11 @@ export const airdropContractDeploy = async ({
   const airdropTimestamp = getTimestampArray(startDate, interval, rounds);
 
   console.log('airdropTimestamp', airdropTimestamp);
-  const targetAddresseList = whiteList?.map((o: { address: string }) =>
+  const targetAddresseList = whiteList?.parsedData?.map((o: { address: string }) =>
     ethers.utils.getAddress(o?.address),
   );
   let totalValue = 0;
-  const targetAmountList = whiteList?.map(
+  const targetAmountList = whiteList?.parsedData?.map(
     (o: { amounts: { toString: () => string } | undefined }) => {
       if (o?.amounts === undefined) {
         throw Error('invalid csv file format');
@@ -80,6 +81,10 @@ export const airdropContractDeploy = async ({
     '0x24516E7EA22C009288eC666bCaa2593385D096D5',
   );
 
+  const delegationFileHash = await uploadCsvFile(delegationList.originalFile);
+
+  console.log('delegation file hash ', delegationFileHash);
+
   const result = await airdropFactory.deploy(
     tokenContractAddress,
     airdropTimestamp,
@@ -89,6 +94,7 @@ export const airdropContractDeploy = async ({
     targetAmountList,
     totalValuePerRound,
     '0x24516E7EA22C009288eC666bCaa2593385D096D5',
+    delegationFileHash,
   );
 
   const receipt = await result.deployed();

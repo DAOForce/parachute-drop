@@ -1,6 +1,6 @@
 import { NFTStorage } from 'nft.storage';
 
-export const uploadFile = async (delegationList: File) => {
+export const uploadCsvFile = async (delegationList: File) => {
   const apiKey = process.env.NEXT_PUBLIC_DAO_FORCE_IMG_KEY;
 
   if (apiKey) {
