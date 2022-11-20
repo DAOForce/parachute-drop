@@ -3,6 +3,7 @@ import AirdropNav from '@src/components/Detail/AirdropNav';
 import AirdropResult from '@src/components/Detail/AirdropResult';
 import DaoProfile from '@src/components/Detail/DaoProfile';
 import DetailPortfolio from '@src/components/Detail/DetailPortfolio';
+import DetailVoting from '@src/components/Detail/DetailVoting';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
@@ -10,7 +11,7 @@ import React, { useState } from 'react';
 // 쿼리에서 보여줄 수 있는 값 -> image, DAOName, symbol, intro, homepage
 // 밑의 라인에서 컨트랙트 통신 (상태)
 
-export type CurrentTab = 'Airdrop' | 'Portfolio';
+export type CurrentTab = 'Airdrop' | 'Portfolio' | 'Voting';
 
 function AirdropDetail() {
   console.log('>http://localhost:3000/create_space');
@@ -31,8 +32,12 @@ function AirdropDetail() {
               // eslint-disable-next-line @typescript-eslint/ban-ts-comment
               // @ts-ignore
               <AirdropResult />
-            ) : (
+            ) : currentTab === 'Portfolio' ? (
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
               <DetailPortfolio />
+            ) : (
+              <DetailVoting />
             )}
           </>
         )}

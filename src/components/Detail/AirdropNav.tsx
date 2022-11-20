@@ -43,6 +43,20 @@ function AirdropNav({ currentTab, setCurrentTab }: AirdropNavProps) {
           Portfolio
         </a>
       </li>
+      <li>
+        <a
+          href="#voting"
+          id="Voting"
+          className={`block p-[12px]  ${
+            currentTab === 'Voting'
+              ? 'text-white border-solid border-b-[1px] border-white'
+              : 'dark:hover:text-white text-slate-500'
+          } md:bg-transparent `}
+          onClick={handleClick}
+        >
+          Voting
+        </a>
+      </li>
     </ul>
   );
 }
