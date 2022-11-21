@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 export const getTimestampArray = (
   startDate: string | number | Date,
   interval: number | null,
@@ -6,7 +7,7 @@ export const getTimestampArray = (
   const dateArray = startDate.toString().split('/');
   const timeArray = [] as number[];
   // @ts-ignore
-  const startDateObj = new Date(`20${dateArray[0]}`, dateArray[1], dateArray[2]);
+  const startDateObj = new Date(`20${dateArray[0]}`, dateArray[1] - 1, dateArray[2]);
   const iterator = new Array(rounds).fill(0);
   let currentDate = startDateObj;
 
