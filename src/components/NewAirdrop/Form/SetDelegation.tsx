@@ -12,7 +12,6 @@ function SetDelegation() {
   const currentValue = getValues();
 
   useEffect(() => {
-    console.log('file data format', fileData);
     if (fileData) {
       setValue('delegationList', fileData, { shouldDirty: true, shouldValidate: true });
       setValue('isDelegate', true, { shouldDirty: true, shouldValidate: true });

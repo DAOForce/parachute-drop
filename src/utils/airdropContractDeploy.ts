@@ -70,8 +70,10 @@ export const airdropContractDeploy = async ({
   );
 
   const delegationFileHash = await uploadCsvFile(delegationList.originalFile);
+  const whiteListFileHash = await uploadCsvFile(whiteList.originalFile);
 
   console.log('delegation file hash ', delegationFileHash);
+  console.log('whitelist file hash ', whiteListFileHash);
 
   const result = await airdropFactory.deploy(
     tokenContractAddress,
@@ -83,13 +85,12 @@ export const airdropContractDeploy = async ({
     totalValuePerRound,
     STORE_ADDRESS,
     delegationFileHash,
+    whiteListFileHash,
   );
-
-  const receipt = await result.deployed();
 
   const receipt2 = await result.deployTransaction.wait();
 
-  console.log('>>>>>>>>>> RESULT >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', receipt2);
+  console.log('[log] airdrop depoly receipt', receipt2);
 
   console.log(result.address);
 
