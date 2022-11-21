@@ -14,7 +14,6 @@ import React, { useState } from 'react';
 export type CurrentTab = 'Airdrop' | 'Portfolio' | 'Voting';
 
 function AirdropDetail() {
-  console.log('>http://localhost:3000/create_space');
   const router = useRouter();
   const [currentTab, setCurrentTab] = useState<CurrentTab>('Airdrop');
   const daoDetails = router?.query;

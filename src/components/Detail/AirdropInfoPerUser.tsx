@@ -58,10 +58,11 @@ function Resolved({
       suspense: true,
     },
   );
+
   const router = useRouter();
   const airdropTimestamps = data?.airdropTimestamps;
-  const airdropAmountsPerRound = data?.airdropAmountsPerRound;
   const airdropWhiteList = data?.airdropWhiteList;
+  const airdropAmountsPerRound = data?.airdropAmountsPerRound / airdropWhiteList?.length;
   const isWhiteList = data?.isWhiteList;
   const total = tokenSupply ? parseInt(tokenSupply?.toString()) : 10000;
   const airdropDetails = [

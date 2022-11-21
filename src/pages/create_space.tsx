@@ -28,7 +28,7 @@ export interface CreateSpaceFormType {
   homepage?: string;
   tokenName?: string;
   tokenSymbol?: string;
-  tokenSupply?: number;
+  tokenSupply: number;
   ownerAddress?: string;
 }
 

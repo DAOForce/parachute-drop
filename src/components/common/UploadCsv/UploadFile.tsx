@@ -37,6 +37,18 @@ function UploadFile({ setFileData }: UploadFileProps) {
           const csv = Papa.parse(target?.result as string, { header: true });
 
           parsedData = csv?.data as Array<FreeObject>;
+          let totalSupply = 0;
+
+          parsedData.map((item) => (totalSupply += Number(item?.amounts)));
+          const tokenSupply = Number(localStorage.getItem('tokenSupply'));
+
+          console.log('totalSupply--', totalSupply);
+          console.log('tokenSupply (찐)', tokenSupply);
+          if (totalSupply > tokenSupply) {
+            alert('Total supply must be smaller than token supply');
+
+            return;
+          }
           setFileData({ parsedData, originalFile: files[0] });
           localStorage.setItem('whitelist', JSON.stringify(parsedData));
         };

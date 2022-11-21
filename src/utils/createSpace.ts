@@ -53,6 +53,7 @@ export const createSpace = async ({
   const receipt1 = await tokenContract.deployTransaction.wait();
 
   localStorage.setItem('tokenContractAddress', tokenContract.address);
+  localStorage.setItem('tokenSupply', tokenSupply.toString());
 
   console.log('[log] TOKEN CONTRACT tx Receipt', receipt1);
   console.log('[log] TOKEN CONTRACT address', tokenContract.address);
