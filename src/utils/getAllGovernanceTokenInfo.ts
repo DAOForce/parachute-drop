@@ -1,9 +1,10 @@
-import { abi } from '@src/utils/abi';
+import { STORE_ADDRESS } from '@src/constants';
+import abi from '@src/lib/ContractStore';
 import { ethers } from 'ethers';
 
 // export const STORE_ADDRESS = '0x838D974c4fB94537bFA9e700B1a09b8324743471'; // Goerli
-export const STORE_ADDRESS = '0x24516E7EA22C009288eC666bCaa2593385D096D5';
-
+// export const STORE_ADDRESS = '0x24516E7EA22C009288eC666bCaa2593385D096D5'; // before evmos ipfs hash update
+// export const STORE_ADDRESS = '0x7312b1b22f40c1fE83Fc52987D67c9D2fdd229aD';
 export interface tokenInfo {
   image: string;
   DAOName: string;
@@ -22,7 +23,7 @@ export const getAllGovernanceTokenInfo = async () => {
   const provider = new ethers.providers.JsonRpcProvider('https://eth.bd.evmos.dev:8545');
 
   console.log('>>>>>>>> PROVIDER >>>>>>>>>', provider);
-  const ContractInfoStore = new ethers.Contract(STORE_ADDRESS, abi, provider);
+  const ContractInfoStore = new ethers.Contract(STORE_ADDRESS, abi.abi, provider);
 
   return await ContractInfoStore.getAllGovernanceTokenInfo();
 };

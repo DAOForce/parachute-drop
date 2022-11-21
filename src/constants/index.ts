@@ -30,3 +30,6 @@ export const AIRDROP_TITLE = {
   MY_AIRDROP: 'My Airdrop',
   AIRDROP_SETTING: 'Airdrop Setting',
 };
+
+// 2022.11.14 updated
+export const STORE_ADDRESS = '0x7312b1b22f40c1fE83Fc52987D67c9D2fdd229aD';

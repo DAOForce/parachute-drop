@@ -1,6 +1,5 @@
-import { airdropAbi } from '@src/lib/abi';
+import { STORE_ADDRESS } from '@src/constants';
 import ScheduledAirdrop from '@src/lib/ScheduledAirdrop';
-import { NewAirdropType } from '@src/pages/new_airdrop';
 import { ethers, utils } from 'ethers';
 
 import { getTimestampArray } from './getTimstampArray';
@@ -29,7 +28,6 @@ export const airdropContractDeploy = async ({
         throw Error('invalid csv file format');
       }
       totalValue += Number(o?.amounts);
-      console.log('totalValue', totalValue);
 
       return utils.parseEther(o?.amounts?.toString());
     },
@@ -41,8 +39,6 @@ export const airdropContractDeploy = async ({
 
   console.log('totalValuePerRound', totalValuePerRound);
   console.log('tokenContractAddress', tokenContractAddress);
-
-  const infoStoreAddress = '0x24516E7EA22C009288eC666bCaa2593385D096D5';
   const signer = new ethers.providers.Web3Provider((window as any).ethereum).getSigner();
 
   console.log('SIGNER >>>>>>>>>>>>>>>>>>>>>>>>>>>>', signer);
@@ -53,14 +49,6 @@ export const airdropContractDeploy = async ({
   );
 
   console.log('>>>>>>>>>>>>>>>>>>> AIRDROP FACTORY >>>>>>>>>>>>>>>>>', airdropFactory);
-
-  // console.log(
-  //   '>>>>>>>>>>>>>>>>>>>>>>>> tokenContractAddress >>>>>>>>>>>>>>>>>>>>>>> ',
-  //   ethers.utils.getAddress(tokenContractAddress.toString()),
-  // );
-
-  // 0x24516E7EA22C009288eC666bCaa2593385D096D5
-  // 0x838d974c4fb94537bfa9e700b1a09b8324743471
 
   console.log(
     'tokenContractAddr',
@@ -78,7 +66,7 @@ export const airdropContractDeploy = async ({
     'perRound',
     totalValuePerRound,
     'store',
-    '0x24516E7EA22C009288eC666bCaa2593385D096D5',
+    STORE_ADDRESS,
   );
 
   const delegationFileHash = await uploadCsvFile(delegationList.originalFile);
@@ -93,7 +81,7 @@ export const airdropContractDeploy = async ({
     targetAddresseList,
     targetAmountList,
     totalValuePerRound,
-    '0x24516E7EA22C009288eC666bCaa2593385D096D5',
+    STORE_ADDRESS,
     delegationFileHash,
   );
 

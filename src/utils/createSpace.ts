@@ -1,7 +1,8 @@
-import DAOForceToken from '@src/lib/DAOForceToken';
+import { STORE_ADDRESS } from '@src/constants';
 import DAOForceGovernor from '@src/lib/DAOForceGovernor';
-import { ethers } from 'ethers';
+import DAOForceToken from '@src/lib/DAOForceToken';
 import { CreateSpaceFormType } from '@src/pages/create_space';
+import { ethers } from 'ethers';
 
 export const createSpace = async ({
   homepage,
@@ -13,15 +14,14 @@ export const createSpace = async ({
   tokenSupply,
   tokenSymbol,
 }: CreateSpaceFormType) => {
-  // @ts-ignore
-  const provider = new ethers.providers.Web3Provider(window.ethereum, 'any');
+  // get ether provider
+  const provider = new ethers.providers.Web3Provider(window.ethereum as any, 'any');
+
   // Prompt user for account connections
   await provider.send('eth_requestAccounts', []);
   const signer = provider.getSigner();
-  console.log('Account:', await signer.getAddress());
 
-  console.log(' PROVIDER >>>>>>>>> ', provider);
-
+  // deploy token contract
   const tokenFactory = new ethers.ContractFactory(
     DAOForceToken['abi'],
     DAOForceToken['bytecode'],
@@ -36,11 +36,11 @@ export const createSpace = async ({
     image,
     homepage,
     tokenSupply,
-    '0x24516E7EA22C009288eC666bCaa2593385D096D5',
+    STORE_ADDRESS,
   );
 
   console.log(
-    '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> TOKEN CONTRACT ',
+    '[log] TOKEN CONTRACT params',
     tokenName,
     tokenSymbol,
     spaceName,
@@ -48,26 +48,27 @@ export const createSpace = async ({
     image,
     homepage,
     tokenSupply,
-    '0x24516E7EA22C009288eC666bCaa2593385D096D5',
+    STORE_ADDRESS,
   );
-
-  const receipt0 = await tokenContract.deployed();
   const receipt1 = await tokenContract.deployTransaction.wait();
-  console.log(' >>>>>>>>> RECEIPT 1 >>>>>>>>>>>>>>>> ', receipt1);
 
   localStorage.setItem('tokenContractAddress', tokenContract.address);
-  console.log('token contract address', tokenContract.address);
 
+  console.log('[log] TOKEN CONTRACT tx Receipt', receipt1);
+  console.log('[log] TOKEN CONTRACT address', tokenContract.address);
+
+  // deploy governor contract
   const governorFactory = new ethers.ContractFactory(
     DAOForceGovernor['abi'],
     DAOForceGovernor['bytecode'],
     signer,
   );
   const governorContract = await governorFactory.deploy(tokenContract.address);
-  const receipt = await governorContract.deployed();
 
   const receipt2 = await tokenContract.deployTransaction.wait();
 
-  console.log('governor contract address', governorContract.address);
-  console.log('receipt >>>>>>>>>>>>>>>>>>>>>>>>>>>>>', receipt2);
+  localStorage.setItem('governorContractAddress', tokenContract.address);
+
+  console.log('[log] GOVERNOR CONTRACT address', governorContract.address);
+  console.log('[log] GOVERNOR CONTRACT tx Receipt', receipt2);
 };
