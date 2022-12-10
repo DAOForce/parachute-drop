@@ -14,6 +14,11 @@ interface ProposalProps {
   onClick: () => void;
 }
 
+export const getAddressSubstring = (address: string) =>
+  address
+    ? address.substring(0, 5) + '...' + address.substring(address.length - 5, address.length)
+    : '';
+
 function Proposal({
   title = '',
   contents = '',
@@ -25,7 +30,7 @@ function Proposal({
   return (
     <div className="bg-[#ffffff1a] p-8 w-full cursor-pointer rounded-lg" onClick={onClick}>
       <div className="justify-between flex items-center	mb-4">
-        <span className="text-sm font-bold">{address}</span>
+        <span className="text-sm font-bold">{getAddressSubstring(address)}</span>
         <span
           className={`py-1 px-2 font-bold text-sm rounded-full text-[#000] bg-[${
             isOpen ? '#FCFF70' : '#5E5E5E'
