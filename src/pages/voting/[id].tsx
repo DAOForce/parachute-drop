@@ -5,8 +5,7 @@ import { useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { proposals } from '../../mock/proposals';
 import { getAddressSubstring } from '@src/components/Detail/DetailVoting/Proposal';
-import { useQuery } from '@tanstack/react-query';
-import { beautifyAllGovernanceTokenInfoForIndex } from '@src/utils/getAllGovernanceTokenInfo';
+import ProposalStatus from '@src/components/Detail/DetailVoting/Proposal/ProposalStatus';
 
 function VotingDetails() {
   const router = useRouter();
@@ -60,12 +59,6 @@ function VotingDetails() {
     }
   }, [isOpen]);
 
-  function getWidth(percent: number) {
-    const width = Math.round((percent / 100) * 12);
-    if (width % 2 === 0) return 'w-' + width + '/12';
-    else return 'w-' + (width + 1) + '/12';
-  }
-
   function handleClickBack() {
     router.back();
   }
@@ -112,23 +105,13 @@ function VotingDetails() {
               <ul>
                 {votingStatus.map((e, i) => {
                   return (
-                    <li className="mb-2" key={i}>
-                      <div className="flex justify-between text-sm w-full">
-                        <div className="mb-2">
-                          <span className="pr-1 font-bold">{e.name}</span>
-                          <span>{e.percent}%</span>
-                        </div>
-                        <span>{e.amount} TEL</span>
-                      </div>
-                      <div className="w-full relative h-2 ">
-                        <div
-                          className={`${getWidth(e.percent)} absolute inset-0 bg-[${
-                            e.color
-                          }] h-2 rounded-full`}
-                        />
-                        <div className="bg-[#252525] h-2 rounded-full" />
-                      </div>
-                    </li>
+                    <ProposalStatus
+                      key={i}
+                      name={e.name}
+                      percent={e.percent}
+                      color={e.color}
+                      amount={e.amount}
+                    />
                   );
                 })}
               </ul>
