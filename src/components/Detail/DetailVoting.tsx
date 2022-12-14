@@ -25,7 +25,9 @@ function DetailVoting() {
               key={e.id}
               onClick={() => handleClick(e.id)}
               title={e.title}
-              contents={e.contents}
+              contents={
+                e.contents.length >= 180 ? e.contents.substring(0, 180) + '...' : e.contents
+              }
               address={e.address}
               isOpen={e.isOpen}
               votingOptions={e.votingOptions}
