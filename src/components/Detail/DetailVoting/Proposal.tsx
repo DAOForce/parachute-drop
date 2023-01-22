@@ -28,7 +28,7 @@ function Proposal({
   onClick,
 }: ProposalProps) {
   return (
-    <div className="bg-[#ffffff1a] p-8 w-full cursor-pointer rounded-lg" onClick={onClick}>
+    <div className="bg-[#111] p-8 w-full cursor-pointer rounded-lg" onClick={onClick}>
       <div className="justify-between flex items-center	mb-4">
         <span className="text-sm font-bold">{getAddressSubstring(address)}</span>
         <span

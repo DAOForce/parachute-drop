@@ -21,22 +21,10 @@ const Home: NextPage = () => {
       <Navbar />
       <div className="container mx-auto">
         <div className="flex mt-16 mb-4">
-          <div className="grow">
-            <p className="text-2xl font-bold ">Spaces</p>
-          </div>
-          <div className="flex-none">
-            <button className="link link-hover " onClick={() => handleClick()}>
-              <div className="flex items-center">
-                <div>
-                  <Add />
-                </div>
-                <div className="text-sm">Create Space</div>
-              </div>
-            </button>
-          </div>
+          <div className="grow"></div>
         </div>
 
-        <div className="grid grid-cols-3 gap-4 pb-8">
+        <div className="grid grid-cols-4 gap-4 pb-8">
           <CardSpcaeList />
         </div>
       </div>

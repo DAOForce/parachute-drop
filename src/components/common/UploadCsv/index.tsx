@@ -13,7 +13,7 @@ interface UploadCsvProps {
 function UploadCsv({ fileData, setFileData, className, ...props }: UploadCsvProps) {
   return (
     <section className={`w-[868.5px] ${className}`} {...props}>
-      <div className="w-full pb-[12px] pl-[16px] border-b-[1px] border-solid border-slate-500">
+      <div className="w-full pb-[12px] pl-[16px] border-b-[1px] border-solid border-[#222]">
         <p>Address</p>
       </div>
       <div

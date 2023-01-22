@@ -5,10 +5,16 @@ import useMounted from '@src/hooks/useMounted';
 import { communicateWithWallet, isLogout, walletIdType } from '@src/utils/connectWallet';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+import Add from '@src/assets/Icon/add.svg';
+
 function Navbar() {
   const router = useRouter();
   const isMounted = useMounted();
   const [ownerAddress, setOwnerAddress] = useState<string | undefined | null>('');
+
+  const handleCreateSpace = async () => {
+    await router.push('/create_space');
+  };
 
   useEffect(() => {
     if (isMounted) {
@@ -30,6 +36,8 @@ function Navbar() {
     setOwnerAddress(address);
   };
 
+  const [isHover, setIsHover] = useState(false);
+
   const handleConnect = () => {
     if (isLogout()) {
       return;
@@ -48,24 +56,45 @@ function Navbar() {
 
       {ownerAddress ? (
         <>
-          <button className="btn btn-sm" onClick={handleConnect}>
+          <button
+            className="btn btn-sm btn-custom hover:btn-custom-hover"
+            onClick={() => handleCreateSpace()}
+            onMouseOver={() => setIsHover(true)}
+            onMouseLeave={() => setIsHover(false)}
+          >
+            <div className="flex items-center">
+              <Add
+                viewBox="0 0 24 24"
+                fill={`${isHover ? '#111111' : '#ffffff'}`}
+                style={{ width: '20', height: '20' }}
+              />
+              Create Space
+            </div>
+          </button>
+          <button
+            className="btn btn-sm btn-custom hover:btn-custom-hover ml-1"
+            onClick={handleConnect}
+          >
             {ownerAddressShort}...{ownerAddressShort2}
           </button>
         </>
       ) : (
         <div className="flex-none">
-          <label htmlFor="my-modal-4" className="btn btn-sm modal-button">
+          <label
+            htmlFor="my-modal-4"
+            className="btn btn-sm modal-button btn-text-custom hover:btn-text-custom-hover"
+          >
             Connect Wallet
           </label>
 
           <input type="checkbox" id="my-modal-4" className="modal-toggle" />
-          <label htmlFor="my-modal-4" className="modal cursor-pointer">
-            <div className="modal-box relative">
-              <h3 className="font-bold text-lg text-center">Connect Wallet</h3>
+          <label htmlFor="my-modal-4" className="modal cursor-pointer bg-black bg-opacity-50">
+            <div className="modal-box relative bg-[#222]">
+              <h3 className="font-bold text-xl text-center">Connect Wallet</h3>
               <p className="py-4 text-center">Choose wallet to connect to the blockchain.</p>
-              <div className="grid gap-4">
+              <div className="grid gap-4 mt-2">
                 <button
-                  className="btn btn-block"
+                  className="btn btn-custom2 btn-block btn-custom hover:btn-custom-hover"
                   onClick={handleWalletClick}
                   type="button"
                   id="metamask"
@@ -74,7 +103,7 @@ function Navbar() {
                 </button>
 
                 <button
-                  className="btn btn-block "
+                  className="btn btn-custom2 btn-block btn-custom hover:btn-custom-hover"
                   onClick={handleWalletClick}
                   type="button"
                   id="keplr"

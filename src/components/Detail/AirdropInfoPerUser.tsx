@@ -31,7 +31,7 @@ const AirdropInfoPerUser = ({
       renderFallback={({ error, reset }) => <CommonError error={error} reset={reset} />}
     >
       {/*  TODO skeleton 추가 */}
-      <SSRSafeSuspense fallback={<ClipLoader size={50} color={'#ffffff'} />}>
+      <SSRSafeSuspense fallback={<ClipLoader size={50} color={'#ffffff'} className="mt-8" />}>
         <Resolved
           airdropTokenAddress={airdropTokenAddress}
           governanceToken={governanceToken}
@@ -65,6 +65,7 @@ function Resolved({
   const airdropAmountsPerRound = data?.airdropAmountsPerRound / airdropWhiteList?.length;
   const isWhiteList = data?.isWhiteList;
   const total = tokenSupply ? parseInt(tokenSupply?.toString()) : 10000;
+  const percent = (airdropAmountsPerRound / total) * 100;
   const airdropDetails = [
     { label: 'Start Date', value: airdropTimestamps[0] },
     { label: 'Rounds', value: airdropTimestamps.length },
@@ -77,7 +78,7 @@ function Resolved({
 
   return (
     <>
-      <div className="pb-8">
+      <div className="pb-8 w-full">
         <div className="flex items-center">
           <div className="grow">
             <h2 className="font-bold text-2xl mt-8 mb-8">My Airdrop</h2>
@@ -116,9 +117,9 @@ function Resolved({
             <div
               className="rounded-full"
               style={{
-                backgroundColor: '#FFE55C',
+                backgroundColor: '#fcff70',
                 height: '16px',
-                width: `${(airdropAmountsPerRound / total) * 100}%`,
+                width: `${percent <= 100 ?? 100}%`,
               }}
             />
           </>
@@ -136,15 +137,19 @@ function Resolved({
             <table className="table w-full">
               <thead>
                 <tr>
-                  <th>Date</th>
-                  <th>Round</th>
+                  <th className="bg-[#222]">Date</th>
+                  <th className="bg-[#222]">Round</th>
                 </tr>
               </thead>
               <tbody>
                 {airdropTimestamps?.map((airdrop: any, index: number) => (
                   <tr key={index}>
-                    <td>{airdrop}</td>
-                    <td>{index + 1} Round</td>
+                    <td className="bg-[#222] border-t-[1px] border-[#111111] border-solid">
+                      {airdrop}
+                    </td>
+                    <td className="bg-[#222] border-t-[1px] border-[#111111] border-solid">
+                      {index + 1} Round
+                    </td>
                   </tr>
                 ))}
               </tbody>

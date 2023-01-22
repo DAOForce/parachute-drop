@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import ArrowForward from '@src/assets/Icon/ArrowForward.svg';
 
 interface CardSpaceProps {
   index: number;
@@ -77,17 +78,25 @@ function CardSpace(props: CardSpaceProps) {
   };
 
   return (
-    <div key={index} className="card shadow-xl bg-[#191919]" {...propsRest}>
+    <div
+      key={index}
+      className="card shadow-xl cursor-pointer bg-[#111] hover:bg-[#222]"
+      {...propsRest}
+      onClick={handleClick}
+    >
       <div className="card-body items-center text-center mb-2">
         <img
           src={image}
-          className="w-24 min-w-24 min-h-24 h-24 rounded-full object-cover"
+          className="w-20 min-w-20 min-h-20 h-20 rounded-full object-cover"
           alt="dao"
         />
-        <h2 className="card-title">{spaceName}</h2>
-        <p>{intro}</p>
-        <div className="card-actions justify-center mt-2">
-          <button className="btn btn-warning" onClick={handleClick}>
+        <h2 className="card-title mt-1">{spaceName}</h2>
+        <p className="opacity-60">{intro}</p>
+        <div className="card-actions justify-center mt-2 text-[#ffe55c]">
+          <button
+            className="btn btn-outline btn-sm btn-custom-border hover:btn-custom-border-hover"
+            onClick={handleClick}
+          >
             Join
           </button>
         </div>

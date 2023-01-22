@@ -33,14 +33,14 @@ function DaoProfile({ daoDetails }: DaoDetails) {
       </div>
       <div>
         <div className="flex items-center mb-2">
-          <p className="font-bold text-2xl mr-2">{daoDetails.spaceName}</p>
-          <p className="text-sm opacity-50">
+          <p className="font-bold text-3xl mr-2">{daoDetails.spaceName}</p>
+          <p className="text-sm font-medium opacity-50">
             $<span>{daoDetails.tokenSymbol}</span>
           </p>
         </div>
-        <p className="mb-2">{daoDetails.intro}</p>
+        <p className="mb-2 opacity-80">{daoDetails.intro}</p>
         <div>
-          <a className="text-sm link link-hover " href={daoDetails.homepage}>
+          <a className="link text-sm opacity-60 font-bold" href={daoDetails.homepage}>
             {daoDetails.homepage?.split('//')[1]}
           </a>
         </div>
