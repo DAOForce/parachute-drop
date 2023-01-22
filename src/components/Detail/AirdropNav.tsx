@@ -29,7 +29,7 @@ function AirdropNav({ currentTab, setCurrentTab }: AirdropNavProps) {
           Airdrop
         </a>
       </li>
-      <li>
+      {/* <li>
         <a
           href="#portfolio"
           id="Portfolio"
@@ -41,6 +41,20 @@ function AirdropNav({ currentTab, setCurrentTab }: AirdropNavProps) {
           onClick={handleClick}
         >
           Portfolio
+        </a>
+      </li> */}
+      <li>
+        <a
+          href="#dashboard"
+          id="Dashboard"
+          className={`block p-[12px]  ${
+            currentTab === 'Dashboard'
+              ? 'text-white border-solid border-b-[1px] border-white'
+              : 'dark:hover:text-white text-slate-500'
+          } md:bg-transparent `}
+          onClick={handleClick}
+        >
+          Dashboard
         </a>
       </li>
       <li>

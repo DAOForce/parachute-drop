@@ -1,14 +1,17 @@
 import { useRouter } from 'next/router';
-import Proposal from './DetailVoting/Proposal';
+
 import { proposals } from '../../mock/proposals';
+import Proposal from './DetailVoting/Proposal';
 
 function DetailVoting() {
   const router = useRouter();
+
   function handleClick(id: string) {
     router.push({
       pathname: `/voting/${id}`,
     });
   }
+
   return (
     <section className="flex flex-col">
       <div className="flex justify-between mt-[37.5px] mb-[32.5px]">
