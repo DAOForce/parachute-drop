@@ -2,7 +2,7 @@ import Navbar from '@src/components/common/Navbar';
 import AirdropNav from '@src/components/Detail/AirdropNav';
 import AirdropResult from '@src/components/Detail/AirdropResult';
 import DaoProfile from '@src/components/Detail/DaoProfile';
-import Dashboard from '@src/components/Detail/Dashboard';
+import Dashboard from '@src/components/Detail/Dashboard/Dashboard';
 import DetailPortfolio from '@src/components/Detail/DetailPortfolio';
 import DetailVoting from '@src/components/Detail/DetailVoting';
 import { useRouter } from 'next/router';
