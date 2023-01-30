@@ -44,7 +44,7 @@ function Dashboard() {
         <h1 className="text-[24px] font-extrabold mb-[12px]">{CURRENT_ROUND}</h1>
         <CurrentRound />
       </section>
-      <section>
+      <section className="mt-[40px]">
         <h1 className="text-[24px] font-extrabold mb-[12px]">{AIRDROP_MACRO}</h1>
         <DumpingChart data={data} />
       </section>
