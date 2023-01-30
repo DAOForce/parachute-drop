@@ -40,10 +40,14 @@ function Dashboard() {
 
   return (
     <main className="flex flex-col justify-center w-full pt-[37px]">
-      <h1 className="text-[24px] font-extrabold mb-[12px]">{CURRENT_ROUND}</h1>
-      <CurrentRound />
-      <h1 className="text-[24px] font-extrabold mb-[12px]">{AIRDROP_MACRO}</h1>
-      <DumpingChart data={data} />
+      <section>
+        <h1 className="text-[24px] font-extrabold mb-[12px]">{CURRENT_ROUND}</h1>
+        <CurrentRound />
+      </section>
+      <section>
+        <h1 className="text-[24px] font-extrabold mb-[12px]">{AIRDROP_MACRO}</h1>
+        <DumpingChart data={data} />
+      </section>
     </main>
   );
 }
