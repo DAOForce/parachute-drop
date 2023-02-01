@@ -24,6 +24,8 @@ function CreateSpaceForm({ step, setStep }: CreateSpaceFormProps) {
     const data = getValues();
 
     console.log(data);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     createSpace(data);
     // 2. 페이지 로드
     router.push({

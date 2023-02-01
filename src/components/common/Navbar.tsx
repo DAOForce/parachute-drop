@@ -1,11 +1,12 @@
+/* eslint-disable jsx-a11y/mouse-events-have-key-events */
 import { MetaMaskInpageProvider } from '@metamask/providers';
+import Add from '@src/assets/Icon/add.svg';
 import Logo from '@src/assets/logo.svg';
 import useMounted from '@src/hooks/useMounted';
 // import TestEvmos from '@src/components/main/TestEvmos';
 import { communicateWithWallet, isLogout, walletIdType } from '@src/utils/connectWallet';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import Add from '@src/assets/Icon/add.svg';
 
 function Navbar() {
   const router = useRouter();

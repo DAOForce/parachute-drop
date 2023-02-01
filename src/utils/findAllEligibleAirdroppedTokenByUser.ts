@@ -1,5 +1,5 @@
+import { STORE_ADDRESS } from '@src/constants';
 import { abi } from '@src/utils/abi';
-import { STORE_ADDRESS } from '@src/utils/getAllGovernanceTokenInfo';
 import { ethers } from 'ethers';
 
 export const findAllEligibleAirdroppedTokenByUser = async (userAddress: Nullable<string>) => {
