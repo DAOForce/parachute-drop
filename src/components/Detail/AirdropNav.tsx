@@ -13,7 +13,7 @@ function AirdropNav({ currentTab, setCurrentTab }: AirdropNavProps) {
   };
 
   return (
-    <ul className="flex flex-row mt-[37px] bg-transparent space-x-8  border-solid border-b-[1px] border-slate-500">
+    <ul className="flex flex-row mt-[37px] bg-transparent space-x-8  border-solid border-b-[1px] border-[#222]">
       <li>
         <a
           href="#airdrop"
@@ -21,7 +21,7 @@ function AirdropNav({ currentTab, setCurrentTab }: AirdropNavProps) {
           className={`block p-[12px]  ${
             currentTab === 'Airdrop'
               ? 'text-white border-solid border-b-[1px] border-white'
-              : 'dark:hover:text-white text-slate-500'
+              : 'dark:hover:text-white text-[#aaa]'
           } md:bg-transparent `}
           aria-current="page"
           onClick={handleClick}
@@ -36,7 +36,7 @@ function AirdropNav({ currentTab, setCurrentTab }: AirdropNavProps) {
           className={`block p-[12px]  ${
             currentTab === 'Portfolio'
               ? 'text-white border-solid border-b-[1px] border-white'
-              : 'dark:hover:text-white text-slate-500'
+              : 'dark:hover:text-white text-[#aaa]'
           } md:bg-transparent `}
           onClick={handleClick}
         >
@@ -64,7 +64,7 @@ function AirdropNav({ currentTab, setCurrentTab }: AirdropNavProps) {
           className={`block p-[12px]  ${
             currentTab === 'Voting'
               ? 'text-white border-solid border-b-[1px] border-white'
-              : 'dark:hover:text-white text-slate-500'
+              : 'dark:hover:text-white text-[#aaa]'
           } md:bg-transparent `}
           onClick={handleClick}
         >

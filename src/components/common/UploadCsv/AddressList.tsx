@@ -14,7 +14,7 @@ function AddressList({ fileData }: AddressListProps) {
           {fileData?.parsedData.map((item, idx) => {
             return (
               <tr key={idx}>
-                <td className="border-b-[1px] border-solid border-slate-500 bg-transparent">
+                <td className="border-b-[1px] border-solid border-[#222] bg-transparent">
                   {item.address}
                 </td>
               </tr>

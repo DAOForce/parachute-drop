@@ -6,9 +6,9 @@ import Title from '../CreateSpace/Title';
 function DetailPortfolio() {
   return (
     <section className="flex flex-col justify-center items-center">
-      <div className="flex flex-row justify-between w-[98%] mt-[37.5px] mb-[32.5px]">
-        <Title>My Tokens</Title>
-        <Title>1,000.00 TEL</Title>
+      <div className="flex flex-row justify-between w-[100%]">
+        <h2 className="font-bold text-2xl mt-8 mb-8">My Tokens</h2>
+        <h2 className="font-bold text-2xl mt-8 mb-8">1,000.00 TEL</h2>
       </div>
       <IBC className="mb-[106px]" />
     </section>

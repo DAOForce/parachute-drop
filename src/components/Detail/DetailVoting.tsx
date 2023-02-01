@@ -14,7 +14,7 @@ function DetailVoting() {
 
   return (
     <section className="flex flex-col">
-      <div className="flex justify-between mt-[37.5px] mb-[32.5px]">
+      <div className="flex justify-between mt-[32.5px] mb-[32.5px]">
         <h2 className="text-2xl	font-bold">Proposals</h2>
         {/* <button className="flex gap-1 items-center">
           <Add />

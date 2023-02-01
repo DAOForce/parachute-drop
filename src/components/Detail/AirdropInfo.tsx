@@ -82,7 +82,7 @@ function Resolved() {
   switch (isAirdropContractOpened) {
     case 'true':
       return (
-        <section className="">
+        <section className="flex justify-center">
           <AirdropInfoPerUser
             airdropTokenAddress={airdropTokenAddress}
             governanceToken={governanceToken}
