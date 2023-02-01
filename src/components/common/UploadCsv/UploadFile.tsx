@@ -37,14 +37,21 @@ function UploadFile({ setFileData }: UploadFileProps) {
           const csv = Papa.parse(target?.result as string, { header: true });
 
           parsedData = csv?.data as Array<FreeObject>;
+
           let totalSupply = 0;
 
-          parsedData.map((item) => (totalSupply += Number(item?.amounts)));
+          parsedData.map((item) => {
+            delete item[''];
+
+            return (totalSupply += Number(item?.amounts));
+          });
+
+          console.log('parsedData', parsedData);
           const tokenSupply = Number(localStorage.getItem('tokenSupply'));
 
           console.log('totalSupply--', totalSupply);
           console.log('tokenSupply (찐)', tokenSupply);
-          if (totalSupply > tokenSupply) {
+          if (tokenSupply !== 0 && totalSupply > tokenSupply) {
             alert('Total supply must be smaller than token supply');
 
             return;

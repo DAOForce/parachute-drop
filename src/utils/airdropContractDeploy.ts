@@ -33,7 +33,11 @@ export const airdropContractDeploy = async ({
     },
   );
 
-  const tokenContractAddress = localStorage.getItem('tokenContractAddress');
+  const tokenContractAddress = localStorage.getItem('tokenContractAddress')
+    ? localStorage.getItem('tokenContractAddress')
+    : // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      JSON.parse(localStorage.getItem('clickedCardInfo'))?.governanceToken?.contractAddress;
 
   const totalValuePerRound = utils.parseEther(totalValue.toString());
 
@@ -59,13 +63,13 @@ export const airdropContractDeploy = async ({
     duration,
     'rounds',
     rounds,
-    'targetList',
+    'targetAddresseList',
     targetAddresseList,
-    'targetAmount',
+    'targetAmountList',
     targetAmountList,
-    'perRound',
+    'totalValuePerRound',
     totalValuePerRound,
-    'store',
+    'STORE_ADDRESS',
     STORE_ADDRESS,
   );
 

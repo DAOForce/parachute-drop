@@ -58,6 +58,10 @@ function Resolved() {
       tokenSymbol,
     } = router.query;
 
+    typeof governanceToken === 'string' &&
+      localStorage.setItem('tokenContractAddress', governanceToken);
+    typeof tokenSupply === 'string' && localStorage.setItem('tokenSupply', tokenSupply);
+
     setIsAirdropContractOpened(isAirdropContractOpened);
     setAirdropTokenAddress(airdropTokenAddress);
     setGovernanceToken(governanceToken);
