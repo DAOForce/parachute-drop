@@ -73,6 +73,25 @@ export const airdropContractDeploy = async ({
     STORE_ADDRESS,
   );
 
+  console.log(
+    'tokenContractAddr',
+    typeof tokenContractAddress,
+    'airdrop',
+    typeof airdropTimestamp,
+    'duration',
+    typeof duration,
+    'rounds',
+    typeof rounds,
+    'targetAddresseList',
+    typeof targetAddresseList,
+    'targetAmountList',
+    typeof targetAmountList,
+    'totalValuePerRound',
+    typeof totalValuePerRound,
+    'STORE_ADDRESS',
+    typeof STORE_ADDRESS,
+  );
+
   const delegationFileHash = await uploadCsvFile(delegationList.originalFile);
   const whiteListFileHash = await uploadCsvFile(whiteList.originalFile);
 

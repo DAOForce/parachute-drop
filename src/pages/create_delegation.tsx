@@ -31,6 +31,8 @@ function CreateDelegation() {
       pathname: '/review_claim',
       query: {
         address: e.currentTarget.id,
+        balance: router.query.balance,
+        tokenSymbol: router.query.tokenSymbol,
       },
     });
   };

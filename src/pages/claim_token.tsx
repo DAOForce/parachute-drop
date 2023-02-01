@@ -21,13 +21,19 @@ function ClaimToken() {
       <section className="w-[512px] h-[136px] p-[64px] bg-[#ffffff1a] rounded-[20px] flex flex-col justify-center items-center mb-[50px]">
         <h2 className="font-normal text-sm">You will receive</h2>
         <p className="mb-[24px] mt-[10px] text-center font-bold color-white w-[452px] break-words text-[40px]">
-          {router.query.balance ? router.query.balance : 100.0}{' '}
+          {router.query.balance ? Math.floor(Number(router.query.balance) / 3) : 100.0}{' '}
           {router.query.tokenSymbol ? router.query.tokenSymbol : 'TEL'}
         </p>
       </section>
       <NextBtn
         onClick={() => {
-          router.push('/create_delegation');
+          router.push({
+            pathname: '/create_delegation',
+            query: {
+              balance: router.query.balance,
+              tokenSymbol: router.query.tokenSymbol,
+            },
+          });
         }}
       >
         Delegation
